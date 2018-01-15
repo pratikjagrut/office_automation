@@ -1,4 +1,4 @@
-@extends('layouts.app')
+	@extends('layouts.app')
 
 @section('title', 'Admin Rights')
 
@@ -10,8 +10,24 @@
 				<div class="panel panel-default">
 					<div class="panel-heading text-center"><b>Grant Admin Rights</b></div>
 					<div class="panel-body">
-						<form action="/grantAdminRights" method="get">
+						<form action="/performAdminRights" method="get">
 							<table class="table table-striped">
+								<tr class="form-group">
+									<td><label>Select Action: </label></td>
+									<td>
+										<select name="action" class="form-control" required="true">
+											<option value="assignAdminRights">
+												Assign Admin Rights
+											</option>
+											<option value="removeAdminRights">
+												Remove Admin Rights
+											</option>
+											<option value="deleteAccount">
+												Delete user
+											</option>
+										</select>
+									</td>
+								</tr>
 								<tr class="form-group">
 									<td><label>Enter Employee Id: </label></td>
 									<td>
@@ -27,68 +43,7 @@
 								<tr class="form-group">
 									<td></td>
 									<td>
-										<input type="submit" class="btn btn-primary pull-right" value="Grant Admin Rights" name="submit">
-									</td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading text-center"><b>Remove Admin Rights</b></div>
-					<div class="panel-body">
-						<form action="/removeAdminRights" method="get">
-							<table class="table table-striped">
-								<tr class="form-group">
-									<td><label>Enter Employee Id: </label></td>
-									<td>
-										<input type="text" class="form-control" name="employee_id" required="true">
-									</td>
-								</tr>
-								<tr class="form-group">
-									<td><label>Enter Password: </label></td>
-									<td>
-										<input type="password" class="form-control" name="password" required="true">
-									</td>
-								</tr>
-								<tr class="form-group">
-									<td></td>
-									<td>
-										<input type="submit" class="btn btn-primary pull-right" value="Remove Admin Rights" name="submit">
-									</td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-			</div>		
-		</div>
-
-		<div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading text-center"><b>Delete User</b></div>
-					<div class="panel-body">
-						<form action="/deleteAccount" method="get">
-							<table class="table table-striped">
-								<tr class="form-group">
-									<td><label>Enter Employee Id: </label></td>
-									<td>
-										<input type="text" class="form-control" name="employee_id" required="true">
-									</td>
-								</tr>
-								<tr class="form-group">
-									<td><label>Enter Password: </label></td>
-									<td>
-										<input type="password" class="form-control" name="password" required="true">
-									</td>
-								</tr>
-								<tr class="form-group">
-									<td></td>
-									<td>
-										<input type="submit" class="btn btn-primary pull-right" value="Delete Account" name="submit">
+										<input type="submit" class="btn btn-primary pull-right" value="Submit" name="submit">
 									</td>
 								</tr>
 							</table>

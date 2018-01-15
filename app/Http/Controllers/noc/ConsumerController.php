@@ -15,10 +15,13 @@ class ConsumerController extends Controller
     		return redirect('/login')->with('error', 'Login First');
     	else
     	{
-    		return view('noc.addNewConsumer',[
+            if(auth()->user()->user_type != 'admin')
+                return redirect('/newJobEntry')->with('error', 'Unauthorised Access!');
+    		else
+                return view('noc.addNewConsumer',[
     			'consumers' => null,
     			'consumer_type' => null
-    		]);
+    		    ]);
     	}	
     }
 
@@ -76,9 +79,13 @@ class ConsumerController extends Controller
     	{
     		$consumer_type = $request->input('consumer_type');
     		$consumers = NocConsumer::where('type', $consumer_type)->get();
-    		return view('noc.addNewConsumer',[
-    			'consumers' => $consumers,
-    			'consumer_type' => null
+    		
+            if(count($consumers) == 0)
+                return redirect('/addNewConsumer')->with('delete', 'Sorry no consumer!');
+            else
+                return view('noc.addNewConsumer',[
+    			       'consumers' => $consumers,
+    			       'consumer_type' => null
     		]);
     	}
     }

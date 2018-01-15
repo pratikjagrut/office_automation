@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\noc;
 
 use App\Http\Controllers\Controller;
+use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,17 @@ class AdminRightsController extends Controller
             return redirect('/login')->with('error', 'Login First');
         else
         {
-            $admins = User::where('user_type', 'admin')->get();
-            return view('noc.admin_pages.adminRights')->with('admins', $admins);
+            if(auth()->user()->user_type != 'admin')
+                return redirect('/newJobEntry')->with('error', 'Unauthorised Access!');
+            else
+            {
+                $admins = User::where('user_type', 'admin')->get();
+                return view('noc.admin_pages.adminRights')->with('admins', $admins);
+            }
         }
     }
 
-    public function grantAdminRights(Request $request)
+    /*public function grantAdminRights(Request $request)
     {
     	if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
@@ -77,15 +83,45 @@ class AdminRightsController extends Controller
                     return redirect('/adminRights')->with('error', 'Something went wrong or employee id does not exists');    
             }
         }
-    }
+    }*/
 
-    public function listAdmins()
+    //Admin or Hod rights
+    public function performAdminRights(Request $request)
     {
         if(Auth::guest())
-            return redirect('/login')->with('error', 'Login first');
+             return redirect('/login')->with('error', 'Login First');
         else
         {
-            ;
-        }    
-    }
+            $password = $request->input('password');
+            $employee_id = $request->input('employee_id');
+            if(Hash::check($password, auth()->user()->password))
+            {
+                //Assign admin rights
+                if($request->input('action') == 'assignAdminRights')
+                {
+                    $user = User::where('employee_id', $employee_id)->first();
+                    $user->user_type = 'admin';
+                    $user->save();
+                    return redirect('/adminRights')->with('success', 'Admin Rights Granted');
+                }
+                //Remove admin rights
+                elseif($request->input('action') == 'removeAdminRights')
+                {
+                    $user = User::where('employee_id', $employee_id)->first();
+                    $user->user_type = 'user';
+                    $user->save();
+                    return redirect('/adminRights')->with('delete', 'Admin Rights Removed');
+                }
+                //Delete Account
+                else
+                {
+                    if(User::where('employee_id', $employee_id)->delete() && 
+                       Profile::where('employee_id', $employee_id)->delete())
+                        return redirect('/adminRights')->with('delete', 'Account Deleted');
+                    else
+                        return redirect('/adminRights')->with('error', 'Something went wrong or employee id does not exists or users profile does not exist');
+                }
+            }   
+        }   
+    }    
 }

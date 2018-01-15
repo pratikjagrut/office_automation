@@ -21,15 +21,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profile', 'ProfileController');
 
-Route::get('/adminRights', 'noc\AdminRightsController@index');
+Route::get('/adminRights', 'noc\AdminRightsController@index');	
 
-Route::get('/grantAdminRights', 'noc\AdminRightsController@grantAdminRights');
+Route::get('/performAdminRights', 'noc\AdminRightsController@performAdminRights');
 
-Route::get('/removeAdminRights', 'noc\AdminRightsController@removeAdminRights');
+//Route::get('/grantAdminRights', 'noc\AdminRightsController@grantAdminRights');
 
-Route::get('/deleteAccount', 'noc\AdminRightsController@deleteAccount');
+//Route::get('/removeAdminRights', 'noc\AdminRightsController@removeAdminRights');
 
-Route::get('/assignJob', 'noc\AdminRightsController@assignJob');
+//Route::get('/deleteAccount', 'noc\AdminRightsController@deleteAccount');
+
+//Route::get('/assignJob', 'noc\AdminRightsController@assignJob');
 
 Route::get('/newJobEntry', 'noc\JobController@index');
 
@@ -51,7 +53,7 @@ Route::get('/setConsumer', 'noc\ConsumerController@setConsumer');
 
 Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer');
 
-Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');	
+Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
 Route::get('trial', function(){
 	return view('trial');

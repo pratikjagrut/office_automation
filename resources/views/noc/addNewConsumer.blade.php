@@ -28,7 +28,7 @@
 					    </table>
 					</form>
 					<table class="table table-striped table-bordered" style="border: 1px solid #ccc;">
-						@if (count($consumers) > 0 && $consumers != null)
+						@if ($consumers != null && count($consumers) > 0 )
 							<tr>
 								<th>Sr. No</th>
 								<th>Circuit Id</th>
