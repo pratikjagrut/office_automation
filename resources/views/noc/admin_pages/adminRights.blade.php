@@ -55,26 +55,24 @@
 				<div class="panel panel-default">
 					<div class="panel-heading text-center"><b>Current Admins</b></div>
 					<div class="panel-body">
-						<form action="/assignJob" method="get">
-							<table class="table table-striped">
-								@if (count($admins) > 0)
+						<table class="table table-striped">
+							@if (count($admins) > 0)
+								<tr>
+									<th>Sr. No</th>
+									<th>Employee Id</th>
+									<th>Name</th>
+									<th>Email</th>
+								</tr>
+								@foreach ($admins as $admin)
 									<tr>
-										<th>Sr. No</th>
-										<th>Employee Id</th>
-										<th>Name</th>
-										<th>Email</th>
+										<td>{{$loop->iteration}}</td>
+										<td>{{$admin->employee_id}}</td>
+										<td>{{ucwords($admin->name)}}</td>
+										<td>{{$admin->email}}</td>
 									</tr>
-									@foreach ($admins as $admin)
-										<tr>
-											<td>{{$loop->iteration}}</td>
-											<td>{{$admin->employee_id}}</td>
-											<td>{{ucwords($admin->name)}}</td>
-											<td>{{$admin->email}}</td>
-										</tr>
-									@endforeach
-								@endif
-							</table>
-						</form>
+								@endforeach
+							@endif
+						</table>
 					</div>
 				</div>
 			</div>		
