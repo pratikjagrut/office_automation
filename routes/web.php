@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Hash;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,6 +56,6 @@ Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer'
 
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
-Route::get('trial', function(){
-	return view('trial');
+Route::get('/pswd', function(){
+	return Hash::make('123456');
 });
