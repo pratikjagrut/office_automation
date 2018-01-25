@@ -24,7 +24,7 @@ class CreateNocOngoingJobsTable extends Migration
             $table->string('state')->nullable();
             $table->string('contact_details')->nullable();
             $table->string('consumer_type')->nullable();
-            $table->string('generation_date')->nullable();
+            $table->string('generation_date_timestamp')->nullable();
             $table->text('case_reason')->nullable();
             $table->string('assign_to')->nullable();
             $table->string('generated_by')->nullable();
