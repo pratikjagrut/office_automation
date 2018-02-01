@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profile', 'ProfileController');
 
+//NOC Department Routes
+
 Route::get('/adminRights', 'noc\AdminRightsController@index');	
 
 Route::get('/performAdminRights', 'noc\AdminRightsController@performAdminRights');
@@ -56,6 +58,41 @@ Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer'
 
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
+
+
+//CC Department Routes
+
+
+Route::get('/extension', function () {
+    return view('customer_care.extension');
+});
+
+Route::get('/downArea', function () {
+    return view('customer_care.downArea');
+});
+
+Route::get('/refund', function () {
+    return view('customer_care.refund');
+});
+
+Route::get('/feasible', function () {
+    return view('customer_care.feasibleArea');
+});
+
+//HR Department Routes
+Route::get('/manpower', function () {
+    return view('hr.manPower');
+});
+
+Route::get('/stationary', function () {
+    return view('hr.stationary');
+});
+
+
+
+
+//Default password generator
 Route::get('/pswd', function(){
 	return Hash::make('123456');
 });
+
