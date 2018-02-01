@@ -5997,3 +5997,24 @@ oc\\ConsumerController), 'index')
 #31 /opt/lampp/htdocs/office_automation/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
 #32 /opt/lampp/htdocs/office_automation/vendor/fideloper/proxy/src/TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illumi
 >>>>>>> e53897c4e8bcf2a83223f17abd9e807a0e827a09
+[2018-02-01 06:39:18] local.ERROR: Parse error: syntax error, unexpected 'public' (T_PUBLIC), expecting ',' or ')' {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected 'public' (T_PUBLIC), expecting ',' or ')' at D:\\xampp\\htdocs\\office_automation\\database\\migrations\\2018_02_01_063820_create_hr_manpowers_table.php:36)
+[stacktrace]
+#0 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(446): Illuminate\\Filesystem\\Filesystem->requireOnce('D:\\\\xampp\\\\htdocs...')
+#1 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(89): Illuminate\\Database\\Migrations\\Migrator->requireFiles(Array)
+#2 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#3 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#4 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(29): call_user_func_array(Array, Array)
+#5 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#6 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#7 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#8 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#9 D:\\xampp\\htdocs\\office_automation\\vendor\\symfony\\console\\Command\\Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#10 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#11 D:\\xampp\\htdocs\\office_automation\\vendor\\symfony\\console\\Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 D:\\xampp\\htdocs\\office_automation\\vendor\\symfony\\console\\Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 D:\\xampp\\htdocs\\office_automation\\vendor\\symfony\\console\\Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\xampp\\htdocs\\office_automation\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 {main}
+"} 
