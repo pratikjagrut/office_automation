@@ -61,8 +61,6 @@ Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
 
 //CC Department Routes
-
-
 Route::get('/extension', function () {
     return view('customer_care.extension');
 });
@@ -84,6 +82,7 @@ Route::get('/manpower', function () {
     return view('hr.manPower');
 });
 
+<<<<<<< HEAD
 Route::get('/stationary', function () {
     return view('hr.stationary');
 });
@@ -96,6 +95,9 @@ Route::get('/ill', function () {
 Route::get('/p2p', function () {
     return view('sales.p2p');
 });
+=======
+Route::resource('stationery', 'hr\StationeryController');
+>>>>>>> a8aa171d0e60ec4f967290ad988799ad02bc9f1e
 
 //Default password generator
 Route::get('/pswd', function(){
