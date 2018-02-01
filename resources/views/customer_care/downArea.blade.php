@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Down Areas</div>
+                <div class="panel-heading text-center">Down Areas</div>
 
                  <div class="panel-body">
                     <div class="modal-body">
@@ -22,11 +22,11 @@
                         
                         <tr class="from-group">
                             <td><label>Customer Name: </label></td>
-                            <td><input id="name" type="text" class="form-control" name="name" value="" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
+                            <td><input id="customer_name" type="text" class="form-control" name="customer_name" value="" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Area Name: </label></td>
-                            <td><input id="area" type="text" class="form-control" name="area" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
+                            <td><input id="area_name" type="text" class="form-control" name="area_name" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Down Reason: </label></td>
@@ -34,15 +34,15 @@
                         </tr>
                         <tr class="from-group">
                             <td><label>Down Date: </label></td>
-                            <td><input id="down_time" type="date" class="form-control" name="down_date" required></td>
+                            <td><input id="down_date" type="date" class="form-control" name="down_date" required></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Down Time: </label></td>
-                            <td> <input id="down_time" type="time"  class="form-control" name="up_time" required></td>
+                            <td> <input id="down_time" type="time"  class="form-control" name="down_time" required></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Up Date : </label></td>
-                            <td> <input id="up_date" type="date"  class="form-control" name="up_time" required></td>
+                            <td> <input id="up_date" type="date"  class="form-control" name="up_date" required></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Up Time : </label></td>

@@ -88,8 +88,14 @@ Route::get('/stationary', function () {
     return view('hr.stationary');
 });
 
+//Sales Department
+Route::get('/ill', function () {
+    return view('sales.ill');
+});
 
-
+Route::get('/p2p', function () {
+    return view('sales.p2p');
+});
 
 //Default password generator
 Route::get('/pswd', function(){

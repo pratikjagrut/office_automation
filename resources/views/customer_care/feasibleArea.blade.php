@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Feasible Areas</div>
+                    <div class="panel-heading text-center">Feasible Areas</div>
 
                     <div class="panel-body">
                         <div class="modal-body">
@@ -17,12 +17,12 @@
                                 <table class="table table-striped">
                                     <tr class="from-group">
                                       <td><label>Reseller Name: </label></td>
-                                      <td><input type="text" name="reseller" id="reseller" class="form-control" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
+                                      <td><input type="text" name="reseller_name" id="reseller_name" class="form-control" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                                     </tr>
                         
                                     <tr class="from-group">
                                        <td><label>Building: </label></td>
-                                       <td><input id="building_name" type="text" class="form-control" name="building_name"  required></td>
+                                       <td><input id="building" type="text" class="form-control" name="building"  required></td>
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Society: </label></td>
@@ -38,7 +38,7 @@
                                     </tr>
                                     <tr class="from-group">
                                       <td><label>Switch Location: </label></td>
-                                      <td><input id="location" type="text" class="form-control" name="location" required></td>
+                                      <td><input id="switch_location" type="text" class="form-control" name="switch_location" required></td>
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Contact Person Name: </label></td>
@@ -46,7 +46,7 @@
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Contact Person Number: </label></td>
-                                       <td><input id="contact_no" type="tel" class="form-control" name="contact_no" required pattern="^\d{10}$" title="Enter 10-digits only!"></td>
+                                       <td><input id="contact_number" type="tel" class="form-control" name="contact_number" required pattern="^\d{10}$" title="Enter 10-digits only!"></td>
                                     </tr>
 
 
