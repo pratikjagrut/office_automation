@@ -89,6 +89,9 @@ Route::get('/stationary', function () {
 });
 
 
+Route::resource('stationery', 'hr\StationeryController');
+
+
 
 
 //Default password generator
