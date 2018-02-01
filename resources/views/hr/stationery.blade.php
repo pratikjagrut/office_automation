@@ -17,7 +17,7 @@
                         
                             <tr class="from-group">
                                <td><label>Item Description: </label></td>
-                               <td><input id="description" type="text" class="form-control" name="description" required></td>
+                               <td><input id="item_description" type="text" class="form-control" name="item_description" required></td>
                             </tr>
                             <tr class="from-group">
                                <td><label>Quantity: </label></td>
