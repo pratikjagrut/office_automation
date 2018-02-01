@@ -82,15 +82,7 @@ Route::get('/manpower', function () {
     return view('hr.manPower');
 });
 
-Route::get('/stationary', function () {
-    return view('hr.stationary');
-});
-
-
 Route::resource('stationery', 'hr\StationeryController');
-
-
-
 
 //Default password generator
 Route::get('/pswd', function(){
