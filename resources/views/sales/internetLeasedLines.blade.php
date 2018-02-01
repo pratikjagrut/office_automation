@@ -22,7 +22,7 @@
                         
                                     <tr class="from-group">
                                        <td><label>Customer Address: </label></td>
-                                       <td><input id="customer_address" type="text" class="form-control" name="address"  required></td>
+                                       <td><input id="customer_address" type="text" class="form-control" name="customer_address"  required></td>
                                     </tr>
                                     
                                     <tr class="from-group">

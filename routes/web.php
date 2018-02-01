@@ -82,11 +82,7 @@ Route::get('/manpower', function () {
     return view('hr.manPower');
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-Route::get('/stationary', function () {
-    return view('hr.stationary');
-});
+Route::resource('stationery', 'hr\StationeryController');
 
 //Sales Department
 Route::get('/ill', function () {
@@ -96,12 +92,8 @@ Route::get('/ill', function () {
 Route::get('/p2p', function () {
     return view('sales.p2p');
 });
-=======
-Route::resource('stationery', 'hr\StationeryController');
->>>>>>> a8aa171d0e60ec4f967290ad988799ad02bc9f1e
-=======
-Route::resource('stationery', 'hr\StationeryController');
->>>>>>> a8aa171d0e60ec4f967290ad988799ad02bc9f1e
+
+
 
 //Default password generator
 Route::get('/pswd', function(){
