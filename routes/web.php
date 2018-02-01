@@ -61,8 +61,6 @@ Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
 
 //CC Department Routes
-
-
 Route::get('/extension', function () {
     return view('customer_care.extension');
 });
