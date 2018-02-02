@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\CcDownArea' => $baseDir . '/app/CcDownArea.php',
+    'App\\CcExtension' => $baseDir . '/app/CcExtension.php',
+    'App\\CcRefund' => $baseDir . '/app/CcRefund.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\HrManpower' => $baseDir . '/app/HrManpower.php',
@@ -16,6 +19,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
+    'App\\Http\\Controllers\\Hr\\StationeryController' => $baseDir . '/app/Http/Controllers/hr/StationeryController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\noc\\AdminRightsController' => $baseDir . '/app/Http/Controllers/noc/AdminRightsController.php',
     'App\\Http\\Controllers\\noc\\ConsumerController' => $baseDir . '/app/Http/Controllers/noc/ConsumerController.php',
