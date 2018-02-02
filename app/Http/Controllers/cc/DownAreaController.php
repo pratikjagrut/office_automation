@@ -44,27 +44,19 @@ class DownAreaController extends Controller
             return redirect('/login')->with('error', 'Login first');
         else
         {
-            $user_id = $request->input('user_id');
-            $customer_name = $request->input('customer_name');
-            $area_name = $request->input('area_name');
+            $area = $request->input('area');
+            $assigned_to = $request->input('assigned_to');
             $reason = $request->input('reason');
-            $down_date = $request->input('down_date');
-            $down_time = $request->input('down_time');
-            $up_date = $request->input('up_date');
-            $up_time = $request->input('up_time');
-            $assigned = $request->input('assigned');
+            $down_day_time = $request->input('down_day_time');
+            $up_day_time = $request->input('up_day_time');
             $generated_by = $request->input('generated_by');
 
             $new_request = new CcDownArea;
-            $new_request->user_id = $user_id;
-            $new_request->customer_name = $customer_name;
-            $new_request->area_name = $area_name;
+            $new_request->area = $area;
+            $new_request->assigned_to = $assigned_to;
             $new_request->reason = $reason;
-            $new_request->down_date = $down_date;
-            $new_request->down_time = $down_time;
-            $new_request->up_date = $up_date;
-            $new_request->up_time = $up_time;
-            $new_request->assigned = $assigned;
+            $new_request->down_day_time = $down_day_time;
+            $new_request->up_day_time = $up_day_time;
             $new_request->generated_by = $generated_by;
 
             if($new_request->save())

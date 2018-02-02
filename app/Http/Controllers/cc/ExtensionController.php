@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\cc;
 
+use App\CcExtension;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,22 +44,22 @@ class ExtensionController extends Controller
             return redirect('/login')->with('error', 'Login first');
         else
         {
-            $user_id = $request->input('user_id');
-            $customer_name = $request->input('customer_name');
+            $customer_id = $request->input('customer_id');
             $complaint_date = $request->input('complaint_date');
-            $expiry = $request->input('expiry');
+            $expiry_date = $request->input('expiry_date');
             $status = $request->input('status');
             $reason = $request->input('reason');
+            $extension_day = $request->input('extension_day');
             $assigned_to = $request->input('assigned_to');
             $generated_by = $request->input('generated_by');
 
-            $new_request = new CcExtsension;
-            $new_request->user_id = $user_id;
-            $new_request->customer_name = $customer_name;
+            $new_request = new CcExtension;
+            $new_request->customer_id = $customer_id;
             $new_request->complaint_date = $complaint_date;
-            $new_request->expiry = $expiry;
+            $new_request->expiry_date = $expiry_date;
             $new_request->status = $status;
-            $new_request->reason = $reason;
+            $new_request->reason = $reason; 
+            $new_request->extension_day = $extension_day; 
             $new_request->assigned_to = $assigned_to;
             $new_request->generated_by = $generated_by;
 

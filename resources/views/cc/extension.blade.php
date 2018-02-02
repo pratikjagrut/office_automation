@@ -19,13 +19,8 @@
                         <tr class="from-group">
                             <td><label>Customer User_ID: </label></td>
                             <td>
-                                <input id="user_id" type="text" class="form-control" name="user_id" value="" required>
+                                <input id="customer_id" type="text" class="form-control" name="customer_id" value="" required>
                             </td>
-                        </tr>
-                        
-                        <tr class="from-group">
-                            <td><label>Customer Name: </label></td>
-                            <td><input id="customer_name" type="text" class="form-control" name="customer_name" value="" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Complaint Date: </label></td>
@@ -35,7 +30,7 @@
                         </tr>
                         <tr class="from-group">
                             <td><label>Expiry: </label></td>
-                            <td><input id="expiry" type="date" class="form-control" name="expiry" required></td>
+                            <td><input id="expiry_date" type="date" class="form-control" name="expiry_date" required></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Status: </label></td>
@@ -44,6 +39,12 @@
                         <tr class="from-group">
                             <td><label>Reason: </label></td>
                             <td><input id="reason" type="text" class="form-control" name="reason" required></td>
+                        </tr>
+                        <tr class="from-group">
+                            <td><label>Extension Date: </label></td>
+                            <td>
+                                <input id="extension_date" type="date" class="form-control" name="extension_date" required>
+                            </td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Assigned to: </label></td>

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CcDownArea extends Model
+class CcExtension extends Model
 {
     protected $table = 'cc_extensions';
 	public $primaryKey = 'id';

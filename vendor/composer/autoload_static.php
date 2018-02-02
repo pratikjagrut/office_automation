@@ -317,6 +317,9 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
     );
 
     public static $classMap = array (
+        'App\\CcDownArea' => __DIR__ . '/../..' . '/app/CcDownArea.php',
+        'App\\CcExtension' => __DIR__ . '/../..' . '/app/CcExtension.php',
+        'App\\CcRefund' => __DIR__ . '/../..' . '/app/CcRefund.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\HrManpower' => __DIR__ . '/../..' . '/app/HrManpower.php',
@@ -327,6 +330,7 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\Hr\\StationeryController' => __DIR__ . '/../..' . '/app/Http/Controllers/hr/StationeryController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\noc\\AdminRightsController' => __DIR__ . '/../..' . '/app/Http/Controllers/noc/AdminRightsController.php',
         'App\\Http\\Controllers\\noc\\ConsumerController' => __DIR__ . '/../..' . '/app/Http/Controllers/noc/ConsumerController.php',
