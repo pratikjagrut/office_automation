@@ -15,7 +15,6 @@
                     <div class="modal-body">
                        <form action="/closeJob">
                          <table class="table table-striped">
-                        
                             <tr class="from-group">
                                <td><label>Item Description: </label></td>
                                <td><input id="item_description" type="text" class="form-control" name="item_description" required></td>

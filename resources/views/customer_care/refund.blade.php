@@ -82,7 +82,7 @@
                         </tr>
                         <tr class="from-group">
                             <td><label>Mail Date: </label></td>
-                            <td><input id="mail_date" type="text" class="form-control" name="mail_date" required></td>
+                            <td><input id="mail_date" type="date" class="form-control" name="mail_date" required></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Refund Status: </label></td>

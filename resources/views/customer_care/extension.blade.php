@@ -29,7 +29,7 @@
                         <tr class="from-group">
                             <td><label>Complaint Date: </label></td>
                             <td>
-                                <input id="complaint_date" type="text" class="form-control" name="complaint_date" required>
+                                <input id="complaint_date" type="date" class="form-control" name="complaint_date" required>
                             </td>
                         </tr>
                         <tr class="from-group">

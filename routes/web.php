@@ -86,13 +86,21 @@ Route::resource('stationery', 'hr\StationeryController');
 
 //Sales Department
 Route::get('/ill', function () {
-    return view('sales.ill');
+    return view('sales.internetLeasedLines');
 });
 
 Route::get('/p2p', function () {
     return view('sales.p2p');
 });
 
+Route::get('/approvalnote', function () {
+    return view('sales.approvalNote');
+});
+
+//VOIP Department
+Route::get('/voip', function () {
+    return view('voip.voipForm');
+});
 
 
 //Default password generator
