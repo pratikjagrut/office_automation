@@ -13,7 +13,7 @@ class CreateCcRefundsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cc_refunds', function (Blueprint $table) {
+       Schema::create('cc_refunds', function (Blueprint $table) {
             $table->increments('id');
             $table->string('customer_id')->nullable();
             $table->string('customer_name')->nullable();
@@ -28,6 +28,7 @@ class CreateCcRefundsTable extends Migration
             $table->string('done_date')->nullable();
             $table->string('utr_no')->nullable();
             $table->string('assigned_to')->nullable();
+            $table->string('generated_by')->nullable();
             $table->timestamps();
         });
     }
