@@ -7819,7 +7819,11 @@ oc\\ConsumerController), 'index')
 #61 D:\\xampp\\htdocs\\office_automation\\server.php(21): require_once('D:\\\\xampp\\\\htdocs...')
 #62 {main}
 "} 
+<<<<<<< HEAD
 [2018-02-03 06:16:09] local.ERROR: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+=======
+[2018-02-03 07:22:11] local.ERROR: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+>>>>>>> c23f47dbe786c723fe71b5492f36129ee1e0da10
  {"exception":"[object] (PDOException(code: 2002): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
  at D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php:67)
 [stacktrace]
@@ -7856,7 +7860,11 @@ oc\\ConsumerController), 'index')
 #30 D:\\xampp\\htdocs\\office_automation\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #31 {main}
 "} 
+<<<<<<< HEAD
 [2018-02-03 06:16:09] local.ERROR: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+=======
+[2018-02-03 07:22:11] local.ERROR: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+>>>>>>> c23f47dbe786c723fe71b5492f36129ee1e0da10
  (SQL: select * from information_schema.tables where table_schema = office_automation and table_name = migrations) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 2002): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
  (SQL: select * from information_schema.tables where table_schema = office_automation and table_name = migrations) at D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:664, PDOException(code: 2002): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
  at D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php:67)
@@ -7884,6 +7892,7 @@ oc\\ConsumerController), 'index')
 #20 D:\\xampp\\htdocs\\office_automation\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #21 {main}
 "} 
+<<<<<<< HEAD
 [2018-02-03 06:45:16] local.ERROR: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
  {"exception":"[object] (PDOException(code: 2002): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
  at D:\\xampp\\htdocs\\office_automation\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php:67)
@@ -7980,3 +7989,5 @@ oc\\ConsumerController), 'index')
 #26 D:\\xampp\\htdocs\\office_automation\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #27 {main}
 "} 
+=======
+>>>>>>> c23f47dbe786c723fe71b5492f36129ee1e0da10
