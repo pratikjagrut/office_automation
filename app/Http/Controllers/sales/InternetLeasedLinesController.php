@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\cc;
+namespace App\Http\Controllers\sales;
 
-use App\CcFeasibleArea;
 use App\Http\Controllers\Controller;
+use App\SalesInternetLeasedLines;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FeasibleAreaController extends Controller
+class InternetLeasedLinesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,10 @@ class FeasibleAreaController extends Controller
      */
     public function index()
     {
-        if(Auth::guest())
+       if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-            return view('cc.feasibleArea');
+            return view('sales.internetLeasedLines');
     }
 
     /**
@@ -44,31 +44,39 @@ class FeasibleAreaController extends Controller
             return redirect('/login')->with('error', 'Login first');
         else
         {
-            $reseller_name = $request->input('reseller_name');
-            $building = $request->input('building');
-            $society = $request->input('society');
-            $area = $request->input('area');
+            $generated_by = $request->input('generated_by');
+            $customer_name = $request->input('customer_name');
+            $customer_address = $request->input('customer_address');
             $city = $request->input('city');
-            $switch_location = $request->input('switch_location');
+            $state = $request->input('state');
+            $pincode = $request->input('pincode');
             $contact_name = $request->input('contact_name');
             $contact_number = $request->input('contact_number');
-            $generated_by = $request->input('generated_by');
+            $contact_email = $request->input('contact_email');
+            $bandwidth_size = $request->input('bandwidth_size');
+            $feasiblity_status = $request->input('feasiblity_status');
+            $fiber = $request->input('fiber');
+            $radio_frequency = $request->input('radio_frequency');
 
-            $new_request = new CcFeasibleArea;
-            $new_request->reseller_name = $reseller_name;
-            $new_request->building = $building;
-            $new_request->society = $society;
-            $new_request->area = $area;
+            $new_request = new SalesInternetLeasedLines;
+            $new_request->generated_by = $generated_by;
+            $new_request->customer_name = $customer_name;
+            $new_request->customer_address = $customer_address;
             $new_request->city = $city;
-            $new_request->switch_location = $switch_location;
+            $new_request->state = $state;
+            $new_request->pincode = $pincode;
             $new_request->contact_name = $contact_name;
             $new_request->contact_number = $contact_number;
-            $new_request->generated_by = $generated_by;
+            $new_request->contact_email = $contact_email;
+            $new_request->bandwidth_size = $bandwidth_size;
+            $new_request->feasiblity_status = $feasiblity_status;
+            $new_request->fiber = $fiber;
+            $new_request->radio_frequency = $radio_frequency;
 
             if($new_request->save())
-                return redirect('/feasibleArea')->with('success', 'Successfuly submitted request');
+                return redirect('/internetLeasedLines')->with('success', 'Successfuly submitted request');
             else
-                return redirect('/feasibleArea')->with('error', 'Request could not be submitted! Please try again');
+                return redirect('/internetLeasedLines')->with('error', 'Request could not be submitted! Please try again');
         }
     }
 

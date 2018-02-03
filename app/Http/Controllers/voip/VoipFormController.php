@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\cc;
+namespace App\Http\Controllers\voip;
 
-use App\CcFeasibleArea;
 use App\Http\Controllers\Controller;
+use App\VoipVoipForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FeasibleAreaController extends Controller
+class VoipFormController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class FeasibleAreaController extends Controller
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-            return view('cc.feasibleArea');
+            return view('voip.voipForm');
     }
 
     /**
@@ -44,31 +44,25 @@ class FeasibleAreaController extends Controller
             return redirect('/login')->with('error', 'Login first');
         else
         {
-            $reseller_name = $request->input('reseller_name');
-            $building = $request->input('building');
-            $society = $request->input('society');
-            $area = $request->input('area');
-            $city = $request->input('city');
-            $switch_location = $request->input('switch_location');
-            $contact_name = $request->input('contact_name');
-            $contact_number = $request->input('contact_number');
-            $generated_by = $request->input('generated_by');
+            $dates_manually = $request->input('dates_manually');
+            $destination = $request->input('destination');
+            $country_code = $request->input('country_code');
+            $area_code = $request->input('area_code');
+            $price = $request->input('price');
+            $status = $request->input('status');
 
-            $new_request = new CcFeasibleArea;
-            $new_request->reseller_name = $reseller_name;
-            $new_request->building = $building;
-            $new_request->society = $society;
-            $new_request->area = $area;
-            $new_request->city = $city;
-            $new_request->switch_location = $switch_location;
-            $new_request->contact_name = $contact_name;
-            $new_request->contact_number = $contact_number;
-            $new_request->generated_by = $generated_by;
+            $new_request = new VoipVoipForm;
+            $new_request->dates_manually = $dates_manually;
+            $new_request->destination = $destination;
+            $new_request->country_code = $country_code;
+            $new_request->area_code = $area_code;
+            $new_request->price = $price;
+            $new_request->status = $status;
 
             if($new_request->save())
-                return redirect('/feasibleArea')->with('success', 'Successfuly submitted request');
+                return redirect('/voipForm')->with('success', 'Successfuly submitted request');
             else
-                return redirect('/feasibleArea')->with('error', 'Request could not be submitted! Please try again');
+                return redirect('/voipForm')->with('error', 'Request could not be submitted! Please try again');
         }
     }
 

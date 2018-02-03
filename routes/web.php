@@ -104,10 +104,16 @@ Route::get('/approvalnote', function () {
     return view('sales.approvalNote');
 });
 
+Route::resource('approvalNote', 'sales\ApprovalNoteController');
+Route::resource('internetLeasedLines', 'sales\InternetLeasedLinesController');
+Route::resource('p2p', 'sales\P2pController');
+
 //VOIP Department
 Route::get('/voip', function () {
     return view('voip.voipForm');
 });
+
+Route::resource('voipForm', 'voip\VoipFormController');
 
 
 //Default password generator
