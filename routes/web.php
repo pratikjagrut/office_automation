@@ -114,6 +114,10 @@ Route::get('/inventory', function () {
     return view('inventory.purchaseRequest');
 });
 
+//Document Approval 
+Route::get('/documentApproval', function () {
+    return view('document_approval.documentApproval');
+});
 
 //Default password generator
 Route::get('/pswd', function(){
