@@ -109,6 +109,11 @@ Route::get('/voip', function () {
     return view('voip.voipForm');
 });
 
+//Inventory Department
+Route::get('/inventory', function () {
+    return view('inventory.purchaseRequest');
+});
+
 
 //Default password generator
 Route::get('/pswd', function(){
