@@ -50,8 +50,8 @@ class FeasibleAreaController extends Controller
             $area = $request->input('area');
             $city = $request->input('city');
             $switch_location = $request->input('switch_location');
-            $contact_name = $request->input('contact_name');
-            $contact_number = $request->input('contact_number');
+            $contact_person_name = $request->input('contact_person_name');
+            $contact_person_number = $request->input('contact_person_number');
             $generated_by = $request->input('generated_by');
 
             $new_request = new CcFeasibleArea;
@@ -61,8 +61,8 @@ class FeasibleAreaController extends Controller
             $new_request->area = $area;
             $new_request->city = $city;
             $new_request->switch_location = $switch_location;
-            $new_request->contact_name = $contact_name;
-            $new_request->contact_number = $contact_number;
+            $new_request->contact_person_name = $contact_person_name;
+            $new_request->contact_person_number = $contact_person_number;
             $new_request->generated_by = $generated_by;
 
             if($new_request->save())
