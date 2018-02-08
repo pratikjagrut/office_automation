@@ -79,7 +79,7 @@ Route::get('/feasible', function () {
 
 Route::resource('extension', 'cc\ExtensionController');
 Route::resource('downArea', 'cc\DownAreaController');
-Route::resource('feasibleArea', 'cc\FeasibleAreaController.php');
+Route::resource('feasibleArea', 'cc\FeasibleAreaController');
 Route::resource('refund', 'cc\RefundController');
 
 //HR Department Routes
