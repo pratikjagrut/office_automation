@@ -119,14 +119,11 @@ Route::get('/inventory', function () {
     return view('inventory.purchaseRequest');
 });
 
-<<<<<<< HEAD
 Route::resource('purchaseRequest', 'inventory\PurchaseRequestController');
-=======
 //Document Approval 
 Route::get('/documentApproval', function () {
     return view('document_approval.documentApproval');
 });
->>>>>>> 21c3c30a79f8c31fe1d8d9eeea056dfaf590651c
 
 //Default password generator
 Route::get('/pswd', function(){
