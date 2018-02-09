@@ -113,15 +113,13 @@ Route::get('/voip', function () {
     return view('voip.voipForm');
 });
 
-<<<<<<< HEAD
 Route::resource('voipForm', 'voip\VoipFormController');
-=======
 //Inventory Department
 Route::get('/inventory', function () {
     return view('inventory.purchaseRequest');
 });
->>>>>>> 2ae5be436873631d258c91e2b89877aa6cd6775d
 
+Route::resource('purchaseRequest', 'inventory\PurchaseRequestController');
 
 //Default password generator
 Route::get('/pswd', function(){
