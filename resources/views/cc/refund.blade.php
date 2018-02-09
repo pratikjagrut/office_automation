@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Export Finished Jobs')
+@section('title', 'Refund Request')
 
 @section('content')
    
@@ -13,12 +13,13 @@
 
                  <div class="panel-body">
                     <div class="modal-body">
-                     <form action="/closeJob">
+                       <form action="/refund" method="post">
+                        {{csrf_field()}}
                       <table class="table table-striped">
                         <tr class="from-group">
                             <td><label>Customer User_Id: </label></td>
                             <td>
-                                <input id="user_id" type="text" class="form-control" name="user_id" value="" required >
+                                <input id="customer_id" type="text" class="form-control" name="customer_id" value="" required >
                             </td>
                         </tr>
                         
@@ -28,17 +29,17 @@
                         </tr>
                         <tr class="from-group">
                             <td><label>Bank Account Number: </label></td>
-                            <td><input id="account_number" type="tel" class="form-control" name="account_number" required pattern="^\d{16}$" title="Only 16 digits are allowed!"></td>
+                            <td><input id="account_no" type="number" class="form-control" name="account_no" required pattern="^\d{16}$" title="Only 16 digits are allowed!"></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>IFSC Number: </label></td>
-                            <td><input id="ifsc_code" type="tel" class="form-control" name="ifsc_code" required pattern="^\d{11}$" title="Only 11 digits are allowed!"></td>
+                            <td><input id="ifsc_no" type="number" class="form-control" name="ifsc_no" required pattern="^\d{11}$" title="Only 11 digits are allowed!"></td>
                         </tr>
                         
 
                         <tr class="from-group">
                             <td><label>Bank Name: </label></td>
-                            <td><select name="bank_name" class="form-control">
+                            <td><select name="bank" class="form-control">
                                 <option value="select">Select</option>
                                 <option value="allahabad"> Allahabad Bank</option>
                                 <option value="andhra">Andhra Bank</option>
@@ -74,15 +75,19 @@
 
                         <tr class="from-group">
                             <td><label>Bank Branch: </label></td>
-                            <td><input id="bank_branch" type="text" class="form-control" name="bank_branch" required pattern="([A-Za-z\s]){3,}" title="Minimum 3 letters required. Only uppercase and lower case letters allowed."></td>
+                            <td><input id="branch" type="text" class="form-control" name="branch" required pattern="([A-Za-z\s]){3,}" title="Minimum 3 letters required. Only uppercase and lower case letters allowed."></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Reason: </label></td>
                             <td><input id="reason" type="text" class="form-control" name="reason" required></td>
                         </tr>
                         <tr class="from-group">
+                            <td><label>Refund Amount: </label></td>
+                            <td><input id="refund_amount" type="number" class="form-control" name="refund_amount" required pattern="^\d{11}$"></td>
+                        </tr>
+                        <tr class="from-group">
                             <td><label>Mail Date: </label></td>
-                            <td><input id="mail_date" type="text" class="form-control" name="mail_date" required></td>
+                            <td><input id="mail_date" type="date" class="form-control" name="mail_date" required></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Refund Status: </label></td>
@@ -100,7 +105,7 @@
                         
                         <tr class="from-group">
                             <td><label>UTR Number: </label></td>
-                            <td><input id="utr_number" type="tel" class="form-control" name="utr_number" required pattern="^\d{11}$" title="Max 11 digits are allowed!"></td>
+                            <td><input id="utr_no" type="number" class="form-control" name="utr_no" required pattern="^\d{11}$" title="Max 11 digits are allowed!"></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Assigned to: </label></td>
@@ -108,9 +113,8 @@
                         </tr>
                         <tr class="from-group">
                             <td><label>Generated by: </label></td>
-                            <td><input id="generated_by" type="text" class="form-control" name="generated_by" required></td>
+                            <td><input id="generated_by" type="text" class="form-control" name="generated_by" value="{{Auth::user()->name}}" readonly="true" required></td>
                         </tr>
-
                         <tr class="from-group">
                              <td></td>
                                 <td>
