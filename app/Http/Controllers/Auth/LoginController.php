@@ -25,8 +25,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    #protected $redirectTo = '/home';
 
+    protected function redirecting()
+    {
+        if(!auth()->user()->active)
+            return 'deactivatedAccount'
+    }
     /**
      * Create a new controller instance.
      *
