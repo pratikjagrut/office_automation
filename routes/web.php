@@ -47,55 +47,27 @@ Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer'
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
 //CC Department Routes
-<<<<<<< HEAD
-Route::resource('extension', 'cc\ExtensionController');
-Route::resource('downArea', 'cc\DownAreaController');
-Route::resource('feasibleArea', 'cc\FeasibleAreaController');
-Route::resource('refund', 'cc\RefundController');
-=======
 Route::resource('/extension', 'cc\ExtensionController');
 Route::resource('/downArea', 'cc\DownAreaController');
-Route::resource('/feasibleArea', 'cc\FeasibleAreaController.php');
+Route::resource('/feasibleArea', 'cc\FeasibleAreaController');
 Route::resource('/refund', 'cc\RefundController');
->>>>>>> 6665c50abd63119bb636c42bf0e92d17d2c3a014
-
 //HR Department Routes
 Route::resource('/stationery', 'hr\StationeryController');
 Route::resource('/manPower', 'hr\ManPowerController');
 
 //Sales Department
-Route::get('/ill', function () {
-    return view('sales.internetLeasedLines');
-});
-
-Route::get('/p2p', function () {
-    return view('sales.p2p');
-});
-
-Route::get('/approvalnote', function () {
-    return view('sales.approvalNote');
-});
-
-Route::resource('approvalNote', 'sales\ApprovalNoteController');
-Route::resource('internetLeasedLines', 'sales\InternetLeasedLinesController');
-Route::resource('p2p', 'sales\P2pController');
+Route::resource('/approvalNote', 'sales\ApprovalNoteController');
+Route::resource('/internetLeasedLines', 'sales\InternetLeasedLinesController');
+Route::resource('/p2p', 'sales\P2pController');
 
 //VOIP Department
-Route::get('/voip', function () {
-    return view('voip.voipForm');
-});
+Route::resource('/voipForm', 'voip\VoipFormController');
 
-Route::resource('voipForm', 'voip\VoipFormController');
 //Inventory Department
-Route::get('/inventory', function () {
-    return view('inventory.purchaseRequest');
-});
+Route::resource('/inventory', 'inventory\PurchaseRequestController');
 
-Route::resource('purchaseRequest', 'inventory\PurchaseRequestController');
 //Document Approval 
-Route::get('/documentApproval', function () {
-    return view('document_approval.documentApproval');
-});
+Route::resource('/documentApproval', 'document_approval\DocumentApprovalController');
 
 //Default password generator
 Route::get('/pswd', function(){

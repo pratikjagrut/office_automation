@@ -62,16 +62,16 @@ class InternetLeasedLinesController extends Controller
             $new_request->generated_by = $generated_by;
             $new_request->customer_name = $customer_name;
             $new_request->customer_address = $customer_address;
-            $new_request->city = $city;
-            $new_request->state = $state;
+            $new_request->customer_city = $city;
+            $new_request->customer_state = $state;
             $new_request->pincode = $pincode;
-            $new_request->contact_name = $contact_name;
-            $new_request->contact_number = $contact_number;
-            $new_request->contact_email = $contact_email;
+            $new_request->contact_person_name = $contact_name;
+            $new_request->contact_person_no = $contact_number;
+            $new_request->contact_person_email = $contact_email;
             $new_request->bandwidth_size = $bandwidth_size;
-            $new_request->feasiblity_status = $feasiblity_status;
+            $new_request->feasibility_status = $feasiblity_status;
             $new_request->fiber = $fiber;
-            $new_request->radio_frequency = $radio_frequency;
+            $new_request->rf = $radio_frequency;
 
             if($new_request->save())
                 return redirect('/internetLeasedLines')->with('success', 'Successfuly submitted request');

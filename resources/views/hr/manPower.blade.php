@@ -22,11 +22,7 @@
                                     </tr>
                                     <tr class="from-group">
                                       <td><label>No. of vacancy: </label></td>
-<<<<<<< HEAD
                                       <td><input id="vacancy" type="number" class="form-control" name="vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
-=======
-                                      <td><input id="no_of_vacancy" type="tel" class="form-control" name="no_of_vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
->>>>>>> c23f47dbe786c723fe71b5492f36129ee1e0da10
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Reason: </label></td>
