@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function index()
     {
         if(Auth::guest())
-            return view('welcome');
+            return redirect('/login')->with('error', 'Login first');
         else
         {  
             $user = User::find(auth()->user()->id);
