@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,12 +26,17 @@ class LoginController extends Controller
      *
      * @var string
      */
-    #protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
 
-    protected function redirecting()
+    protected function redirectTo()
     {
-        if(!auth()->user()->active)
-            return 'deactivatedAccount'
+        if(auth()->user()->active)
+            return '/home';
+        else
+        {
+            Auth::logout();
+            return 'deactivatedAccount';
+        }
     }
     /**
      * Create a new controller instance.

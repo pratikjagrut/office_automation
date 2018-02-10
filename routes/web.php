@@ -18,6 +18,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Account deactivation routes
+Route::get('deactivatedAccount', function () {
+    return view('deactivatedAccount');
+});
+
 //user process routes
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('profile', 'ProfileController');
