@@ -47,14 +47,14 @@ Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer'
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
 //CC Department Routes
-Route::resource('extension', 'cc\ExtensionController');
-Route::resource('downArea', 'cc\DownAreaController');
-Route::resource('feasibleArea', 'cc\FeasibleAreaController.php');
-Route::resource('refund', 'cc\RefundController');
+Route::resource('/extension', 'cc\ExtensionController');
+Route::resource('/downArea', 'cc\DownAreaController');
+Route::resource('/feasibleArea', 'cc\FeasibleAreaController.php');
+Route::resource('/refund', 'cc\RefundController');
 
 //HR Department Routes
-Route::resource('stationery', 'hr\StationeryController');
-Route::resource('manPower', 'hr\ManPowerController');
+Route::resource('/stationery', 'hr\StationeryController');
+Route::resource('/manPower', 'hr\ManPowerController');
 
 //Sales Department
 Route::get('/ill', function () {
