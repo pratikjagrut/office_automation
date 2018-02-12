@@ -49,6 +49,7 @@
 									<td><?php echo e($consumer->contact_details); ?></td>
 								</tr>
 							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							<div class="text-center"><?php echo e($consumers->links()); ?></div>
 						<?php endif; ?>
 					</table>
 				</div>

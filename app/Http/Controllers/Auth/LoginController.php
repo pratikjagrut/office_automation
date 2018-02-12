@@ -31,7 +31,12 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if(auth()->user()->active)
-            return '/home';
+        {
+            if(auth()->user()->user_type == 'super admin')
+                return '/dashboard';
+            else
+                return '/home';
+        }
         else
         {
             Auth::logout();

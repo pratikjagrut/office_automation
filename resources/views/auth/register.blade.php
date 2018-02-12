@@ -55,12 +55,12 @@
                             <div class="col-md-6">
                                 <select id="department" type="text" class="form-control" name="department" required>
                                     <option>Select Department</option>
-                                    <option vlaue="cc">Customer Care</option>
-                                    <option vlaue="hr">Human Resource</option>
-                                    <option vlaue="inventory">Inventory</option>
-                                    <option vlaue="noc">NOC</option>
-                                    <option vlaue="Sales">sales</option>
-                                    <option vlaue="voip">VOIP</option>
+                                    <option value="cc">Customer Care</option>
+                                    <option value="hr">Human Resource</option>
+                                    <option value="inventory">Inventory</option>
+                                    <option value="noc">NOC</option>
+                                    <option value="Sales">sales</option>
+                                    <option value="voip">VOIP</option>
                                 </select>
                             </div>
                         </div>

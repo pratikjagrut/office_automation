@@ -23,6 +23,10 @@ Route::get('deactivatedAccount', function () {
     return view('deactivatedAccount');
 });
 
+//Super admin routes
+Route::get('/dashboard', 'super_admin\SuperAdminController@index');
+Route::get('userList', 'super_admin\SuperAdminController@userList');
+
 //user process routes
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('profile', 'ProfileController');
@@ -56,6 +60,33 @@ Route::resource('/stationery', 'hr\StationeryController');
 Route::resource('/manPower', 'hr\ManPowerController');
 
 //Sales Department
+Route::get('/ill', function() {
+    return view('sales.internetLeasedLines');
+});
+
+Route::get('/p2p', function() {
+    return view('sales.p2p');
+});
+
+Route::get('/approvalnote', function() {
+    return view('sales.approvalNote');
+});
+
+//VOIP Department
+Route::get('/voip', function() {
+    return view('voip.voipForm');
+});
+
+//Inventory Department
+Route::get('/inventory', function() {
+    return view('inventory.purchaseRequest');
+});
+
+//Document Approval 
+Route::get('/documentApproval', function() {
+    return view('document_approval.documentApproval');
+});
+
 Route::resource('/approvalNote', 'sales\ApprovalNoteController');
 Route::resource('/internetLeasedLines', 'sales\InternetLeasedLinesController');
 Route::resource('/p2p', 'sales\P2pController');
@@ -68,6 +99,7 @@ Route::resource('/inventory', 'inventory\PurchaseRequestController');
 
 //Document Approval 
 Route::resource('/documentApproval', 'document_approval\DocumentApprovalController');
+
 
 //Default password generator
 Route::get('/pswd', function(){
