@@ -11,7 +11,7 @@
 
                     <div class="panel-body">
                         <div class="modal-body">
-                            <form action="/approvalNote" method="post">
+                            <form action="/p2p" method="post">
                                 <?php echo e(csrf_field()); ?>
 
                                 <table class="table table-striped">
