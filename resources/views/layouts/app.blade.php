@@ -66,6 +66,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    @if (Auth::user()->user_type == 'super admin')
+                                       <li>
+                                           <a href="{{ url('/dashboard') }}">Dashboard</a>
+                                       </li> 
+                                    @endif
                                     <li>
                                         <a href="{{ url('/profile') }}">Profile</a>
                                     </li>
