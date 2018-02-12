@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\cc;
+namespace App\Http\Controllers\document_approval;
 
-use App\CcFeasibleArea;
+use App\DocumentApproval;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FeasibleAreaController extends Controller
+class DocumentApprovalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class FeasibleAreaController extends Controller
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-            return view('cc.feasibleArea');
+            return view('document_approval.documentApproval');
     }
 
     /**
@@ -40,35 +40,33 @@ class FeasibleAreaController extends Controller
      */
     public function store(Request $request)
     {
-       if(Auth::guest())
+        if(Auth::guest())
             return redirect('/login')->with('error', 'Login first');
         else
         {
-            $reseller_name = $request->input('reseller_name');
-            $building = $request->input('building');
-            $society = $request->input('society');
-            $area = $request->input('area');
-            $city = $request->input('city');
-            $switch_location = $request->input('switch_location');
-            $contact_person_name = $request->input('contact_person_name');
-            $contact_person_number = $request->input('contact_person_number');
+            $title = $request->input('title');
+            $file_path = $request->input('file_path');
+            $remark = $request->input('remark');
+            $approval = $request->input('approval');
+            $job_id = $request->input('job_id');
+            $priority = $request->input('priority');
+            $deadline = $request->input('deadline');
             $generated_by = $request->input('generated_by');
 
-            $new_request = new CcFeasibleArea;
-            $new_request->reseller_name = $reseller_name;
-            $new_request->building = $building;
-            $new_request->society = $society;
-            $new_request->area = $area;
-            $new_request->city = $city;
-            $new_request->switch_location = $switch_location;
-            $new_request->contact_person_name = $contact_person_name;
-            $new_request->contact_person_number = $contact_person_number;
+            $new_request = new DocumentApproval;
+            $new_request->title = $title;
+            $new_request->file_path = $file_path;
+            $new_request->remark = $remark;
+            $new_request->approval = $approval;
+            $new_request->job_id = $job_id;
+            $new_request->priority = $priority;
+            $new_request->deadline = $deadline;
             $new_request->generated_by = $generated_by;
 
             if($new_request->save())
-                return redirect('/feasibleArea')->with('success', 'Successfuly submitted request');
+                return redirect('/documentApproval')->with('success', 'Successfuly submitted request');
             else
-                return redirect('/feasibleArea')->with('error', 'Request could not be submitted! Please try again');
+                return redirect('/documentApproval')->with('error', 'Request could not be submitted! Please try again');
         }
     }
 

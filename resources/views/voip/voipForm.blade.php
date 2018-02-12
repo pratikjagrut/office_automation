@@ -12,7 +12,8 @@
 
                     <div class="panel-body">
                         <div class="modal-body">
-                            <form action="/closeJob">
+                            <form action="/voipForm" method="post">
+                                {{csrf_field()}}
                                 <table class="table table-striped">
                                     <tr class="from-group">
                                       <td><label>Date: </label></td>

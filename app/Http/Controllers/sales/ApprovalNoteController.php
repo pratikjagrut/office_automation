@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\cc;
+namespace App\Http\Controllers\sales;
 
-use App\CcFeasibleArea;
 use App\Http\Controllers\Controller;
+use App\SalesApprovalNote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FeasibleAreaController extends Controller
+class ApprovalNoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,10 @@ class FeasibleAreaController extends Controller
      */
     public function index()
     {
-        if(Auth::guest())
+       if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-            return view('cc.feasibleArea');
+            return view('sales.approvalNote');
     }
 
     /**
@@ -44,31 +44,37 @@ class FeasibleAreaController extends Controller
             return redirect('/login')->with('error', 'Login first');
         else
         {
-            $reseller_name = $request->input('reseller_name');
-            $building = $request->input('building');
-            $society = $request->input('society');
-            $area = $request->input('area');
-            $city = $request->input('city');
-            $switch_location = $request->input('switch_location');
-            $contact_person_name = $request->input('contact_person_name');
-            $contact_person_number = $request->input('contact_person_number');
+            $customer_name = $request->input('customer_name');
             $generated_by = $request->input('generated_by');
+            $bandwidth_size = $request->input('bandwidth_size');
+            $order_value = $request->input('order_value');
+            $job_id = $request->input('job_id');
+            $capex = $request->input('capex');
+            $opex = $request->input('opex');
+            $operator_involved = $request->input('operator_involved');
+            $miscellaneous_expenses = $request->input('miscellaneous_expenses');
+            $comment = $request->input('comment');
+            $approved_by = $request->input('approved_by');
+            $approval_remark = $request->input('approval_remark');
 
-            $new_request = new CcFeasibleArea;
-            $new_request->reseller_name = $reseller_name;
-            $new_request->building = $building;
-            $new_request->society = $society;
-            $new_request->area = $area;
-            $new_request->city = $city;
-            $new_request->switch_location = $switch_location;
-            $new_request->contact_person_name = $contact_person_name;
-            $new_request->contact_person_number = $contact_person_number;
+            $new_request = new SalesApprovalNote;
+            $new_request->customer_name = $customer_name;
             $new_request->generated_by = $generated_by;
+            $new_request->bandwidth_size = $bandwidth_size;
+            $new_request->order_value = $order_value;
+            $new_request->job_id = $job_id;
+            $new_request->capex = $capex;
+            $new_request->opex = $opex;
+            $new_request->operator_involved = $operator_involved;
+            $new_request->miscellaneous_expenses = $miscellaneous_expenses;
+            $new_request->comment = $comment;
+            $new_request->approved_by = $approved_by;
+            $new_request->approval_remark = $approval_remark;
 
             if($new_request->save())
-                return redirect('/feasibleArea')->with('success', 'Successfuly submitted request');
+                return redirect('/approvalNote')->with('success', 'Successfuly submitted request');
             else
-                return redirect('/feasibleArea')->with('error', 'Request could not be submitted! Please try again');
+                return redirect('/approvalNote')->with('error', 'Request could not be submitted! Please try again');
         }
     }
 

@@ -11,9 +11,9 @@ body {
   position:absolute;
   top:0px;
   left:0px;
-  width:15%;
+  width:20%;
   height:100vh;
-  background:#3097d1;
+  background:#0c1d27;
   text-align:center;
   transform-origin:left;
   transform:perspective(1200px) rotateY(90deg);
@@ -44,7 +44,7 @@ body {
   transition:left 200ms linear 0ms,transform 300ms ease 100ms;
 }
 #toggle-btn.active {
-  left:230px;
+  left:240px;
   transform:rotate(360deg);
 }
 #toggle-btn span {
@@ -52,9 +52,9 @@ body {
   top:0px;
   display:block;
   background:#1a1a1a;
-  width:30px;
+  width:25px;
   height:5px;
-  margin:5px 0px;
+  margin:5px 40px;
   cursor:pointer;
   transition:transform 300ms ease 200ms;
 }

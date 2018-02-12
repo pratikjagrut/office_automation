@@ -53,14 +53,14 @@ Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 //CC Department Routes
 Route::resource('/extension', 'cc\ExtensionController');
 Route::resource('/downArea', 'cc\DownAreaController');
-Route::resource('/feasibleArea', 'cc\FeasibleAreaController.php');
+Route::resource('/feasibleArea', 'cc\FeasibleAreaController');
 Route::resource('/refund', 'cc\RefundController');
-
 //HR Department Routes
 Route::resource('/stationery', 'hr\StationeryController');
 Route::resource('/manPower', 'hr\ManPowerController');
 
 //Sales Department
+<<<<<<< HEAD
 Route::get('/ill', function() {
     return view('sales.internetLeasedLines');
 });
@@ -87,6 +87,20 @@ Route::get('/inventory', function() {
 Route::get('/documentApproval', function() {
     return view('document_approval.documentApproval');
 });
+=======
+Route::resource('/approvalNote', 'sales\ApprovalNoteController');
+Route::resource('/internetLeasedLines', 'sales\InternetLeasedLinesController');
+Route::resource('/p2p', 'sales\P2pController');
+
+//VOIP Department
+Route::resource('/voipForm', 'voip\VoipFormController');
+
+//Inventory Department
+Route::resource('/inventory', 'inventory\PurchaseRequestController');
+
+//Document Approval 
+Route::resource('/documentApproval', 'document_approval\DocumentApprovalController');
+>>>>>>> 562bf3cd7fb39799657d623149d7e8ed5e474ffb
 
 //Default password generator
 Route::get('/pswd', function(){

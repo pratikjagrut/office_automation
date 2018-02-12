@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SalesP2p extends Model
+class SalesInternetLeasedLines extends Model
 {
-    protected $table = 'sales_p2ps';
+    protected $table = 'sales_ills';
 	public $primaryKey = 'id';
 	public $timeStamps = true;
 }
