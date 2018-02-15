@@ -51,10 +51,34 @@ Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer'
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
 //CC Department Routes
+<<<<<<< HEAD
+Route::get('/extension', function () {
+    return view('customer_care.extension');
+});
+
+Route::get('/downArea', function () {
+    return view('customer_care.downArea');
+});
+
+Route::get('/refund', function () {
+    return view('customer_care.refund');
+});
+
+Route::get('/feasible', function () {
+    return view('customer_care.feasibleArea');
+});
+
+Route::resource('extension', 'cc\ExtensionController');
+Route::resource('downArea', 'cc\DownAreaController');
+Route::resource('feasibleArea', 'cc\FeasibleAreaController');
+Route::resource('refund', 'cc\RefundController');
+
+=======
 Route::resource('/extension', 'cc\ExtensionController');
 Route::resource('/downArea', 'cc\DownAreaController');
 Route::resource('/feasibleArea', 'cc\FeasibleAreaController');
 Route::resource('/refund', 'cc\RefundController');
+>>>>>>> 4dbb4554c55c254d442c2c881f0495353f6a677c
 //HR Department Routes
 Route::resource('/stationery', 'hr\StationeryController');
 Route::resource('/manPower', 'hr\ManPowerController');
