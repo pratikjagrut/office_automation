@@ -4,9 +4,9 @@
   box-sizing:border-box;
   font-family:"Bree Serif",sans-serif;
 }
-body {
+/*body {
   overflow:hidden;
-}
+}*/
 #scroll{
   height: 560px;
   width: auto; 
