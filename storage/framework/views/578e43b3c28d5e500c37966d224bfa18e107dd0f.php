@@ -9,9 +9,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">P2P Connectivity</div>
 
-                    <div class="panel-body">
+                    <div class="panel-body" style=" height: 560px; width: auto; overflow: auto;">
                         <div class="modal-body">
-                            <form action="/approvalNote" method="post">
+                            <form action="/p2p" method="post">
                                 <?php echo e(csrf_field()); ?>
 
                                 <table class="table table-striped">

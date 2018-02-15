@@ -67,6 +67,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <?php if(Auth::user()->user_type == 'super admin'): ?>
+                                       <li>
+                                           <a href="<?php echo e(url('/dashboard')); ?>">Dashboard</a>
+                                       </li> 
+                                    <?php endif; ?>
                                     <li>
                                         <a href="<?php echo e(url('/profile')); ?>">Profile</a>
                                     </li>

@@ -10,7 +10,7 @@
           <div class="panel panel-default">
               <div class="panel-heading">Stationary Request Form</div>
 
-               <div class="panel-body">
+               <div class="panel-body" id="scroll">
                   <div class="modal-body">
                      <form action="/stationery" method="post">
                       {{csrf_field()}}

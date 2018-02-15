@@ -7,6 +7,11 @@
 body {
   overflow:hidden;
 }
+#scroll{
+  height: 560px;
+  width: auto; 
+  overflow: auto;
+}
 #sidebar {
   position:absolute;
   top:0px;

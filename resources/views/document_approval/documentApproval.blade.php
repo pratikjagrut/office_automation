@@ -11,7 +11,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">DocumentApproval</div>
 
-                    <div class="panel-body">
+                    <div class="panel-body" id="scroll">
                         <div class="modal-body">
                        <form action="/documentApproval" method="post">
                         {{csrf_field()}}

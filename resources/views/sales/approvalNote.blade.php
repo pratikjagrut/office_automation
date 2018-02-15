@@ -10,7 +10,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">Approval Note</div>
 
-                    <div class="panel-body">
+                    <div class="panel-body" id="scroll">
                         <div class="modal-body">
                             <form action="/approvalNote" method="post">
                                 {{csrf_field()}}

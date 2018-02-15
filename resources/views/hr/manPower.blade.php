@@ -11,7 +11,7 @@
                 <div class="panel-heading text-center">ManPower Request Form
                 </div>
 
-                    <div class="panel-body">
+                    <div class="panel-body" id="scroll">
                         <div class="modal-body">
                             <form action="/manPower" method="post">
                                 {{csrf_field()}}

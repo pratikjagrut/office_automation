@@ -65,7 +65,7 @@ class ApprovalNoteController extends Controller
             $new_request->job_id = $job_id;
             $new_request->capex = $capex;
             $new_request->opex = $opex;
-            $new_request->operator_involved = $operator_involved;
+            $new_request->operator_involed = $operator_involved;
             $new_request->miscellaneous_expenses = $miscellaneous_expenses;
             $new_request->comment = $comment;
             $new_request->approved_by = $approved_by;
