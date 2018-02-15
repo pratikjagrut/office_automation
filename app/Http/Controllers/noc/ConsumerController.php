@@ -78,7 +78,9 @@ class ConsumerController extends Controller
     	else
     	{
     		$consumer_type = $request->input('consumer_type');
-    		$consumers = NocConsumer::where('type', $consumer_type)->get();
+    		$consumers = NocConsumer::where('type', $consumer_type)
+                                    ->paginate(25)
+                                    ->appends(['consumer_type' => $consumer_type]);
     		
             if(count($consumers) == 0)
                 return redirect('/addNewConsumer')->with('delete', 'Sorry no consumer!');

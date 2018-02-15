@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                <div class="panel-heading text-center" >Extension</div>
 
-                <div class="panel-body">
+                <div class="panel-body" id="scroll">
                     <div class="modal-body">
                        <form action="/extension" method="post">
                         {{csrf_field()}}
