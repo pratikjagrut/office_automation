@@ -23,18 +23,18 @@
                         </tr>
                          <tr class="from-group">
                             <td><label>Assigned to: </label></td>
-                            <td><input id="assigned_to" type="text" class="form-control" name="assigned_to" required></td>
+                            <td><input id="assigned_to" type="text" class="form-control" name="assigned_to" required  pattern="([A-Za-z\s]){2,}" title="Only letters are allowed.Minimum 2 letters required."></td>
                         </tr>
                         <tr class="from-group">
                             <td><label>Down Reason: </label></td>
-                            <td><input id="reason" type="text" class="form-control" name="reason" required></td>
+                            <td><input id="reason" type="text" class="form-control" name="reason" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                         </tr>
                         <tr class="from-group">
-                            <td><label>Down Day Time: </label></td>
+                            <td><label>Down Day: </label></td>
                             <td><input id="down_day_time" type="date" class="form-control" name="down_day_time" required></td>
                         </tr>
                         <tr class="from-group">
-                            <td><label>Up Day Time : </label></td>
+                            <td><label>Up Day: </label></td>
                             <td> <input id="up_day_time" type="date" class="form-control" name="up_day_time" required></td>
                         </tr>
                         <tr class="from-group">

@@ -19,7 +19,7 @@ class FeasibleAreaController extends Controller
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-            return view('cc.extension');
+            return view('cc.feasibleArea');
     }
 
     /**

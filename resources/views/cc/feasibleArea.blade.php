@@ -22,16 +22,16 @@
                                     </tr>
                         
                                     <tr class="from-group">
-                                       <td><label>Building: </label></td>
-                                       <td><input id="building" type="text" class="form-control" name="building"  required></td>
+                                       <td><label>Building Number: </label></td>
+                                       <td><input id="building" type="number" min="1" class="form-control" name="building"  required></td>
                                     </tr>
                                     <tr class="from-group">
-                                       <td><label>Society: </label></td>
-                                       <td><input id="society" type="text" class="form-control" name="society" required ></td>
+                                       <td><label>Society Name: </label></td>
+                                       <td><input id="society" type="text" class="form-control" name="society" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                                     </tr>
                                     <tr class="from-group">
-                                        <td><label>Area: </label></td>
-                                        <td><input id="area" type="text" class="form-control" name="area" required></td>
+                                        <td><label>Area Name: </label></td>
+                                        <td><input id="area" type="text" class="form-control" name="area" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>City: </label></td>
@@ -39,7 +39,7 @@
                                     </tr>
                                     <tr class="from-group">
                                       <td><label>Switch Location: </label></td>
-                                      <td><input id="switch_location" type="text" class="form-control" name="switch_location" required></td>
+                                      <td><input id="switch_location" type="text" class="form-control" name="switch_location" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Contact Person Name: </label></td>
