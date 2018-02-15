@@ -26,15 +26,21 @@
                                 </td>
                             </tr>
                             <tr class="from-group">
-                                <td><label>Assigned to: </label></td>
-                                <td>
-                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required  pattern="([A-Za-z\s]){2,}" title="Only letters are allowed.Minimum 2 letters required.">
-                                </td>
-                            </tr>
-                            <tr class="from-group">
                                 <td><label>Down Day: </label></td>
                                 <td>
                                     <input id="down_day_time" type="date" class="form-control" name="down_day_time" required>
+                                </td>
+                            </tr>
+                            <tr class="from-group">
+                                <td><label>TAT: </label></td>
+                                <td>
+                                    <input id="tat" type="time" class="form-control" name="tat" required>
+                                </td>
+                            </tr>
+                            <tr class="from-group">
+                                <td><label>Assigned to: </label></td>
+                                <td>
+                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required  pattern="([A-Za-z\s]){2,}" title="Only letters are allowed.Minimum 2 letters required.">
                                 </td>
                             </tr>
                             <tr class="from-group">
