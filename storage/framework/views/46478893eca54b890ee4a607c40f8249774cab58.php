@@ -16,7 +16,17 @@
 
     <!--jquery-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    
+    <script type="text/javascript">
+    $(function () {
+        $("#bank").change(function () {
+            if ($(this).val() == "other") {
+                $("#banklist").show();
+            } else {
+                $("#banklist").hide();
+            }
+        });
+    });
+</script>
 </head>
 <body>
     <div id="app">
@@ -37,6 +47,16 @@
                         <?php echo e(config('app.name')); ?>
 
                     </a>
+
+                    <!--Side bar button-->
+                    <?php if(auth()->guard()->guest()): ?>
+                    <?php else: ?>
+                        <div id="toggle-btn" onclick="toggleSidebar(this)">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -51,17 +71,17 @@
                         <?php if(auth()->guard()->guest()): ?>
                             <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
                         <?php else: ?>
-                            <li><a href="<?php echo e(url('listOnGoingJobs')); ?>">On-going Jobs</a></li>
-                            <li><a href="<?php echo e(url('listFinishedJobs')); ?>">Finished Jobs</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     <?php echo e(ucwords(Auth::user()->name)); ?> <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="<?php echo e(url('/newJobEntry')); ?>">Enter New Job</a>
-                                    </li>
+                                    <?php if(Auth::user()->user_type == 'super admin'): ?>
+                                       <li>
+                                           <a href="<?php echo e(url('/dashboard')); ?>">Dashboard</a>
+                                       </li> 
+                                    <?php endif; ?>
                                     <li>
                                         <a href="<?php echo e(url('/profile')); ?>">Profile</a>
                                     </li>
@@ -79,9 +99,6 @@
                                                 Add new user
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="<?php echo e(url('/addNewConsumer')); ?>">Register New Consumer</a>
-                                        </li>
                                     <?php endif; ?>
                                     <li>
                                         <a href="<?php echo e(route('logout')); ?>"
@@ -96,6 +113,38 @@
                                     </li>
                                 </ul>
                             </li>
+                            <?php if(auth()->user()->user_type == 'super admin'): ?>
+                                <?php echo $__env->make('sidebar.superAdmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            <?php else: ?>
+                                <?php switch(auth()->user()->department):
+                                    case ('cc'): ?>
+                                        <?php echo $__env->make('sidebar.cc', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+                                    
+                                    <?php case ('hr'): ?>
+                                        <?php echo $__env->make('sidebar.hr', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
+                                    <?php case ('inventory'): ?>
+                                        <?php echo $__env->make('sidebar.inventory', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
+                                    <?php case ('noc'): ?>
+                                        <?php echo $__env->make('sidebar.noc', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
+                                    <?php case ('sales'): ?>
+                                        <?php echo $__env->make('sidebar.sales', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+                                    
+                                    <?php case ('voip'): ?>
+                                        <?php echo $__env->make('sidebar.voip', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>                
+                                    <?php default: ?>
+                                            Default case...
+                                <?php endswitch; ?>
+                                
+                            <?php endif; ?>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -107,5 +156,11 @@
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    <script type="text/javascript">
+        function toggleSidebar(ref) {
+          ref.classList.toggle('active');
+          document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

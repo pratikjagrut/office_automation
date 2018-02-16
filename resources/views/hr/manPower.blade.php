@@ -11,7 +11,7 @@
                 <div class="panel-heading text-center">ManPower Request Form
                 </div>
 
-                    <div class="panel-body">
+                    <div class="panel-body" id="scroll">
                         <div class="modal-body">
                             <form action="/manPower" method="post">
                                 {{csrf_field()}}
@@ -23,10 +23,13 @@
                                     <tr class="from-group">
                                       <td><label>No. of vacancy: </label></td>
 <<<<<<< HEAD
+
                                       <td><input id="vacancy" type="number" class="form-control" name="vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
+
+
 =======
-                                      <td><input id="no_of_vacancy" type="tel" class="form-control" name="no_of_vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
->>>>>>> c23f47dbe786c723fe71b5492f36129ee1e0da10
+                                      <td><input id="vacancy" type="number" class="form-control" name="vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
+>>>>>>> 4dbb4554c55c254d442c2c881f0495353f6a677c
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Reason: </label></td>

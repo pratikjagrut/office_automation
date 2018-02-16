@@ -1,3 +1,5 @@
+ 
+
 <?php $__env->startSection('title', 'ManPower Request'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -6,7 +8,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">ManPower Request Form
+                <div class="panel-heading text-center">ManPower Request Form
                 </div>
 
                     <div class="panel-body">
@@ -21,7 +23,7 @@
                                     </tr>
                                     <tr class="from-group">
                                       <td><label>No. of vacancy: </label></td>
-                                      <td><input id="no_of_vacancy" type="tel" class="form-control" name="no_of_vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
+                                      <td><input id="vacancy" type="number" class="form-control" name="vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Reason: </label></td>
