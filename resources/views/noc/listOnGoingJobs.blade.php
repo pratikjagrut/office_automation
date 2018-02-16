@@ -66,6 +66,7 @@
 	        </div>
 	        <div class="modal-body">
 				<form action="/closeJob" method="post">
+					{{csrf_field()}}
 					<table class="table table-striped">
 						<tr class="from-group">
 							<td><label>Ticket: </label></td>
