@@ -30,8 +30,8 @@
                             <tr class="from-group">
                                 <td><label>Bank Name: </label></td>
                                 <td>
-                                    <select name="bank" required="true" class="form-control">
-                                        <option value="">Select</option>
+                                    <select name="bank" id="bank" required="true" class="form-control">
+                                        <option value="">select</option>
                                         <option value="allahabad"> Allahabad Bank</option>
                                         <option value="andhra">Andhra Bank</option>
                                         <option value="baroda">Bank of Baroda</option>
@@ -58,15 +58,23 @@
                                 </td>
                             </tr>
                             <tr class="from-group">
-                                <td><label>If Other: </label></td>
+                                 <div id="banklist" style="display: none">
+                                    Other:
+                                    <input type="text" id="banking" type="text" class="form-control" />
+                                </div>
+                            </tr>
+                            
+                           
+                            <tr class="from-group">
+                                <td><label>Bank Branch: </label></td>
                                 <td>
-                                    <input id="other" type="text" class="form-control" name="other"  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required.">
+                                    <input id="branch" type="text" class="form-control" name="branch" required="true" pattern="([A-Za-z\s]){3,}" title="Minimum 3 letters required. Only uppercase and lower case letters allowed.">
                                 </td>
                             </tr>
                             <tr class="from-group">
                                 <td><label>Bank Account Number: </label></td>
                                 <td>
-                                    <input id="account_no" type="tel" class="form-control" min="1" name="account_no" required="true" pattern="^\d{16}$" title="Only 16 digits are allowed!">
+                                    <input id="account_no" type="tel" class="form-control" min="1" name="account_no" required="true" pattern="^\d{16}$" title="Add zeros in front if number less than 16!">
                                 </td>
                             </tr>
                             <tr class="from-group">
@@ -75,12 +83,7 @@
                                     <input id="ifsc_no" type="text" class="form-control" name="ifsc_no" required="true" pattern="([A-Za-z0-9\s]){3,}" title="Alphanumeric code required. Code length should be 11">
                                 </td>
                             </tr>
-                            <tr class="from-group">
-                                <td><label>Bank Branch: </label></td>
-                                <td>
-                                    <input id="branch" type="text" class="form-control" name="branch" required="true" pattern="([A-Za-z\s]){3,}" title="Minimum 3 letters required. Only uppercase and lower case letters allowed.">
-                                </td>
-                            </tr>
+                            
                             <tr class="from-group">
                                 <td><label>Reason: </label></td>
                                 <td>
@@ -99,6 +102,7 @@
                                     <input id="mail_date" type="date" class="form-control" name="mail_date" required>
                                 </td>
                             </tr>
+                            
                             <tr class="from-group">
                                 <td><label>Assigned to: </label></td>
                                 <td>
