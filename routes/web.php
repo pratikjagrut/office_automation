@@ -42,7 +42,7 @@ Route::get('/newJobEntry', 'noc\JobController@index');
 Route::get('/selectConsumer', 'noc\JobController@selectConsumer');
 Route::post('/submitNewJob', 'noc\JobController@newJobEntry');
 Route::get('/listOnGoingJobs', 'noc\JobController@onGoingJobs');
-Route::get('/closeJob', 'noc\JobController@finishedJob');
+Route::post('/closeJob', 'noc\JobController@finishedJob');
 Route::get('/listFinishedJobs', 'noc\JobController@listFinishedJobs');
 Route::get('/exportFinishedJobs', 'noc\JobController@exportFinishedJobs');
 Route::get('/addNewConsumer', 'noc\ConsumerController@index');
