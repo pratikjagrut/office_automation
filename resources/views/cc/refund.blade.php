@@ -59,8 +59,7 @@
                             </tr>
                             <tr class="from-group">
                                  <div id="banklist" style="display: none">
-                                    Other:
-                                    <input type="text" id="banking" type="text" class="form-control" />
+                                    Other:<input type="text" id="banking" type="text" class="form-control" />
                                 </div>
                             </tr>
                             

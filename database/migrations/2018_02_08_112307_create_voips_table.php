@@ -22,7 +22,6 @@ class CreateVoipsTable extends Migration
             $table->string('price')->nullable();
             $table->string('status')->nullable();
             $table->string('generated_by')->nullable();
-           
             $table->timestamps();
 
             
