@@ -46,16 +46,6 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name') }}
                     </a>
-
-                    <!--Side bar button-->
-                    @guest
-                    @else
-                        <div id="toggle-btn" onclick="toggleSidebar(this)">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                    @endguest
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -70,6 +60,38 @@
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                         @else
+                        @if (auth()->user()->user_type == 'super admin')
+                                @include('sidebar.superAdmin')
+                            @else
+                                @switch(auth()->user()->department)
+                                    @case('cc')
+                                        @include('sidebar.cc')
+                                        @break
+                                    
+                                    @case('hr')
+                                        @include('sidebar.hr')
+                                        @break
+
+                                    @case('inventory')
+                                        @include('sidebar.inventory')
+                                        @break
+
+                                    @case('noc')
+                                        @include('sidebar.noc')
+                                        @break
+
+                                    @case('sales')
+                                        @include('sidebar.sales')
+                                        @break
+                                    
+                                    @case('voip')
+                                        @include('sidebar.voip')
+                                        @break                
+                                    @default
+                                            Default case...
+                                @endswitch
+                                
+                            @endif
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
@@ -110,39 +132,7 @@
                                         </form>
                                     </li>
                                 </ul>
-                            </li>
-                            @if (auth()->user()->user_type == 'super admin')
-                                @include('sidebar.superAdmin')
-                            @else
-                                @switch(auth()->user()->department)
-                                    @case('cc')
-                                        @include('sidebar.cc')
-                                        @break
-                                    
-                                    @case('hr')
-                                        @include('sidebar.hr')
-                                        @break
-
-                                    @case('inventory')
-                                        @include('sidebar.inventory')
-                                        @break
-
-                                    @case('noc')
-                                        @include('sidebar.noc')
-                                        @break
-
-                                    @case('sales')
-                                        @include('sidebar.sales')
-                                        @break
-                                    
-                                    @case('voip')
-                                        @include('sidebar.voip')
-                                        @break                
-                                    @default
-                                            Default case...
-                                @endswitch
-                                
-                            @endif
+                            </li>    
                         @endguest
                     </ul>
                 </div>
