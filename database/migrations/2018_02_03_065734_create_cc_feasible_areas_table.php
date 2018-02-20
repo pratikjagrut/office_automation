@@ -20,7 +20,7 @@ class CreateCcFeasibleAreasTable extends Migration
             $table->string('society')->nullable();
             $table->string('area')->nullable();
             $table->string('city')->nullable();
-            $table->string('switch location')->nullable();
+            $table->string('switch_location')->nullable();
             $table->string('contact_person_name')->nullable();
             $table->string('contact_person_number')->nullable();
             $table->string('generated_by')->nullable();

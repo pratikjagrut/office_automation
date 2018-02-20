@@ -51,25 +51,32 @@ Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer'
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 
 //CC Department Routes
-Route::get('/extension', function () {
-    return view('customer_care.extension');
-});
+Route::get('/downArea', 'cc\DownAreaController@index');
+Route::post('/downArea', 'cc\DownAreaController@store');
+Route::get('/listDownAreas', 'cc\DownAreaController@listDownAreas');
+Route::post('/closeDownArea', 'cc\DownAreaController@closeDownArea');
+Route::get('/listClosedDownAreas', 'cc\DownAreaController@listClosedDownAreas');
+Route::post('/deleteClosedDownAreas', 'cc\DownAreaController@deleteClosedDownAreas');
 
-Route::get('/downArea', function () {
-    return view('customer_care.downArea');
-});
+Route::get('/feasibleAreaForm', 'cc\FeasibleAreaController@index');
+Route::post('/saveFeasibleArea', 'cc\FeasibleAreaController@store');
+Route::get('/listFeasibleAreas', 'cc\FeasibleAreaController@listFeasibleAreas');
 
-Route::get('/refund', function () {
-    return view('customer_care.refund');
-});
+Route::get('/extension', 'cc\ExtensionController@index');
+Route::post('/extension', 'cc\ExtensionController@store');
+Route::get('/listExtensions', 'cc\ExtensionController@listExtensions');
+Route::post('/changeExtensionStatus', 'cc\ExtensionController@changeExtensionStatus');
 
-Route::get('/feasible', function () {
-    return view('customer_care.feasibleArea');
-});
+Route::get('/refund', 'cc\RefundController@index');
+Route::post('/refund', 'cc\RefundController@store');
+Route::get('/listRefunds', 'cc\RefundController@listRefunds');
+Route::post('/changeRefundStatus', 'cc\RefundController@changeRefundStatus');
 
-Route::resource('extension', 'cc\ExtensionController');
-Route::resource('downArea', 'cc\DownAreaController');
-Route::resource('feasibleArea', 'cc\FeasibleAreaController');
+
+
+//Route::resource('extension', 'cc\ExtensionController');
+//Route::resource('downArea', 'cc\DownAreaController');
+//Route::resource('feasibleArea', 'cc\FeasibleAreaController');
 Route::resource('refund', 'cc\RefundController');
 Route::resource('/extension', 'cc\ExtensionController');
 Route::resource('/downArea', 'cc\DownAreaController');

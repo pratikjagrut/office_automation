@@ -40,7 +40,7 @@
                             <tr class="from-group">
                                 <td><label>Extension Days: </label></td>
                                 <td>
-                                  <input id="extension_date" type="number" min="1" class="form-control" name="extension_date" required>
+                                  <input id="extension_day" type="number" min="1" class="form-control" name="extension_day" required>
                                 </td>
                             </tr>
                             <tr class="from-group">

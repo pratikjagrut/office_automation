@@ -24,7 +24,7 @@ class CreateCcRefundsTable extends Migration
             $table->string('reason')->nullable();
             $table->string('refund_amount')->nullable();
             $table->string('mail_date')->nullable();
-            $table->string('refund_status')->nullable();
+            $table->string('refund_status')->default('pending');
             $table->string('done_date')->nullable();
             $table->string('utr_no')->nullable();
             $table->string('assigned_to')->nullable();

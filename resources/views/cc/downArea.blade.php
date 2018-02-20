@@ -28,7 +28,7 @@
                             <tr class="from-group">
                                 <td><label>Down Day: </label></td>
                                 <td>
-                                    <input id="down_day_time" type="date" class="form-control" name="down_day_time" required>
+                                    <input id="down_day_time" type="datetime-local" class="form-control" name="down_day_time" required>
                                 </td>
                             </tr>
                             <tr class="from-group">

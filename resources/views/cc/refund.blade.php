@@ -30,40 +30,22 @@
                             <tr class="from-group">
                                 <td><label>Bank Name: </label></td>
                                 <td>
-                                    <select name="bank" id="bank" required="true" class="form-control">
-                                        <option value="">select</option>
-                                        <option value="allahabad"> Allahabad Bank</option>
-                                        <option value="andhra">Andhra Bank</option>
-                                        <option value="baroda">Bank of Baroda</option>
-                                        <option value="india">Bank of India</option>
-                                        <option value="maharashtra">Bank of Maharashtra</option>
-                                        <option value="canara">Canara Bank</option>
-                                        <option value="central">Central Bank of India</option>
-                                        <option value="corporation">Corporation Bank</option>
-                                        <option value="dena">Dena Bank</option>
-                                        <option value="indian">Indian Bank</option>
-                                        <option value="overseas">Indian Overseas Bank</option>
-                                        <option value="idbi">IDBI Bank</option>
-                                        <option value="oriental">Oriental Bank of Commerce</option>
-                                        <option value="sind">Punjab and Sind Bank</option>
-                                        <option value="punjab">Punjab National Bank</option>
-                                        <option value="state">State Bank of India</option>
-                                        <option value="syndicate">Syndicate Bank</option>
-                                        <option value="uco">UCO Bank</option>
-                                        <option value="union">Union Bank of India</option>
-                                        <option value="united">United Bank of India</option>
-                                        <option value="vijaya">Vijaya Bank</option>
-                                        <option value="other">Other</option>
+                                    <select class="selectpicker form-control bank" name="bank" id="bank" data-live-search="true" title="Select Bank" required="true">
+                                        @if (count($banks) > 0)
+                                            @foreach ($banks as $bank)
+                                                <option data-tokens="{{$bank->bank_name}}" value="{{$bank->bank_name}}">{{ucwords($bank->bank_name)}}</option>
+                                            @endforeach     
+                                        @endif  
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="from-group">
-                                 <div id="banklist" style="display: none">
-                                    Other:<input type="text" id="banking" type="text" class="form-control" />
-                                </div>
+                            <tr class="from-group other_bank">
+                                 <td><label>Other Bank</label></td>
+                                 <td>
+                                     <input type="text" name="other_bank" class="form-control">
+                                 </td>
                             </tr>
                             
-                           
                             <tr class="from-group">
                                 <td><label>Bank Branch: </label></td>
                                 <td>
@@ -130,4 +112,18 @@
         </div>            
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".other_bank").hide()
+        $("#bank").change(function(){
+            var bank = $(this).val()
+            if(bank == 'other')
+            {
+                $(".other_bank").show()
+            }
+            else
+                $(".other_bank").hide()
+        })
+    })
+</script>
 @endsection

@@ -12,7 +12,7 @@
                     <b>Feasible Area</b>
                 </div>
                 <div class="panel-body">
-                    <form action="/feasibleArea" method="post">
+                    <form action="/saveFeasibleArea" method="post">
                         {{csrf_field()}}
                         <table class="table table-striped">
                             <tr class="from-group">
@@ -54,13 +54,13 @@
                             <tr class="from-group">
                                 <td><label>Contact Person Name: </label></td>
                                 <td>
-                                    <input id="contact_person_name" type="text" class="form-control" name="contact_name" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required.">
+                                    <input id="contact_person_name" type="text" class="form-control" name="contact_person_name" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required.">
                                 </td>
                             </tr>
                             <tr class="from-group">
                                <td><label>Contact Person Number: </label></td>
                                <td>
-                                   <input id="contact_person_number" type="tel" class="form-control" name="contact_number" required pattern="^\d{10}$" title="Enter 10-digits only!">
+                                   <input id="contact_person_number" type="tel" class="form-control" name="contact_person_number" required pattern="^\d{10}$" title="Enter 10-digits only!">
                                 </td>
                             </tr>
                             <tr class="from-group">

@@ -317,6 +317,7 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
     );
 
     public static $classMap = array (
+        'App\\BankList' => __DIR__ . '/../..' . '/app/BankList.php',
         'App\\CcDownArea' => __DIR__ . '/../..' . '/app/CcDownArea.php',
         'App\\CcExtension' => __DIR__ . '/../..' . '/app/CcExtension.php',
         'App\\CcFeasibleArea' => __DIR__ . '/../..' . '/app/CcFeasibleArea.php',
@@ -336,7 +337,7 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\cc\\DownAreaController' => __DIR__ . '/../..' . '/app/Http/Controllers/cc/DownAreaController.php',
         'App\\Http\\Controllers\\cc\\ExtensionController' => __DIR__ . '/../..' . '/app/Http/Controllers/cc/ExtensionController.php',
-        'App\\Http\\Controllers\\cc\\FeasibleAreaController' => __DIR__ . '/../..' . '/app/Http/Controllers/cc/FeasibleAreaController.php',
+        'App\\Http\\Controllers\\cc\\FeasibleAreaController' => __DIR__ . '/../..' . '/app/Http/Controllers/cc/FeasibleAreaControllerDuplicate.php',
         'App\\Http\\Controllers\\cc\\RefundController' => __DIR__ . '/../..' . '/app/Http/Controllers/cc/RefundController.php',
         'App\\Http\\Controllers\\document_approval\\DocumentApprovalController' => __DIR__ . '/../..' . '/app/Http/Controllers/document_approval/DocumentApprovalController.php',
         'App\\Http\\Controllers\\hr\\ManPowerController' => __DIR__ . '/../..' . '/app/Http/Controllers/hr/ManPowerController.php',

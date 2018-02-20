@@ -18,7 +18,7 @@ class CreateCcExtensionsTable extends Migration
             $table->string('customer_id')->nullable();
             $table->string('complaint_date')->nullable();
             $table->string('expiry_date')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->default('pending');
             $table->string('reason')->nullable();
             $table->string('generated_by')->nullable();
             $table->string('assigned_to')->nullable();

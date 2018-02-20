@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\BankList' => $baseDir . '/app/BankList.php',
     'App\\CcDownArea' => $baseDir . '/app/CcDownArea.php',
     'App\\CcExtension' => $baseDir . '/app/CcExtension.php',
     'App\\CcFeasibleArea' => $baseDir . '/app/CcFeasibleArea.php',
@@ -25,7 +26,7 @@ return array(
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\cc\\DownAreaController' => $baseDir . '/app/Http/Controllers/cc/DownAreaController.php',
     'App\\Http\\Controllers\\cc\\ExtensionController' => $baseDir . '/app/Http/Controllers/cc/ExtensionController.php',
-    'App\\Http\\Controllers\\cc\\FeasibleAreaController' => $baseDir . '/app/Http/Controllers/cc/FeasibleAreaController.php',
+    'App\\Http\\Controllers\\cc\\FeasibleAreaController' => $baseDir . '/app/Http/Controllers/cc/FeasibleAreaControllerDuplicate.php',
     'App\\Http\\Controllers\\cc\\RefundController' => $baseDir . '/app/Http/Controllers/cc/RefundController.php',
     'App\\Http\\Controllers\\document_approval\\DocumentApprovalController' => $baseDir . '/app/Http/Controllers/document_approval/DocumentApprovalController.php',
     'App\\Http\\Controllers\\hr\\ManPowerController' => $baseDir . '/app/Http/Controllers/hr/ManPowerController.php',

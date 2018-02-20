@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\cc;
 
-use App\BankList;
 use App\CcRefund;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,17 +9,35 @@ use Illuminate\Support\Facades\Auth;
 
 class RefundController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-        {
-        	$banks = BankList::all();
-        	return view('cc.refund')->with('banks', $banks);
-        }
+            return view('cc.refund');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         if(Auth::guest())
@@ -29,10 +46,9 @@ class RefundController extends Controller
         {
             $customer_id = $request->input('customer_id');
             $customer_name = $request->input('customer_name');
-            $account_no = $request->input('account_no');
+            $account_no = $request->input('accaccount_nount_number');
             $ifsc_no = $request->input('ifsc_no');
             $bank = $request->input('bank');
-            $other_bank = $request->input('other_bank');
             $branch = $request->input('branch');
             $reason = $request->input('reason');
             $refund_amount = $request->input('refund_amount');
@@ -48,10 +64,7 @@ class RefundController extends Controller
             $new_request->customer_name = $customer_name;
             $new_request->account_no = $account_no;
             $new_request->ifsc_no = $ifsc_no;
-            if($bank != null)
-            	$new_request->bank = $bank;
-            else
-            	$new_request->bank = $other_bank;
+            $new_request->bank = $bank;
             $new_request->branch = $branch;
             $new_request->reason = $reason;
             $new_request->refund_amount = $refund_amount;
@@ -69,36 +82,48 @@ class RefundController extends Controller
         }
     }
 
-    public function listRefunds()
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-    	if(Auth::guest())
-    		return redirect('/login')->with('error', 'Login First');
-    	else
-    	{
-    		$refunds = CcRefund::orderBy('created_at', 'dsc')->get();
-    		return view('cc/listRefunds')->with('refunds', $refunds);
-    	}
+        //
     }
 
-    public function changeRefundStatus(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
-    	if(Auth::guest())
-    		return redirect('/login')->with('error', 'LOgin first');
-    	else
-    	{
-    		$refund_id = $request->input('refund_id');
-    		$customer_id = $request->input('customer_id');
-    		$refund_status = $request->input('refund_status');
-    		$refund_granted_by = $request->input('refund_granted_by');
+        //
+    }
 
-    		$refund = CcRefund::find($refund_id);
-    		$refund->refund_status = $refund_status;
-    		$refund->granted_by = $refund_granted_by;
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
-    		if($refund->save())
-    			return redirect('/listRefunds')->with('success', ucwords($customer_id).' refund '.ucwords($refund_status));
-    		else
-    			return redirect('/listRefunds')->with('error', 'Something went wrong');
-    	}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
