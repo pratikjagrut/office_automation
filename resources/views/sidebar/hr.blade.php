@@ -1,11 +1,13 @@
-<!--Left side navbar menu-->
-<div id="sidebar">
-    <ul>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+        Work Links <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
         <li>
-            <a class="btn" href="{{ url('/manPower') }}">Manpower Requirement</a>
+            <a href="{{ url('/manPower') }}">Manpower Requirement</a>
         </li>
         <li>
-            <a class="btn" href="{{ url('/stationery') }}">Miscellaneous Requirement</a>
+            <a href="{{ url('/stationery') }}">Miscellaneous Requirement</a>
         </li>
     </ul>
-</div>
+</li>

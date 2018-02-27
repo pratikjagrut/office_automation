@@ -6,6 +6,7 @@ use App\CcExtension;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ExtensionController extends Controller
 {
@@ -47,19 +48,61 @@ class ExtensionController extends Controller
         }
     }
 
-    public function listExtensions()
+    public function listExtensions(Request $request)
     {
     	if(Auth::guest())
     		return redirect('/login')->with('error', 'Login First');
     	else
     	{
-    		$extensions = CcExtension::orderBy('created_at', 'dsc')
-    								  ->get();
-    		return view('cc.listExtensions')->with('extensions', $extensions);
+            if(isset($_GET['filter']))
+            {
+                if($request->input('customer_id') != null)
+                    $extensions = CcExtension::where('customer_id', $request->input('customer_id'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(30);
+                
+                elseif($request->input('assigned_to') != null)
+                    $extensions = CcExtension::where('assigned_to', $request->input('assigned_to'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(30);
+                
+                elseif($request->input('status') != null)
+                    $extensions = CcExtension::where('status', $request->input('status'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(30);
+                
+                elseif($request->input('complaint_date') != null)
+                    $extensions = CcExtension::where('complaint_date', 'LIKE', $request->input('complaint_date'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(30);
+                
+                else
+                    $extensions = CcExtension::orderBy('created_at', 'dsc')
+                                      ->paginate(30);                             
+            }
+            else
+                $extensions = CcExtension::orderBy('created_at', 'dsc')
+                                      ->paginate(30);
+
+            $customers = DB::table('cc_extensions')
+                        ->select('customer_id as customer_id')
+                        ->groupBy('customer_id')
+                        ->get();
+
+            $engineers = DB::table('cc_extensions')
+                            ->select('assigned_to as assigned_to')
+                            ->groupBy('assigned_to')
+                            ->get();
+
+    		return view('cc.listExtensions', [
+                                                'extensions' => $extensions,
+                                                'engineers' => $engineers,
+                                                'customers' => $customers
+                                             ]);
     	}
     }
 
-    public function changeExtensionStatus(Request $request)
+    /*public function changeExtensionStatus(Request $request)
     {
     	if(Auth::guest())
     		return redirect('/login')->with('error', 'Login First');
@@ -67,7 +110,7 @@ class ExtensionController extends Controller
     	{
     		$extension_id = $request->input('extension_id');
     		$extension_status = $request->input('extension_status');
-    		$extension_granted_by = $request->input('extension_granted_by');
+    		$extension_granted_by = $request->input('granted_by');
     		$customer_id = $request->input('customer_id');
     		$extension = CcExtension::find($extension_id);
     		$extension->status = $extension_status;
@@ -78,5 +121,113 @@ class ExtensionController extends Controller
     		else
     			return redirect('/listExtensions')->with('error', 'Something Went Wrong');
     	}
+    }*/
+
+    public function operationOnExtensions(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            $grant_extension_id = $request->input('grant');
+            $reject_extension_id = $request->input('reject');
+            $delete_extension_id = $request->input('delete');
+            $granted_by = $request->input('granted_by');
+            $grant = false;
+            $reject = false;
+            $delete = false;
+
+            if(count($grant_extension_id) > 0)
+                for ($i = 0; $i < count($grant_extension_id); $i++) 
+                { 
+                    $extension = CcExtension::find($grant_extension_id[$i]);
+                    $extension->status = 'granted';
+                    $extension->granted_by = $granted_by;
+                    $extension->save();
+                    $grant = true;
+                }
+
+            if(count($reject_extension_id))
+                for ($i = 0; $i < count($reject_extension_id); $i++) 
+                { 
+                    $extension = CcExtension::find($reject_extension_id[$i]);
+                    $extension->status = 'rejected';
+                    $extension->granted_by = $granted_by;
+                    $extension->save();
+                    $reject = true;
+                }
+
+             if(count($delete_extension_id) > 0)
+                for ($i = 0; $i < count($delete_extension_id); $i++) 
+                { 
+                    $extension = CcExtension::find($delete_extension_id[$i]);
+                    $extension->delete();
+                    $delete = true;
+                }  
+            if(!$grant && !$reject && !$delete)
+                return redirect('/listExtensions')->with('error', 'Select at least one record to delete');
+            elseif($grant && !$reject && !$delete)
+                return redirect('/listExtensions')->with('success', count($grant_extension_id).' extension granted');
+            elseif(!$grant && $reject && !$delete)
+                return redirect('/listExtensions')->with('success', count($reject_extension_id).' extension rejected');
+            elseif(!$grant && !$reject && $delete)
+                return redirect('/listExtensions')->with('success', count($delete_extension_id).' extension deleted');
+            else
+                return redirect('/listExtensions')->with('success', count($grant_extension_id).' extension/s is/are granted, '.count($reject_extension_id).' is/are rejected and '.count($reject_extension_id).' is/are deleted');
+        }
+    }
+
+    public function exportExtensions(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if(isset($_GET['filter']))
+            {
+                if($request->input('customer_id') != null)
+                    $extensions = CcExtension::where('customer_id', $request->input('customer_id'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+                
+                elseif($request->input('assigned_to') != null)
+                    $extensions = CcExtension::where('assigned_to', $request->input('assigned_to'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+                
+                elseif($request->input('status') != null)
+                    $extensions = CcExtension::where('status', $request->input('status'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+                
+                elseif($request->input('complaint_date') != null)
+                    $extensions = CcExtension::where('complaint_date', 'LIKE', $request->input('complaint_date'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+                
+                else
+                    $extensions = CcExtension::orderBy('created_at', 'dsc')
+                                      ->get();                             
+            }
+            else
+                $extensions = CcExtension::orderBy('created_at', 'dsc')
+                                      ->get();
+
+            $customers = DB::table('cc_extensions')
+                        ->select('customer_id as customer_id')
+                        ->groupBy('customer_id')
+                        ->get();
+
+            $engineers = DB::table('cc_extensions')
+                            ->select('assigned_to as assigned_to')
+                            ->groupBy('assigned_to')
+                            ->get();
+
+            return view('cc.exportExtensions', [
+                                                'extensions' => $extensions,
+                                                'engineers' => $engineers,
+                                                'customers' => $customers
+                                             ]);   
+        }
     }
 }

@@ -12,7 +12,7 @@
                     <b>Feasible Area</b>
                 </div>
                 <div class="panel-body">
-                    <form action="/saveFeasibleArea" method="post">
+                    <form action="/feasibleArea" method="post">
                         {{csrf_field()}}
                         <table class="table table-striped">
                             <tr class="from-group">

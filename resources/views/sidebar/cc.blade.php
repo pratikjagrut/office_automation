@@ -4,19 +4,19 @@
     </a>
     <ul class="dropdown-menu">
         <li>
-            <a href="{{ url('/listExtensions') }}">List Extension</a>
+            <a href="{{ url('/listExtensions') }}">Extension</a>
         </li>
         <li>
-            <a href="{{ url('/listRefunds') }}">List Refunds</a>
+            <a href="{{ url('/listRefunds') }}">Refunds</a>
         </li>
         <li>
-            <a href="{{ url('/listDownAreas') }}">List Down Areas</a>
+            <a href="{{ url('/listDownAreas') }}">Down Areas</a>
         </li>
         <li>
-            <a href="{{ url('/listClosedDownAreas') }}">List Closed Down Areas</a>
+            <a href="{{ url('/listClosedDownAreas') }}">Closed Down Areas</a>
         </li>
         <li>
-            <a href="{{ url('/listFeasibleAreas') }}">List Feasible Area</a>
+            <a href="{{ url('/listFeasibleAreas') }}">Feasible Area</a>
         </li>
     </ul>
 </li>
@@ -35,10 +35,7 @@
             <a href="{{ url('/downArea') }}">Down Area</a>
         </li>
         <li>
-            <a href="{{ url('/listClosedDownAreas') }}">List Closed Down Areas</a>
-        </li>
-        <li>
-            <a href="{{ url('/listFeasibleAreas') }}">List Feasible Area</a>
+            <a href="{{ url('/feasibleArea') }}">Feasible Area</a>
         </li>
     </ul>
 </li>

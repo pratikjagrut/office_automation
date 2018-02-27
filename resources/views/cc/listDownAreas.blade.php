@@ -38,7 +38,7 @@
 									</select>
 								</td>
 								<td>
-									<input type="date" name="downDate" class="form-control">
+									<input placeholder="Down Date" class="form-control" type="text" onfocus="(this.type='date')" name="downDate" onblur="(this.type='text')">
 								</td>
 								<td>
 									<button type="submit" name="filter" class="btn btn-success">Search</button>
@@ -113,7 +113,7 @@
 						<tr class="form-group">
 							<td><label>Down Area:</label></td>
 							<td>
-								<input type="text" name="downArea" class="form-control" readonly="true" id="downArea">
+								<input type="text" name="downArea" class="form-control" readonly="true" id="downArea1">
 							</td>
 						</tr>
 						<tr class="form-group">
@@ -148,7 +148,7 @@
 	  	function clck(id, area)
 	  	{
 	  		document.getElementById("downAreaId").value = id
-	  		document.getElementById("downArea").value = area
+	  		document.getElementById("downArea1").value = area
 	  	}
 	  </script>
 @endsection

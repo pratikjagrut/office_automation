@@ -71,6 +71,14 @@ class DownAreaController extends Controller
                                     ->orderBy('created_at', 'dsc')
                                     ->paginate(30);
 
+                elseif($request->input('downDate') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'down'],
+                                                      ['down_day_time', 'LIKE', $request->input('downDate').'%']
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->paginate(30);
+
                 elseif($request->input('reason') != null)
                     $downAreas = CcDownArea::where([
                                                       ['status', 'down'],
@@ -139,34 +147,95 @@ class DownAreaController extends Controller
     	}
     }
 
-    public function listClosedDownAreas()
+    public function listClosedDownAreas(Request $request)
     {
     	if(Auth::guest())
     		return redirect('/login')->with('error', 'Login First');
     	else
     	{
-    		$downAreas = CcDownArea::where('status', 'up')
-    									 ->orderBy('created_at', 'dsc')
-    									 ->paginate(30);
-    		return view('cc.listClosedDownAreas')->with('downAreas', $downAreas);
-    	}
-    }
+            if(isset($_GET['filter']))
+            {
+                if($request->input('downArea') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['area', $request->input('downArea')]
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
 
-    public function deleteClosedDownAreas(Request $request)
-    {
+                elseif($request->input('assigned_to') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['assigned_to', $request->input('assigned_to')]
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+                elseif($request->input('downDate') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['down_day_time', 'LIKE', $request->input('downDate').'%']
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+                elseif($request->input('reason') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['reason', $request->input('reason')]
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+                else
+                    $downAreas = CcDownArea::where('status', 'up')
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+            }
+            else
+                $downAreas = CcDownArea::where('status', 'up')
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+            $areas = DB::table('cc_down_areas')
+                        ->select('area as area')
+                        ->where('status', 'up')
+                        ->groupBy('area')
+                        ->get();
+
+            $engineers = DB::table('cc_down_areas')
+                            ->select('assigned_to as assigned_to')
+                            ->where('status', 'up')
+                            ->groupBy('assigned_to')
+                            ->get();
+
+            $reasons = DB::table('cc_down_areas')
+                            ->select('reason as reason')
+                            ->where('status', 'up')
+                            ->groupBy('reason')
+                            ->get();
+    		return view('cc.listClosedDownAreas', [
+                                                    'downAreas' => $downAreas,
+                                                    'areas' => $areas,
+                                                    'engineers' => $engineers,
+                                                    'reasons' => $reasons
+                                                  ]);
+        	}
+      }
+
+     public function deleteClosedDownAreas(Request $request)
+        {
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login first');
         else
-        {
+        {   
+            $data = $request->input('delete');
             $downArea_id = array();
             $delete = false;
-            for ($i = 0; $i < 10; $i++) { 
-                if($request->input('delete_'.($i+1)) != null)
-                {
-                    $downArea = CcDownArea::find($request->input('delete_'.($i+1)));
-                    $downArea->delete();
-                    $delete  = true;
-                }
+            for ($i = 0; $i < count($data); $i++) { 
+                $downArea = CcDownArea::find($data[$i]);
+                $downArea->delete();
+                $delete  = true;
             }
             if(!$delete)
                 return redirect('/listClosedDownAreas')->with('error', 'Select at least one record to delete');
@@ -174,4 +243,83 @@ class DownAreaController extends Controller
                 return redirect('/listClosedDownAreas')->with('delete', 'Record deleted');
         }
     }
+
+    public function exportClosedDownAreas(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if(isset($_GET['filter']))
+            {
+                if($request->input('downArea') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['area', $request->input('downArea')]
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+                elseif($request->input('assigned_to') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['assigned_to', $request->input('assigned_to')]
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+                elseif($request->input('downDate') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['down_day_time', 'LIKE', $request->input('downDate').'%']
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+                elseif($request->input('reason') != null)
+                    $downAreas = CcDownArea::where([
+                                                      ['status', 'up'],
+                                                      ['reason', $request->input('reason')]
+                                                   ])
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+
+                else
+                    $downAreas = CcDownArea::where('status', 'up')
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+            }
+            else
+                $downAreas = CcDownArea::where('status', 'up')
+                                    ->orderBy('created_at', 'dsc')
+                                    ->get();
+            
+            $areas = DB::table('cc_down_areas')
+                        ->select('area as area')
+                        ->where('status', 'up')
+                        ->groupBy('area')
+                        ->get();
+
+            $engineers = DB::table('cc_down_areas')
+                            ->select('assigned_to as assigned_to')
+                            ->where('status', 'up')
+                            ->groupBy('assigned_to')
+                            ->get();
+
+            $reasons = DB::table('cc_down_areas')
+                            ->select('reason as reason')
+                            ->where('status', 'up')
+                            ->groupBy('reason')
+                            ->get();
+                                
+            return view('cc.exportClosedDownAreas', [
+                                                'downAreas' => $downAreas,
+                                                'areas' => $areas,
+                                                'engineers' => $engineers,
+                                                'reasons' => $reasons
+                                            ]); 
+    
+        }
+    }
+
 }

@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading text-center">ManPower Request Form
+                <div class="panel-heading text-center">
+                  ManPower Request Form
                 </div>
 
                     <div class="panel-body" id="scroll">
@@ -22,14 +23,8 @@
                                     </tr>
                                     <tr class="from-group">
                                       <td><label>No. of vacancy: </label></td>
-<<<<<<< HEAD
 
                                       <td><input id="vacancy" type="number" class="form-control" name="vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
-
-
-=======
-                                      <td><input id="vacancy" type="number" class="form-control" name="vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
->>>>>>> 4dbb4554c55c254d442c2c881f0495353f6a677c
                                     </tr>
                                     <tr class="from-group">
                                        <td><label>Reason: </label></td>

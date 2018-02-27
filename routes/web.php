@@ -57,22 +57,27 @@ Route::get('/listDownAreas', 'cc\DownAreaController@listDownAreas');
 Route::post('/closeDownArea', 'cc\DownAreaController@closeDownArea');
 Route::get('/listClosedDownAreas', 'cc\DownAreaController@listClosedDownAreas');
 Route::post('/deleteClosedDownAreas', 'cc\DownAreaController@deleteClosedDownAreas');
+Route::get('/exportClosedDownAreas', 'cc\DownAreaController@exportClosedDownAreas');
 
-Route::get('/feasibleAreaForm', 'cc\FeasibleAreaController@index');
-Route::post('/saveFeasibleArea', 'cc\FeasibleAreaController@store');
+Route::get('/feasibleArea', 'cc\FeasibleAreaController@index');
+Route::post('/feasibleArea', 'cc\FeasibleAreaController@store');
 Route::get('/listFeasibleAreas', 'cc\FeasibleAreaController@listFeasibleAreas');
+Route::get('/exportFeasibleAreas', 'cc\FeasibleAreaController@exportFeasibleAreas');
+Route::post('/deleteFeasibleAreas', 'cc\FeasibleAreaController@deleteFeasibleAreas');
+Route::post('/editFeasibleArea', 'cc\FeasibleAreaController@editFeasibleArea');
 
 Route::get('/extension', 'cc\ExtensionController@index');
 Route::post('/extension', 'cc\ExtensionController@store');
 Route::get('/listExtensions', 'cc\ExtensionController@listExtensions');
-Route::post('/changeExtensionStatus', 'cc\ExtensionController@changeExtensionStatus');
+Route::post('/operationOnExtensions', 'cc\ExtensionController@operationOnExtensions');
+Route::get('/exportExtensions', 'cc\ExtensionController@exportExtensions');
 
 Route::get('/refund', 'cc\RefundController@index');
 Route::post('/refund', 'cc\RefundController@store');
 Route::get('/listRefunds', 'cc\RefundController@listRefunds');
 Route::post('/changeRefundStatus', 'cc\RefundController@changeRefundStatus');
-
-
+Route::get('/exportRefunds', 'cc\RefundController@exportRefunds');
+Route::post('/actOnRefunds', 'cc\RefundController@actOnRefunds');
 
 //Route::resource('extension', 'cc\ExtensionController');
 //Route::resource('downArea', 'cc\DownAreaController');
