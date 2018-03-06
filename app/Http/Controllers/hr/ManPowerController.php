@@ -6,6 +6,7 @@ use App\HrManpower;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ManPowerController extends Controller
 {
@@ -50,14 +51,54 @@ class ManPowerController extends Controller
         }
     }
 
-    public function listManPowerRequirments()
+    public function listManPowerRequirments(Request $request)
     {
     	if(Auth::guest())
     		return redirect('/login')->with('error', 'Login First');
     	else
     	{
-    		$manPowerRequests = HrManpower::orderBy('created_at', 'dsc')->paginate(20);
-    		return view('hr.listManPowerRequirments')->with('manPowerRequests', $manPowerRequests);
+            if(isset($_GET['filter']))
+            {
+                if($request->input('designation') != null)
+                    $manPowerRequests = HrManpower::where('vacancy_designation', $request->input('designation'))
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->paginate(20);
+
+                elseif($request->input('status') != null)
+                    $manPowerRequests = HrManpower::where('status', $request->input('status'))
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->paginate(20);
+
+                elseif($request->input('generated_by') != null)
+                    $manPowerRequests = HrManpower::where('generated_by', $request->input('generated_by'))
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->paginate(20);
+
+                elseif($request->input('generated_date') != null)
+                    $manPowerRequests = HrManpower::where('created_at', 'LIKE', $request->input('generated_date').'%')
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->paginate(20);
+                else
+                    $manPowerRequests = HrManpower::orderBy('created_at', 'dsc')->paginate(20);        
+            }
+            else
+    		    $manPowerRequests = HrManpower::orderBy('created_at', 'dsc')->paginate(20);
+
+            $designations = DB::table('hr_manpowers')
+                                ->select('vacancy_designation as vacancy_designation')
+                                ->groupBy('vacancy_designation')
+                                ->get();
+
+            $engineers = DB::table('hr_manpowers')
+                            ->select('generated_by as generated_by')
+                            ->groupBy('generated_by')
+                            ->get();
+
+    		return view('hr.listManPowerRequirments', [
+                                                        'manPowerRequests' => $manPowerRequests,
+                                                        'designations' => $designations,
+                                                        'engineers' => $engineers
+                                                      ]);
     	}	
     }
 
@@ -147,6 +188,57 @@ class ManPowerController extends Controller
                 return redirect('/listManPowerRequirments')->with('success', 'Request Deleted');
             else
                 return redirect('/listManPowerRequirments')->with('error', 'Something went wrong');
+        }
+    }
+
+    public function exportManPowerRequirments(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if(isset($_GET['filter']))
+            {
+                if($request->input('designation') != null)
+                    $manPowerRequests = HrManpower::where('vacancy_designation', $request->input('designation'))
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->get();
+
+                elseif($request->input('status') != null)
+                    $manPowerRequests = HrManpower::where('status', $request->input('status'))
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->get();
+
+                elseif($request->input('generated_by') != null)
+                    $manPowerRequests = HrManpower::where('generated_by', $request->input('generated_by'))
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->get();
+
+                elseif($request->input('generated_date') != null)
+                    $manPowerRequests = HrManpower::where('created_at', 'LIKE', $request->input('generated_date').'%')
+                                                    ->orderBy('created_at', 'dsc')
+                                                    ->get();
+                else
+                    $manPowerRequests = HrManpower::orderBy('created_at', 'dsc')->get();        
+            }
+            else
+                $manPowerRequests = HrManpower::orderBy('created_at', 'dsc')->get();
+
+            $designations = DB::table('hr_manpowers')
+                                ->select('vacancy_designation as vacancy_designation')
+                                ->groupBy('vacancy_designation')
+                                ->get();
+
+            $engineers = DB::table('hr_manpowers')
+                            ->select('generated_by as generated_by')
+                            ->groupBy('generated_by')
+                            ->get();
+
+            return view('hr.exportManPowerRequests', [
+                                                        'manPowerRequests' => $manPowerRequests,
+                                                        'designations' => $designations,
+                                                        'engineers' => $engineers
+                                                      ]);
         }
     }
 }
