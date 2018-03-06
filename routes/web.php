@@ -98,7 +98,6 @@ Route::post('/deleteManPowerRequest', 'hr\ManPowerController@deleteManPowerReque
 Route::get('/exportManPowerRequirments', 'hr\ManPowerController@exportManPowerRequirments');
 
 
-
 Route::resource('/stationery', 'hr\StationeryController');
 //Route::resource('/manPower', 'hr\ManPowerController');
 
