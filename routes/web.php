@@ -89,8 +89,16 @@ Route::resource('/feasibleArea', 'cc\FeasibleAreaController');
 Route::resource('/refund', 'cc\RefundController');
 
 //HR Department Routes
+Route::get('/manPower', 'hr\ManPowerController@index');
+Route::post('/manPower', 'hr\ManPowerController@store');
+Route::get('/listManPowerRequirments', 'hr\ManPowerController@listManPowerRequirments');
+Route::post('/actionOnRequests', 'hr\ManPowerController@actionOnRequests');
+Route::post('/editManPowerRequest', 'hr\ManPowerController@editManPowerRequest');
+Route::post('/deleteManPowerRequest', 'hr\ManPowerController@deleteManPowerRequest');
+
+
 Route::resource('/stationery', 'hr\StationeryController');
-Route::resource('/manPower', 'hr\ManPowerController');
+//Route::resource('/manPower', 'hr\ManPowerController');
 
 //Sales Department
 Route::get('/ill', function() {
