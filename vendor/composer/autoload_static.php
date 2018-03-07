@@ -34,6 +34,10 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
+        'U' => 
+        array (
+            'Unisharp\\Ckeditor\\' => 18,
+        ),
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
@@ -130,6 +134,10 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Unisharp\\Ckeditor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/unisharp/laravel-ckeditor',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -365,7 +373,6 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
         'App\\Http\\Controllers\\cc\\RefundController' => __DIR__ . '/../..' . '/app/Http/Controllers/cc/RefundController.php',
         'App\\Http\\Controllers\\document_approval\\DocumentApprovalController' => __DIR__ . '/../..' . '/app/Http/Controllers/document_approval/DocumentApprovalController.php',
         'App\\Http\\Controllers\\hr\\ManPowerController' => __DIR__ . '/../..' . '/app/Http/Controllers/hr/ManPowerController.php',
-        'App\\Http\\Controllers\\hr\\ManPowerController1' => __DIR__ . '/../..' . '/app/Http/Controllers/hr/ManPowerController1.php',
         'App\\Http\\Controllers\\inventory\\PurchaseRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/inventory/PurchaseRequestController.php',
         'App\\Http\\Controllers\\noc\\AdminRightsController' => __DIR__ . '/../..' . '/app/Http/Controllers/noc/AdminRightsController.php',
         'App\\Http\\Controllers\\noc\\ConsumerController' => __DIR__ . '/../..' . '/app/Http/Controllers/noc/ConsumerController.php',
@@ -3870,6 +3877,7 @@ class ComposerStaticInit20fd52d7cb17588bab96edcff26616ed
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
+        'Unisharp\\Ckeditor\\ServiceProvider' => __DIR__ . '/..' . '/unisharp/laravel-ckeditor/ServiceProvider.php',
         'UserSeeder' => __DIR__ . '/../..' . '/database/seeds/UserSeeder.php',
         'VoipSeeder' => __DIR__ . '/../..' . '/database/seeds/VoipSeeder.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',

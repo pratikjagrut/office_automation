@@ -150,8 +150,8 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title text-center"><b>Job Description</b></h4>
             </div>
-            <div class="modal-body" id="jd">
-                
+            <div class="modal-body">
+                <p id="jd" style="padding: 10px;"></p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -254,7 +254,7 @@
                     
                         <tr class="from-group">
                           <td><label>Job Description: </label></td>
-                          <td><input id="job_description" type="text" class="form-control" name="job_description" ></td>
+                          <td><textarea name="job_description" id="article-ckeditor"></textarea></td>
                         </tr>
                         <tr class="from-group">
                           <td><label>Edited by: </label></td>

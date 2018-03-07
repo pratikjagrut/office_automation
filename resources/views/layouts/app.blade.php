@@ -147,5 +147,10 @@
           document.getElementById('sidebar').classList.toggle('active');
         }
     </script>
+
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
 </body>
 </html>
