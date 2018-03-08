@@ -32,7 +32,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<?php if($consumer != null && count($consumer) > 0): ?>
+					<?php if($consumer != null): ?>
 						<form action="/submitNewJob" method="post">
 							<?php echo e(csrf_field()); ?>
 

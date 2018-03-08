@@ -1,0 +1,13 @@
+$stationeryRequest = new HrStationery;
+            if($ != null)
+              $stationeryRequest->item_description = $item_description;
+            if($ != null)
+              $stationeryRequest->quantity = $quantity;
+            if($ != null)
+              $stationeryRequest->reason = $reason;
+            if($ != null)
+              $stationeryRequest->status = 'pending';
+            if($ != null)
+              $stationeryRequest->generated_by = $generated_by;
+
+            if($stationeryRequest->save())
