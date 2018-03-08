@@ -63,7 +63,9 @@
 	          <h4 class="modal-title text-center"><b>Close Job</b></h4>
 	        </div>
 	        <div class="modal-body">
-				<form action="/closeJob">
+				<form action="/closeJob" method="post">
+					<?php echo e(csrf_field()); ?>
+
 					<table class="table table-striped">
 						<tr class="from-group">
 							<td><label>Ticket: </label></td>
@@ -72,7 +74,7 @@
 						
 						<tr class="from-group">
 							<td><label>Close Date: </label></td>
-							<td><input type="string" class="form-control" id="closeDate" name="close_date" readonly="true"></td>
+							<td><input type="text" class="form-control" id="closeDate" name="close_date" readonly="true"></td>
 						</tr>
 						<tr class="from-group">
 							<td><label>Total Time: </label></td>

@@ -16,6 +16,14 @@
 
     <!--jquery-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!--jquery-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -49,17 +57,49 @@
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                         @else
-                            <li><a href="{{ url('listOnGoingJobs') }}">On-going Jobs</a></li>
-                            <li><a href="{{ url('listFinishedJobs') }}">Finished Jobs</a></li>
+                        @if (auth()->user()->user_type == 'super admin')
+                                @include('sidebar.superAdmin')
+                            @else
+                                @switch(auth()->user()->department)
+                                    @case('cc')
+                                        @include('sidebar.cc')
+                                        @break
+                                    
+                                    @case('hr')
+                                        @include('sidebar.hr')
+                                        @break
+
+                                    @case('inventory')
+                                        @include('sidebar.inventory')
+                                        @break
+
+                                    @case('noc')
+                                        @include('sidebar.noc')
+                                        @break
+
+                                    @case('sales')
+                                        @include('sidebar.sales')
+                                        @break
+                                    
+                                    @case('voip')
+                                        @include('sidebar.voip')
+                                        @break                
+                                    @default
+                                            Default case...
+                                @endswitch
+                                
+                            @endif
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ url('/newJobEntry') }}">Enter New Job</a>
-                                    </li>
+                                    @if (Auth::user()->user_type == 'super admin')
+                                       <li>
+                                           <a href="{{ url('/dashboard') }}">Dashboard</a>
+                                       </li> 
+                                    @endif
                                     <li>
                                         <a href="{{ url('/profile') }}">Profile</a>
                                     </li>
@@ -77,9 +117,6 @@
                                                 Add new user
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ url('/addNewConsumer') }}">Register New Consumer</a>
-                                        </li>
                                     @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -92,7 +129,7 @@
                                         </form>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>    
                         @endguest
                     </ul>
                 </div>
@@ -104,5 +141,16 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
+        function toggleSidebar(ref) {
+          ref.classList.toggle('active');
+          document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
+
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
 </body>
 </html>

@@ -51,6 +51,7 @@
 									<td>{{$consumer->contact_details}}</td>
 								</tr>
 							@endforeach
+							<div class="text-center">{{$consumers->links()}}</div>
 						@endif
 					</table>
 				</div>

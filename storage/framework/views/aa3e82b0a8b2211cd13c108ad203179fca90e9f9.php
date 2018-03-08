@@ -47,6 +47,22 @@
                                 <input id="employee_id" type="text" class="form-control" name="employee_id" required>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="department" class="col-md-4 control-label">Department</label>
+
+                            <div class="col-md-6">
+                                <select id="department" type="text" class="form-control" name="department" required>
+                                    <option>Select Department</option>
+                                    <option value="cc">Customer Care</option>
+                                    <option value="hr">Human Resource</option>
+                                    <option value="inventory">Inventory</option>
+                                    <option value="noc">NOC</option>
+                                    <option value="Sales">sales</option>
+                                    <option value="voip">VOIP</option>
+                                </select>
+                            </div>
+                        </div>
                         
                         <div class="form-group">
                             <label for="user_type" class="col-md-4 control-label">User type</label>

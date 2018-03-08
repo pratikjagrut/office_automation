@@ -34,7 +34,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-body">
-					@if ($consumer != null && count($consumer) > 0)
+					@if ($consumer != null)
 						<form action="/submitNewJob" method="post">
 							{{ csrf_field() }}
 							<table class="table table-striped">
