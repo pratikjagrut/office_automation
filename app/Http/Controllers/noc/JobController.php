@@ -37,7 +37,7 @@ class JobController extends Controller
         	                      ['type', $consumer_type]
         	                    ])->first();
 
-        	if(count($consumer) == 0)
+        	if($consumer == null)
         	    return redirect('newJobEntry')->with('error', 'No customer found!');
         	else
         	    return view('noc.newJobEntry')->with('consumer', $consumer);
