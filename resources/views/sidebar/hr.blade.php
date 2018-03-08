@@ -7,7 +7,7 @@
             <a href="{{ url('/listManPowerRequirments') }}">Manpower Requirement</a>
         </li>
         <li>
-            <a href="{{ url('/stationery') }}">Miscellaneous Requirement</a>
+            <a href="{{ url('/listStationeryRequests') }}">Miscellaneous Requirement</a>
         </li>
     </ul>
 </li>

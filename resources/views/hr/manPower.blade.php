@@ -9,9 +9,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading text-center">
-                  Man Power Request Form
+                  <b>Man Power Request Form</b>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body table-responsive">
                     <form action="/manPower" method="post">
                         {{csrf_field()}}
                         <table class="table table-striped">

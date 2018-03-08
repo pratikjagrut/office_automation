@@ -23,7 +23,7 @@ class CreateHrManpowersTable extends Migration
             $table->string('qualification')->nullable();
             $table->string('status')->nullable();
             $table->string('comment')->nullable();
-            $table->string('job_description')->nullable();
+            $table->text('job_description')->nullable();
             $table->string('generated_by')->nullable();
             $table->timestamps();
         });

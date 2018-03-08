@@ -97,8 +97,15 @@ Route::post('/editManPowerRequest', 'hr\ManPowerController@editManPowerRequest')
 Route::post('/deleteManPowerRequest', 'hr\ManPowerController@deleteManPowerRequest');
 Route::get('/exportManPowerRequirments', 'hr\ManPowerController@exportManPowerRequirments');
 
+Route::get('/stationery', 'hr\StationeryController@index');
+Route::post('/stationery', 'hr\StationeryController@store');
+Route::get('/listStationeryRequests', 'hr\StationeryController@listStationeryRequests');
+Route::post('/actionOnRequests', 'hr\StationeryController@actionOnRequests');
+Route::post('/editStationeryRequest', 'hr\StationeryController@editStationeryRequest');
+Route::post('/deleteStationeryRequests', 'hr\StationeryController@deleteStationeryRequests');
+Route::get('/exportStationeryRequests', 'hr\StationeryController@exportStationeryRequests');
 
-Route::resource('/stationery', 'hr\StationeryController');
+//Route::resource('/stationery', 'hr\StationeryController');
 //Route::resource('/manPower', 'hr\ManPowerController');
 
 //Sales Department
