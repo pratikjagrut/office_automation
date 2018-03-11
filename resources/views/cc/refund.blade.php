@@ -55,7 +55,7 @@
                             <tr class="from-group">
                                 <td><label>Bank Account Number: </label></td>
                                 <td>
-                                    <input id="account_no" type="tel" class="form-control" min="1" name="account_no" required="true" pattern="^\d{16}$" title="Add zeros in front if number less than 16!">
+                                    <input id="account_no" type="tel" class="form-control" min="1" name="account_no" required="true" title="Add zeros in front if number less than 16!">
                                 </td>
                             </tr>
                             <tr class="from-group">
