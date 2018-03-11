@@ -131,13 +131,13 @@
 	                            </tr>
 	                            <tr class="form-group">
 						            <td>
-						                <select name="assign_job" class="selectpicker form-control" id="assign_job" title="Assign Job To">
+						                <select name="assign_job" class="selectpicker form-control" id="assign_job" title="Assign Job To" required>
 						                    <option value="engineer">Engineer</option>
 						                    <option value="team">Team</option>
 						                </select>
 						            </td>
 						            <td id="engineer">
-						            	<select class="selectpicker" data-live-search="true" title="Select Engineer" name="assign_to_engineer">
+						            	<select class="selectpicker" data-live-search="true" title="Select Engineer" name="assign_to_engineer" id="engineer_name">
 							            	<?php if($engineers != null): ?>
                                                 <?php $__currentLoopData = $engineers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $engineer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($engineer->name != 'admin'): ?>
@@ -151,7 +151,7 @@
 						            	</select>
 						            </td>
 						            <td id="team">
-						            	<select class="selectpicker" data-live-search="true" title="Select Team" name="assign_to_team">
+						            	<select class="selectpicker" data-live-search="true" title="Select Team" name="assign_to_team" id="team_name">
 							            	<?php if($teams != null): ?>
                                                 <?php $__currentLoopData = $teams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $team): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($team->department); ?>" data-tokens="<?php echo e($team->department); ?>">
@@ -208,11 +208,13 @@
 			{
 				$("#engineer").show()
 				$("#team").hide()
+				document.getElementById("engineer_name").required = true;
 			}
 			else
 			{
 				$("#engineer").hide()
 				$("#team").show()
+				document.getElementById("team_name").required = true;
 			}
 		})
 	})
