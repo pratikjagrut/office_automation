@@ -136,7 +136,7 @@ class ExtensionController extends Controller
             $grant = false;
             $reject = false;
             $delete = false;
-
+            
             if(count($grant_extension_id) > 0)
                 for ($i = 0; $i < count($grant_extension_id); $i++) 
                 { 
@@ -165,7 +165,7 @@ class ExtensionController extends Controller
                     $delete = true;
                 }  
             if(!$grant && !$reject && !$delete)
-                return redirect('/listExtensions')->with('error', 'Select at least one record to delete');
+                return redirect('/listExtensions')->with('error', 'Select at least one record');
             elseif($grant && !$reject && !$delete)
                 return redirect('/listExtensions')->with('success', count($grant_extension_id).' extension granted');
             elseif(!$grant && $reject && !$delete)

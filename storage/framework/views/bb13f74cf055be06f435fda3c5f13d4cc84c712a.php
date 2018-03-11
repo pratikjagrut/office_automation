@@ -15,7 +15,7 @@
 					        <tr class="form-group">
 					            <td>
 					                <select name="consumer_type" class="form-control" required="true">
-					                    <option value="">Select Consumer</option>
+					                	<option value="">Select Consumer Type</option>
 					                    <option value="partner">Partner</option>
 					                    <option value="customer">Customer</option>
 					                    <option value="reseller">Reseller</option>
@@ -29,7 +29,9 @@
 						<?php if($consumers != null && count($consumers) > 0 ): ?>
 							<tr>
 								<th>Sr. No</th>
-								<th>Circuit Id</th>
+								<?php if($consumer_type1 == 'customer'): ?>
+									<th>Circuit Id</th>
+								<?php endif; ?>
 								<th>Name</th>
 								<th>Address</th>
 								<th>Area</th>
@@ -40,7 +42,9 @@
 							<?php $__currentLoopData = $consumers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $consumer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 								<tr>
 									<td><?php echo e($loop->iteration); ?></td>
-									<td><?php echo e($consumer->circuit_id); ?></td>
+									<?php if($consumer_type1 == 'customer'): ?>
+										<td><?php echo e($consumer->circuit_id); ?></td>
+									<?php endif; ?>
 									<td><?php echo e(ucwords($consumer->name)); ?></td>
 									<td><?php echo e(ucwords($consumer->address)); ?></td>
 									<td><?php echo e(ucwords($consumer->area)); ?></td>
@@ -104,13 +108,13 @@
 							    <tr class="form-group">
 							        <td><label>Address</label></td>
 							        <td>
-							            <input type="text" name="address" class="form-control" required="true">
+							            <input type="text" name="address" class="form-control">
 							        </td>
 							    </tr>
 							    <tr class="form-group">
 							        <td><label>Area</label></td>
 							        <td>
-							            <input type="text" name="area" class="form-control" required="true">
+							            <input type="text" name="area" class="form-control">
 							        </td>
 							    </tr>
 							    <tr class="form-group">

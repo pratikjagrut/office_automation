@@ -31,13 +31,13 @@ Route::get('userList', 'super_admin\SuperAdminController@userList');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('profile', 'ProfileController');
 
+//Admin rights routes
+Route::get('/adminRights', 'AdminRightsController@index');	
+Route::post('/performAdminRights', 'AdminRightsController@performAdminRights');
+Route::post('/changeEmployeePswd', 'AdminRightsController@changeEmployeePswd');
+
+
 //NOC Department Routes
-Route::get('/adminRights', 'noc\AdminRightsController@index');	
-Route::get('/performAdminRights', 'noc\AdminRightsController@performAdminRights');
-//Route::get('/grantAdminRights', 'noc\AdminRightsController@grantAdminRights');
-//Route::get('/removeAdminRights', 'noc\AdminRightsController@removeAdminRights');
-//Route::get('/deleteAccount', 'noc\AdminRightsController@deleteAccount');
-//Route::get('/assignJob', 'noc\AdminRightsController@assignJob');
 Route::get('/newJobEntry', 'noc\JobController@index');
 Route::get('/selectConsumer', 'noc\JobController@selectConsumer');
 Route::post('/submitNewJob', 'noc\JobController@newJobEntry');
@@ -49,6 +49,8 @@ Route::get('/addNewConsumer', 'noc\ConsumerController@index');
 Route::get('/setConsumer', 'noc\ConsumerController@setConsumer');
 Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer');
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
+Route::post('/transferJob', 'noc\JobController@transferJob');
+Route::post('/deleteFinishedJobs', 'noc\JobController@deleteFinishedJobs');
 
 //CC Department Routes
 Route::get('/downArea', 'cc\DownAreaController@index');

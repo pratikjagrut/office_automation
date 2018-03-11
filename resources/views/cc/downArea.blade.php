@@ -52,7 +52,7 @@
                             <tr class="from-group">
                                 <td></td>
                                 <td>
-                                    <button type="clear" name="clear" class="btn btn-danger">Clear!</button>
+                                    <button type="reset" name="clear" class="btn btn-danger">Clear!</button>
                                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                 </td>
                             </tr>
