@@ -17,7 +17,10 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        if(Auth::user()->user_type == 'admin')
+            return view('auth.register');
+        else
+            return redirect('/newJobEntry')->with('error', 'Unauthorised access');
     }
 
     /**
@@ -31,8 +34,6 @@ trait RegistersUsers
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
@@ -57,6 +58,6 @@ trait RegistersUsers
      */
     protected function registered(Request $request, $user)
     {
-        //
+        return redirect('/register')->with('success', 'New user added');
     }
 }
