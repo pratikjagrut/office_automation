@@ -112,11 +112,11 @@
                                                 Admin Rights
                                             </a>
                                         </li>
-                                        <!--<li>
-                                            <a href="{//{ route('register') }}">
+                                        <li>
+                                            <a href="{{ route('register') }}">
                                                 Add new user
                                             </a>
-                                        </li>-->
+                                        </li>
                                     @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
