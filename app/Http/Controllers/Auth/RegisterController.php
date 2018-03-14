@@ -50,7 +50,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users',
-            'employee_id' => 'required|string',
+            'employee_id' => 'required|string|unique:users',
             'department' => 'required|string',
             'user_type' => 'required|string',
             'gender' => 'required|string',
@@ -77,3 +77,4 @@ class RegisterController extends Controller
         ]);
     }
 }
+    

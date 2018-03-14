@@ -87,9 +87,11 @@
 										<th>Generated Date</th>
 										<th>Status</th>
 										<th>Acted By</th>
-										<th>Grant</th>
-										<th>Reject</th>
-										<th>Delete</th>
+										@if (Auth::user()->user_type == 'admin')
+											<th>Grant</th>
+											<th>Reject</th>
+											<th>Delete</th>
+										@endif
 									</tr>
 									@foreach ($refunds as $refund)
 										<tr>
@@ -108,20 +110,24 @@
 											<td>{{$refund->created_at}}</td>
 											<td>{{ucwords($refund->refund_status)}}</td>
 											<td>{{ucwords($refund->granted_by)}}</td>
-											<td>
-												<input type="checkbox" name="grantRefund[]" value="{{$refund->id}}">
-											</td>
-											<td>
-												<input type="checkbox" name="rejectRefund[]" value="{{$refund->id}}">
-											</td>
-											<td>
-												<input type="checkbox" name="deleteRefund[]" value="{{$refund->id}}">
-											</td>
+											@if (Auth::user()->user_type == 'admin')
+												<td>
+													<input type="checkbox" name="grantRefund[]" value="{{$refund->id}}">
+												</td>
+												<td>
+													<input type="checkbox" name="rejectRefund[]" value="{{$refund->id}}">
+												</td>
+												<td>
+													<input type="checkbox" name="deleteRefund[]" value="{{$refund->id}}">
+												</td>
+											@endif
 										</tr>
 									@endforeach	
 								</table>
-								<input type="hidden" name="granted_by" value="{{auth()->user()->name}}">
-								<input type="submit" class="btn btn-danger pull-right" name="action" value="Submit">
+								@if (Auth::user()->user_type == 'admin')
+									<input type="hidden" name="granted_by" value="{{auth()->user()->name}}">
+									<input type="submit" class="btn btn-danger pull-right" name="action" value="Submit">
+								@endif
 							</form>	
 						</div>
 					</div>

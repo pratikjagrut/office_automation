@@ -20,7 +20,7 @@ trait RegistersUsers
         if(Auth::user()->user_type == 'admin')
             return view('auth.register');
         else
-            return redirect('/home')->with('error', 'Unauthorised access');
+            return redirect('/newJobEntry')->with('error', 'Unauthorised access');
     }
 
     /**

@@ -4,7 +4,7 @@
     </a>
     <ul class="dropdown-menu">
         <li>
-            <<a href=""></a> href="{{ url('/voipForm') }}">Voip Form</a>
+            <a href="{{ url('/voipForm') }}">Voip Form</a>
         </li>
     </ul>
 </li>
