@@ -113,11 +113,11 @@
                                                 Admin Rights
                                             </a>
                                         </li>
-                                        <!--<li>
-                                            <a href="{//{ route('register') }}">
+                                        <li>
+                                            <a href="<?php echo e(route('register')); ?>">
                                                 Add new user
                                             </a>
-                                        </li>-->
+                                        </li>
                                     <?php endif; ?>
                                     <li>
                                         <a href="<?php echo e(route('logout')); ?>"

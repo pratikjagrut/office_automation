@@ -5,7 +5,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-7">
 				<div class="well">
 					<form action="/listClosedDownAreas" method="get">	
 						<table class="table-condensed">
@@ -48,7 +48,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<div class="well pull-right">
 					<a href="/exportClosedDownAreas" class="btn btn-warning">Export</a>
 				</div>
