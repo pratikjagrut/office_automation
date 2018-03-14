@@ -5,7 +5,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-7">
+			<div class="col-md-7 col-sm-7">
 				<div class="well">
 					<form action="/exportExtensions" class="form-inline" method="get">
 						<table class="table-condensed">
@@ -46,8 +46,8 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-2"></div>
-			<div class="col-md-3">
+			<div class="col-md-2 col-sm-2"></div>
+			<div class="col-md-3 col-sm-3">
 				<div class="well">
 					<button onclick="printDiv()" class="btn btn-success">Print</button>
 					<button href="" class="btn btn-warning" id="btnExportToExcel">Download To Excel</button>

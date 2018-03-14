@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-7 col-sm-7">
                 <div class="well">
                     <form action="/exportRefunds" method="get">   
                         <table class="table-condensed">

@@ -5,7 +5,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-7">
+			<div class="col-md-6 col-sm-6">
 				<div class="well">
 					<form action="/listExtensions" class="form-inline" method="get">
 						<table class="table-condensed">
@@ -46,8 +46,8 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-3"></div>
-			<div class="col-md-2">
+			<div class="col-md-4 col-sm-4"></div>
+			<div class="col-md-2 col-sm-2">
 				<div class="well text-center">
 					<a href="/exportExtensions" class="btn btn-warning">Export</a>
 				</div>
