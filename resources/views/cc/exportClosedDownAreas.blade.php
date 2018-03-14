@@ -5,7 +5,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-7">
+			<div class="col-md-7 col-sm-7">
 				<div class="well">
 					<form action="/exportClosedDownAreas" method="get">	
 						<table class="table-condensed">
@@ -48,7 +48,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-5 col-sm-5">
 				<div class="well pull-right">
 					<button onclick="printDiv()" class="btn btn-success">Print</button>
 					<button href="" class="btn btn-warning" id="btnExportToExcel">Download To Excel</button>
