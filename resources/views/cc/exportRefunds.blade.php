@@ -74,6 +74,7 @@
                                     <th>Sr. No</th>
                                     <th>Customer Id</th>
                                     <th>Customer Name</th>
+                                    <th>Mode Of Payment</th>
                                     <th>Bank Name</th>
                                     <th>Account Number</th>
                                     <th>Bank Branch</th>
@@ -92,6 +93,7 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{ucwords($refund->customer_id)}}</td>
                                         <td>{{ucwords($refund->customer_name)}}</td>
+                                        <td>{{ucwords($refund->mode_of_payment)}}</td>
                                         <td>{{ucwords($refund->bank)}}</td>
                                         <td>{{ucwords($refund->account_no)}}</td>
                                         <td>{{ucwords($refund->branch)}}</td>

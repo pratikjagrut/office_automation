@@ -79,7 +79,7 @@
 										<td>{{ucwords($downArea->generated_by)}}</td>
 										@if (Auth::user()->user_type == 'admin')
 											<td>
-												<button class="btn btn-danger btn-sm" style="color: white;" data-toggle="modal" data-target="#close_job" id="{{$downArea->id}}" value="{{$downArea->area}}" onclick="clck(this.id, this.value)">X</button>
+												<button class="btn btn-danger btn-sm" style="color: white;" data-toggle="modal" data-target="#close_job" id="{{$downArea->id}}/{{$downArea->down_day_time}}" value="{{$downArea->area}}" onclick="clck(this.id, this.value)">X</button>
 											</td>
 										@endif
 									</tr>
@@ -123,7 +123,7 @@
 						<tr class="form-group">
 							<td><label>Up day:</label></td>
 							<td>
-								<input type="datetime-local" name="upTime" class="form-control" id="upTime">
+								<input id="upTime" type="datetime-local" class="form-control" name="upTime" required onblur="calculateTotalDownTime(this.value);">
 							</td>
 						</tr>
 						<tr class="form-group">
@@ -133,7 +133,10 @@
 							</td>
 						</tr>
 						<tr class="form-group">
-							<td></td>
+							<td>
+								<input type="hidden" name="downDate" id="downDate">
+								<input type="hidden" name="total_time" id="total_time">
+							</td>
 							<td>
 								<input type="submit" class="btn btn-success" value="Close">
 							</td>
@@ -141,8 +144,6 @@
 					</table>
 				</form>
 	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>
 	      
@@ -150,9 +151,38 @@
 	  </div>
 	  <script type="text/javascript">
 	  	function clck(id, area)
-	  	{
-	  		document.getElementById("downAreaId").value = id
+	  	{	
+	  		var data = id.split('/')
+	  		document.getElementById("downAreaId").value = data[0]
 	  		document.getElementById("downArea1").value = area
+	  		document.getElementById("downDate").value = data[1]
+	  	}
+
+	  	function calculateTotalDownTime(up)
+	  	{
+	  		var down = document.getElementById("downDate").value
+	  		console.log(down)
+	  		console.log(up)
+
+	  		//Difference between generation_date and closing date
+			var date1 = new Date(up)
+			var date2 = new Date(down)
+			var difference = date1.getTime() - date2;
+			
+	        var daysDifference = Math.floor(difference/1000/60/60/24)
+	        difference -= daysDifference*1000*60*60*24
+
+	       	var hoursDifference = Math.floor(difference/1000/60/60)
+	        difference -= hoursDifference*1000*60*60
+
+	        var minutesDifference = Math.floor(difference/1000/60)
+	        difference -= minutesDifference*1000*60
+
+	        var secondsDifference = Math.floor(difference/1000)
+
+	     	var total_time = daysDifference + 'd ' + hoursDifference + 'h :' + minutesDifference + 'm :' + secondsDifference + 's'
+
+	     	document.getElementById("total_time").value = total_time
 	  	}
 	  </script>
 @endsection

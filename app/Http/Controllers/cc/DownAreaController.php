@@ -134,11 +134,13 @@ class DownAreaController extends Controller
     		$downAreaName = $request->input('downArea');
     		$upTime = $request->input('upTime');
     		$closed_by = $request->input('closed_by');
+            $total_time = $request->input('total_time');
 
     		$downArea = CcDownArea::find($downAreaId);
     		$downArea->up_day_time = $upTime;
     		$downArea->status = 'up';
     		$downArea->closed_by = $closed_by;
+            $downArea->total_time = $total_time;
 
     		if($downArea->save())
     			return redirect('/listDownAreas')->with('success', ucwords($downAreaName).' is up now!');
