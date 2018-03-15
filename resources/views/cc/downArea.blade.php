@@ -17,18 +17,18 @@
                         <table class="table table-striped">
                             <tr class="from-group">
                                 <td><label>Area Name: </label></td>
-                                <td><input id="area" type="text" class="form-control" name="area" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required."></td>
+                                <td><input id="area" type="text" class="form-control" name="area" required title="Only letters are allowed. Minimum 3 letters required."></td>
                             </tr>
                             <tr class="from-group">
                                 <td><label>Down Reason: </label></td>
                                 <td>
-                                    <input id="reason" type="text" class="form-control" name="reason" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required.">
+                                    <input id="reason" type="text" class="form-control" name="reason" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed. Minimum 3 letters required.">
                                 </td>
                             </tr>
                             <tr class="from-group">
                                 <td><label>Down Day: </label></td>
                                 <td>
-                                    <input id="down_day_time" type="datetime-local" class="form-control" name="down_day_time" required>
+                                    <input id="down_day_time" type="datetime-local" class="form-control" name="down_day_time" required onblur="downTimeStamp(this.value);">
                                 </td>
                             </tr>
                             <tr class="from-group">
@@ -40,7 +40,7 @@
                             <tr class="from-group">
                                 <td><label>Assigned to: </label></td>
                                 <td>
-                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required  pattern="([A-Za-z\s]){2,}" title="Only letters are allowed.Minimum 2 letters required.">
+                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required  pattern="([A-Za-z\s]){2,}" title="Only letters are allowed. Minimum 2 letters required.">
                                 </td>
                             </tr>
                             <tr class="from-group">
@@ -50,7 +50,9 @@
                                 </td>
                             </tr>
                             <tr class="from-group">
-                                <td></td>
+                                <td>
+                                    <input type="hidden" name="down_timestamp" id="down_timestamp">
+                                </td>
                                 <td>
                                     <button type="reset" name="clear" class="btn btn-danger">Clear!</button>
                                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -63,4 +65,13 @@
         </div>            
     </div>
 </div>
+<script type="text/javascript">
+    function downTimeStamp(t)
+    {
+      console.log(t)
+      var timestamps = new Date(t)
+      console.log(timestamps)
+      document.getElementById("down_timestamp").value = timestamps.getTime()
+    }
+</script>
 @endsection

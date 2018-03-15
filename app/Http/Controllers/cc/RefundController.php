@@ -30,6 +30,7 @@ class RefundController extends Controller
         {
             $customer_id = $request->input('customer_id');
             $customer_name = $request->input('customer_name');
+            $modeOfPayment = $request->input('modeOfPayment');
             $account_no = $request->input('account_no');
             $ifsc_no = $request->input('ifsc_no');
             $bank = $request->input('bank');
@@ -46,13 +47,18 @@ class RefundController extends Controller
             $new_request = new CcRefund;
             $new_request->customer_id = $customer_id;
             $new_request->customer_name = $customer_name;
-            $new_request->account_no = $account_no;
-            $new_request->ifsc_no = $ifsc_no;
-            if($bank != null)
-            	$new_request->bank = $bank;
-            else
-            	$new_request->bank = $other_bank;
-            $new_request->branch = $branch;
+            $new_request->mode_of_payment = $modeOfPayment;
+            if($modeOfPayment == 'online banking')
+            {
+                $new_request->account_no = $account_no;
+                $new_request->ifsc_no = $ifsc_no;
+                if($bank != null)
+                    $new_request->bank = $bank;
+                else
+                    $new_request->bank = $other_bank;
+                $new_request->branch = $branch;
+
+            }
             $new_request->reason = $reason;
             $new_request->refund_amount = $refund_amount;
             $new_request->mail_date = $mail_date;

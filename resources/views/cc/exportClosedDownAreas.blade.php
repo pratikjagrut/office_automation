@@ -131,9 +131,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#btnExportToExcel").click(function(e) {
-				var row = document.getElementById("row");
-				row.deleteCell(9);
-				e.preventDefault();
 			    //getting data from our table
 			    var data_type = 'data:application/vnd.ms-excel';
 			    var table_div = document.getElementById('output');
@@ -151,8 +148,6 @@
 			    a.href = data_type + ', ' + table_html;
 			    a.download = 'ClosedDownAreas-' + datetime + '.xls';
 			    a.click();
-			    var cell = row.insertCell(9);
-			    cell.innerHTML = "<b>Delete</b>";
 			});
 		});
 	</script>
