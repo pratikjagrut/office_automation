@@ -326,4 +326,22 @@ class JobController extends Controller
                 return redirect('/listFinishedJobs')->with('error', 'Select at least 1 job to delete');
         }
     }
+
+    public function troubleshootJob(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            $ticket = $request->input('ticket');
+            $troubleshoot = $request->input('troubleshoot');
+
+            $job = NocOngoingJob::where('ticket', $ticket)->first();
+            $job->troubleshoot = $troubleshoot;
+            if($job->save())
+                return redirect('/listOnGoingJobs')->with('success', 'Done');
+            else
+                return redirect('/listOnGoingJobs')->with('error', 'Something went wrong! Data could not be saved in database');
+        }
+    }
 }

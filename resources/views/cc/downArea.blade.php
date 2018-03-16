@@ -17,7 +17,7 @@
                         <table class="table table-striped">
                             <tr class="from-group">
                                 <td><label>Area Name: </label></td>
-                                <td><input id="area" type="text" class="form-control" name="area" required title="Only letters are allowed. Minimum 3 letters required."></td>
+                                <td><input id="area" type="text" class="form-control" name="area" required title="Minimum 3 letters required."></td>
                             </tr>
                             <tr class="from-group">
                                 <td><label>Down Reason: </label></td>
