@@ -51,6 +51,7 @@ Route::post('/registerNewConsumer', 'noc\ConsumerController@registerNewConsumer'
 Route::get('/listConsumer', 'noc\ConsumerController@listConsumer');
 Route::post('/transferJob', 'noc\JobController@transferJob');
 Route::post('/deleteFinishedJobs', 'noc\JobController@deleteFinishedJobs');
+Route::post('/troubleshootJob', 'noc\JobController@troubleshootJob');
 
 //CC Department Routes
 Route::get('/downArea', 'cc\DownAreaController@index');
