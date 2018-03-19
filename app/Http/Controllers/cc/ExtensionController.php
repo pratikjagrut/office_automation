@@ -130,7 +130,7 @@ class ExtensionController extends Controller
         else
         {
             $grant_extension_id = $request->input('grant');
-            $reject_extension_id = $request->input('reject');
+            //$reject_extension_id = $request->input('reject');
             $delete_extension_id = $request->input('delete');
             $granted_by = $request->input('granted_by');
             $grant = false;
@@ -142,12 +142,13 @@ class ExtensionController extends Controller
                 { 
                     $extension = CcExtension::find($grant_extension_id[$i]);
                     $extension->status = 'granted';
+                    $extension->rejection_note = '';
                     $extension->granted_by = $granted_by;
                     $extension->save();
                     $grant = true;
                 }
 
-            if(count($reject_extension_id))
+            /*if(count($reject_extension_id))
                 for ($i = 0; $i < count($reject_extension_id); $i++) 
                 { 
                     $extension = CcExtension::find($reject_extension_id[$i]);
@@ -155,7 +156,7 @@ class ExtensionController extends Controller
                     $extension->granted_by = $granted_by;
                     $extension->save();
                     $reject = true;
-                }
+                }*/
 
              if(count($delete_extension_id) > 0)
                 for ($i = 0; $i < count($delete_extension_id); $i++) 
@@ -164,16 +165,16 @@ class ExtensionController extends Controller
                     $extension->delete();
                     $delete = true;
                 }  
-            if(!$grant && !$reject && !$delete)
+            if(!$grant /*&& !$reject*/ && !$delete)
                 return redirect('/listExtensions')->with('error', 'Select at least one record');
-            elseif($grant && !$reject && !$delete)
+            elseif($grant /*&& !$reject*/ && !$delete)
                 return redirect('/listExtensions')->with('success', count($grant_extension_id).' extension granted');
-            elseif(!$grant && $reject && !$delete)
-                return redirect('/listExtensions')->with('success', count($reject_extension_id).' extension rejected');
-            elseif(!$grant && !$reject && $delete)
+            /*elseif(!$grant && $reject && !$delete)
+                return redirect('/listExtensions')->with('success', count($reject_extension_id).' extension rejected');*/
+            elseif(!$grant /*&& !$reject*/ && $delete)
                 return redirect('/listExtensions')->with('success', count($delete_extension_id).' extension deleted');
             else
-                return redirect('/listExtensions')->with('success', count($grant_extension_id).' extension/s is/are granted, '.count($reject_extension_id).' is/are rejected and '.count($reject_extension_id).' is/are deleted');
+                return redirect('/listExtensions')->with('success', count($grant_extension_id).' extension/s is/are granted, '/*.count($reject_extension_id).' is/are rejected and '*/.count($delete_extension_id).' is/are deleted');
         }
     }
 
@@ -228,6 +229,29 @@ class ExtensionController extends Controller
                                                 'engineers' => $engineers,
                                                 'customers' => $customers
                                              ]);   
+        }
+    }
+
+    public function rejectExtension(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            $extension_id = $request->input('extension_id');
+            $customer_id = $request->input('customer_id');
+            $rejection_note = $request->input('rejection_note');
+            $rejected_by = $request->input('rejected_by');
+            $reject = false;
+
+            $extension = CcExtension::find($extension_id);
+            $extension->rejection_note = $rejection_note;
+            $extension->status = 'rejected';
+            $extension->granted_by = $rejected_by;
+            if($extension->save())
+                return redirect('/listExtensions')->with('delete', $customer_id.' extension is rejected');
+            else
+                return redirect('error', 'Something went wrong');
         }
     }
 }

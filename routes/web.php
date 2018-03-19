@@ -36,7 +36,6 @@ Route::get('/adminRights', 'AdminRightsController@index');
 Route::post('/performAdminRights', 'AdminRightsController@performAdminRights');
 Route::post('/changeEmployeePswd', 'AdminRightsController@changeEmployeePswd');
 
-
 //NOC Department Routes
 Route::get('/newJobEntry', 'noc\JobController@index');
 Route::get('/selectConsumer', 'noc\JobController@selectConsumer');
@@ -74,6 +73,7 @@ Route::post('/extension', 'cc\ExtensionController@store');
 Route::get('/listExtensions', 'cc\ExtensionController@listExtensions');
 Route::post('/operationOnExtensions', 'cc\ExtensionController@operationOnExtensions');
 Route::get('/exportExtensions', 'cc\ExtensionController@exportExtensions');
+Route::post('/rejectExtension', 'cc\ExtensionController@rejectExtension');
 
 Route::get('/refund', 'cc\RefundController@index');
 Route::post('/refund', 'cc\RefundController@store');
