@@ -80,6 +80,23 @@
 											<th class="delete">Delete</th>
 										@endif
 									</tr>
+									<tr>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    @if (Auth::user()->user_type == 'admin')
+						                    <td>
+						                    	<input type="checkbox" id="deleteCkbCheckAll"/>
+						                    </td>
+					                    @endif
+					                </tr> 
 									@foreach ($downAreas as $downArea)
 										<tr>
 											<td>{{$downArea->id}}</td>
@@ -94,7 +111,7 @@
 											<td>{{ucwords($downArea->closed_by)}}</td>
 											@if (Auth::user()->user_type == 'admin')
 												<td class="delete">
-													<input type="checkbox" name="delete[]" value="{{$downArea->id}}">
+													<input type="checkbox" name="delete[]" value="{{$downArea->id}}" class="deleteCheckBox" >
 												</td>
 											@endif
 										</tr>
@@ -171,4 +188,18 @@
 			});
 		});
 	</script>
+<script type="text/javascript">
+	//select all delete checkbox 
+	$(document).ready(function () {
+	    $("#deleteCkbCheckAll").click(function () {
+	        $(".deleteCheckBox").prop('checked', $(this).prop('checked'));
+	    });
+	    
+	    $(".deleteCheckBox").change(function(){
+	        if (!$(this).prop("checked")){
+	            $("#deleteCkbCheckAll").prop("checked",false);
+	        }
+	    });
+	});
+</script>
 @endsection

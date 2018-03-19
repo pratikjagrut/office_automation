@@ -79,7 +79,28 @@
 											<th>Reject</th>
 											<th>Delete</th>
 										@endif
-									</tr>	
+									</tr>
+									<tr>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    @if (Auth::user()->user_type == 'admin')
+					                      <td>
+					                      	<input type="checkbox" id="grantCkbCheckAll" />
+					                      </td>
+					                      <td></td>
+					                      <td>
+					                      	<input type="checkbox" id="deleteCkbCheckAll"/></td>
+					                    @endif
+					                </tr> 
 									@foreach ($extensions as $extension)
 										<tr>
 											<td>{{$loop->iteration}}</td>
@@ -95,7 +116,7 @@
 											<td>{{$extension->rejection_note}}</td>
 											@if (Auth::user()->user_type == 'admin')
 												<td>
-												<input type="checkbox" name="grant[]" value="{{$extension->id}}">
+												<input type="checkbox" name="grant[]" value="{{$extension->id}}" class="grantCheckBox">
 												</td>
 												<!--<td>
 													<input type="checkbox" name="reject[]" value="{//{$extension->id}}">	
@@ -104,7 +125,7 @@
 													<a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#rejectExtension" id="{{$extension->customer_id}}/{{$extension->id}}" onclick="clck(this.id)">Reject</a>
 												</td>
 												<td>
-													<input type="checkbox" name="delete[]" value="{{$extension->id}}">
+													<input type="checkbox" name="delete[]" value="{{$extension->id}}" class="deleteCheckBox">
 												</td>
 											@endif
 										</tr>
@@ -184,4 +205,33 @@
 	}
 </script>
 
+<script type="text/javascript">
+	//select all grant checkbox 
+	$(document).ready(function () {
+	    $("#grantCkbCheckAll").click(function () {
+	        $(".grantCheckBox").prop('checked', $(this).prop('checked'));
+	    });
+	    
+	    $(".grantCheckBox").change(function(){
+	        if (!$(this).prop("checked")){
+	            $("#grantCkbCheckAll").prop("checked",false);
+	        }
+	    });
+	});
+</script>
+
+<script type="text/javascript">
+	//select all delete checkbox 
+	$(document).ready(function () {
+	    $("#deleteCkbCheckAll").click(function () {
+	        $(".deleteCheckBox").prop('checked', $(this).prop('checked'));
+	    });
+	    
+	    $(".deleteCheckBox").change(function(){
+	        if (!$(this).prop("checked")){
+	            $("#deleteCkbCheckAll").prop("checked",false);
+	        }
+	    });
+	});
+</script>
 @endsection
