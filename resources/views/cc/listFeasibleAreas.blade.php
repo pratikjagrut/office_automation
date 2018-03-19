@@ -97,6 +97,25 @@
 											<th>Delete</th>
 										@endif
 									</tr>
+									<tr>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    <td></td>
+					                    @if (Auth::user()->user_type == 'admin')
+						                    <td>
+						                    	<input type="checkbox" id="deleteCkbCheckAll"/>
+						                    </td>
+					                    @endif
+					                </tr>
 									@foreach ($feasibleAreas as $feasibleArea)
 										<tr>
 											<td>{{$loop->iteration}}</td>
@@ -121,7 +140,7 @@
 													<a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#editFeasibleArea" id="{{$feasibleArea->id}}" onclick="clck(this.id)">Edit</a>
 												</td>
 												<td>
-													<input type="checkbox" name="feasibleAreaId[]" value="{{$feasibleArea->id}}">
+													<input type="checkbox" name="feasibleAreaId[]" value="{{$feasibleArea->id}}" class="deleteCheckBox">
 												</td>
 											@endif
 										</tr>
@@ -230,5 +249,20 @@
 	  	{
 	  		document.getElementById("feasibleAreaId").value = id
 	  	}
-	  </script>
+	</script>
+	
+	<script type="text/javascript">
+		//select all delete checkbox 
+		$(document).ready(function () {
+		    $("#deleteCkbCheckAll").click(function () {
+		        $(".deleteCheckBox").prop('checked', $(this).prop('checked'));
+		    });
+		    
+		    $(".deleteCheckBox").change(function(){
+		        if (!$(this).prop("checked")){
+		            $("#deleteCkbCheckAll").prop("checked",false);
+		        }
+		    });
+		});
+	</script>
 @endsection
