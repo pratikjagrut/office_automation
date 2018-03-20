@@ -62,7 +62,10 @@
                                 <?php echo $__env->make('sidebar.superAdmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                             <?php else: ?>
                                 <?php switch(auth()->user()->department):
-                                    case ('cc'): ?>
+                                    case ('accounts'): ?>
+                                        <?php echo $__env->make('sidebar.accounts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?> 
+                                    <?php case ('cc'): ?>
                                         <?php echo $__env->make('sidebar.cc', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                         <?php break; ?>
                                     

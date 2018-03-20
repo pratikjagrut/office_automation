@@ -60,7 +60,7 @@
                                 <td>
                                     <input type="hidden" name="down_timestamp" id="down_timestamp">
                                 </td>
-                                <td>
+                                <td colspan="2">
                                     <button type="reset" name="clear" class="btn btn-danger">Clear!</button>
                                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                 </td>

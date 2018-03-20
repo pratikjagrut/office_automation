@@ -61,6 +61,9 @@
                                 @include('sidebar.superAdmin')
                             @else
                                 @switch(auth()->user()->department)
+                                    @case('accounts')
+                                        @include('sidebar.accounts')
+                                        @break 
                                     @case('cc')
                                         @include('sidebar.cc')
                                         @break
