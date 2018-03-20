@@ -61,26 +61,26 @@
                             <tr class="from-group bank">
                                 <td><label>Bank Branch: </label></td>
                                 <td>
-                                    <input id="branch" type="text" class="form-control" name="branch" pattern="([A-Za-z\s]){3,}" title="Minimum 3 letters required. Only uppercase and lower case letters allowed.">
+                                    <input id="branch" type="text" class="form-control" name="branch" title="Minimum 3 letters required. Only uppercase and lower case letters allowed.">
                                 </td>
                             </tr>
                             <tr class="from-group bank">
                                 <td><label>Bank Account Number: </label></td>
                                 <td>
-                                    <input id="account_no" type="tel" class="form-control" min="1" name="account_no" title="Add zeros in front if number less than 16!">
+                                    <input id="account_no" type="tel" class="form-control" min="1" name="account_no">
                                 </td>
                             </tr>
                             <tr class="from-group bank">
                                 <td><label>IFSC code: </label></td>
                                 <td>
-                                    <input id="ifsc_no" type="text" class="form-control" name="ifsc_no" pattern="([A-Za-z0-9\s]){3,}" title="Alphanumeric code required. Code length should be 11">
+                                    <input id="ifsc_no" type="text" class="form-control" name="ifsc_no">
                                 </td>
                             </tr>
                             
                             <tr class="from-group">
                                 <td><label>Reason: </label></td>
                                 <td>
-                                    <input id="reason" type="text" class="form-control" name="reason" required="true" pattern="([A-Za-z\s]){3,}" title="Only alphabets accepted.Min 3 letters required.">
+                                    <input id="reason" type="text" class="form-control" name="reason" required="true">
                                 </td>
                             </tr>
                             <tr class="from-group">
@@ -99,7 +99,7 @@
                             <tr class="from-group">
                                 <td><label>Assigned to: </label></td>
                                 <td>
-                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required="true"  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed. Minimum 3 letters required.">
+                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required="true">
                                 </td>
                             </tr>
                             <tr class="from-group">
