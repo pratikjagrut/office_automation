@@ -234,7 +234,7 @@ class RefundController extends Controller
         else
         {
             $grantRefund = $request->input('grantRefund');
-            $rejectRefund = $request->input('rejectRefund');
+            //$rejectRefund = $request->input('rejectRefund');
             $deleteRefund = $request->input('deleteRefund');
             $granted_by = $request->input('granted_by');
             $grant = false;
@@ -246,12 +246,17 @@ class RefundController extends Controller
                 { 
                     $refund = Ccrefund::find($grantRefund[$i]);
                     $refund->refund_status = 'granted';
+                    $refund->rejection_note = 'NA';
+                    if($refund->mode_of_payment == 'online banking')
+                        $refund->utr_no = '';
+                    else
+                        $refund->utr_no = 'NA';
                     $refund->granted_by = $granted_by;
                     $refund->save();
                     $grant = true;
                 }
 
-            if(count($rejectRefund) > 0)
+            /*if(count($rejectRefund) > 0)
                 for ($i = 0; $i < count($rejectRefund); $i++) 
                 { 
                     $refund = Ccrefund::find($rejectRefund[$i]);
@@ -260,7 +265,7 @@ class RefundController extends Controller
                     $refund->utr_no = '';
                     $refund->save();
                     $reject = true;
-                }
+                }*/
 
             if(count($deleteRefund) > 0)
                 for ($i = 0; $i < count($deleteRefund); $i++) 
@@ -270,16 +275,18 @@ class RefundController extends Controller
                     $delete = true;
                 }
 
-            if(!$grant && !$reject && !$delete)
-                return redirect('/listRefunds')->with('error', 'Select at least one record to delete');
-            elseif($grant && !$reject && !$delete)
+            if(!$grant && /*!$reject &&*/ !$delete)
+                return redirect('/listRefunds')->with('error', 'Select at least one record to grant refund or to delete');
+            elseif($grant && /*!$reject && */!$delete)
                 return redirect('/listRefunds')->with('success', count($grantRefund).' refund granted');
-            elseif(!$grant && $reject && !$delete)
-                return redirect('/listRefunds')->with('success', count($rejectRefund).' refund rejected');
-            elseif(!$grant && !$reject && $delete)
+            /*elseif(!$grant && $reject && !$delete)
+                return redirect('/listRefunds')->with('success', count($rejectRefund).' refund rejected');*/
+            elseif(!$grant && /*!$reject && */$delete)
                 return redirect('/listRefunds')->with('success', count($deleteRefund).' refund deleted');
+            /*else
+                return redirect('/listRefunds')->with('success', count($grantRefund).' refund/s is/are granted, '.count($rejectRefund).' is/are rejected and '.count($rejectRefund).' is/are deleted');*/ 
             else
-                return redirect('/listRefunds')->with('success', count($grantRefund).' refund/s is/are granted, '.count($rejectRefund).' is/are rejected and '.count($rejectRefund).' is/are deleted');                           
+                return redirect('/listRefunds')->with('success', count($grantRefund).' refund/s is/are granted, and '.count($rejectRefund).' is/are deleted');                         
         }
     }
 
@@ -298,6 +305,30 @@ class RefundController extends Controller
             $refund->refund_status = 'done';
             if($refund->save())
                 return redirect('/listRefunds')->with('success', 'UTR is updated');
+            else
+                return redirect('/listRefunds')->with('error', 'Something went wrong');
+        }
+    }
+
+    public function rejectRefund(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login first');
+        else
+        {
+            $customer_id = $request->input('customer_id');
+            $rejection_note = $request->input('rejection_note');
+            $rejected_by = $request->input('rejected_by');
+            $refund_id = $request->input('refund_id');
+
+            $refund = Ccrefund::find($refund_id);
+            $refund->refund_status = 'rejected';
+            $refund->utr_no = 'NA';
+            $refund->rejection_note = $rejection_note;
+            $refund->granted_by = $rejected_by;
+
+            if($refund->save())
+                return redirect('/listRefunds')->with('delete', $customer_id.' refund is rejected');
             else
                 return redirect('/listRefunds')->with('error', 'Something went wrong');
         }
