@@ -28,7 +28,7 @@ class DownAreaController extends Controller
             $reason = $request->input('reason');
             $down_day_time = $request->input('down_day_time');
             $up_day_time = $request->input('up_day_time');
-            $tat = $request->input('tat');
+            $tat = $request->input('tat').$request->input('format');
             $generated_by = $request->input('generated_by');
 
             $new_request = new CcDownArea;
