@@ -81,6 +81,7 @@ Route::get('/listRefunds', 'cc\RefundController@listRefunds');
 Route::post('/changeRefundStatus', 'cc\RefundController@changeRefundStatus');
 Route::get('/exportRefunds', 'cc\RefundController@exportRefunds');
 Route::post('/actOnRefunds', 'cc\RefundController@actOnRefunds');
+Route::post('/updateUtr', 'cc\RefundController@updateUtr');
 
 //Route::resource('extension', 'cc\ExtensionController');
 //Route::resource('downArea', 'cc\DownAreaController');

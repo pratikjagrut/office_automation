@@ -161,7 +161,6 @@
 					{{csrf_field()}}
 					<table class="table table-striped">
 						<tr class="form-group">
-						<tr class="form-group">
 							<td><label>Customer Id:</label></td>
 							<td>
 								<input type="text" name="customer_id" class="form-control" readonly="true" id="customer_id1">
