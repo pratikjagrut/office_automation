@@ -82,15 +82,17 @@ Route::post('/changeRefundStatus', 'cc\RefundController@changeRefundStatus');
 Route::get('/exportRefunds', 'cc\RefundController@exportRefunds');
 Route::post('/actOnRefunds', 'cc\RefundController@actOnRefunds');
 Route::post('/updateUtr', 'cc\RefundController@updateUtr');
+Route::post('/rejectRefund', 'cc\RefundController@rejectRefund');
 
 //Route::resource('extension', 'cc\ExtensionController');
 //Route::resource('downArea', 'cc\DownAreaController');
 //Route::resource('feasibleArea', 'cc\FeasibleAreaController');
-Route::resource('refund', 'cc\RefundController');
-Route::resource('/extension', 'cc\ExtensionController');
-Route::resource('/downArea', 'cc\DownAreaController');
-Route::resource('/feasibleArea', 'cc\FeasibleAreaController');
-Route::resource('/refund', 'cc\RefundController');
+//Route::resource('refund', 'cc\RefundController');
+//Route::resource('/extension', 'cc\ExtensionController');
+//Route::resource('/downArea', 'cc\DownAreaController');
+//Route::resource('/feasibleArea', 'cc\FeasibleAreaController');
+//Route::resource('/refund', 'cc\RefundController');
+
 
 //HR Department Routes
 Route::get('/manPower', 'hr\ManPowerController@index');
