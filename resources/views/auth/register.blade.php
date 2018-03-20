@@ -53,7 +53,7 @@
                             <label for="department" class="col-md-4 control-label">Department</label>
 
                             <div class="col-md-6">
-                                <select id="department" type="text" class="selectpicker form-control" name="department" title="Select Department" required>
+                                <select id="department" type="text" class="selectpicker  form-control" name="department" title="Select Department" required>
                                     <option value="cc">Customer Care</option>
                                     <option value="hr">Human Resource</option>
                                     <option value="inventory">Inventory</option>
