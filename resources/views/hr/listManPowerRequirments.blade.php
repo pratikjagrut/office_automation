@@ -178,7 +178,7 @@
                         <tr class="form-group">
                             <td>Select Action:</td>
                             <td>
-                                <select class="selectpicker form-control" title="Select Action" name="action" ="true">
+                                <select class="selectpicker form-control" title="Select Action" name="action" required="true">
                                     <option value="accepted">Accept</option>
                                     <option value="rejected">Reject</option>
                                 </select>
