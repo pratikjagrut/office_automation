@@ -169,7 +169,7 @@
 						<tr class="form-group">
 							<td><label>Reason:</label></td>
 							<td>
-								<textarea id="rejection_note" class="form-control" name="rejection_note" rows="4" cols="50">
+								<textarea id="rejection_note" class="form-control" name="rejection_note" rows="4" cols="50" required="true">
 								</textarea>
 							</td>
 						</tr>
