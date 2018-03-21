@@ -64,7 +64,8 @@ class RefundController extends Controller
                 $new_request->ifsc_no = 'NA';
                 $new_request->bank = 'NA';
                 $new_request->branch = 'NA';
-                $new_request->utr_no = 'NA';
+                if($modeOfPayment == 'cash')
+                    $new_request->utr_no = 'NA';
             }
             $new_request->reason = $reason;
             $new_request->refund_amount = $refund_amount;
@@ -247,7 +248,7 @@ class RefundController extends Controller
                     $refund = Ccrefund::find($grantRefund[$i]);
                     $refund->refund_status = 'granted';
                     $refund->rejection_note = 'NA';
-                    if($refund->mode_of_payment == 'online banking')
+                    if($refund->mode_of_payment == 'online banking' || $refund->mode_of_payment == 'cheque')
                         $refund->utr_no = '';
                     else
                         $refund->utr_no = 'NA';
@@ -296,17 +297,36 @@ class RefundController extends Controller
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-        {
-            $refund_id = $request->input('refund_id');
-            $utr_no = $request->input('utr_no');
+        {   
+            date_default_timezone_set('Asia/Kolkata');
+            $today = date("Y-m-d H:i:s");
+            if(isset($_POST['cashDone']))
+            {
+                $refund_id = $request->input('refund_id');
 
-            $refund = Ccrefund::find($refund_id);
-            $refund->utr_no = $utr_no;
-            $refund->refund_status = 'done';
-            if($refund->save())
-                return redirect('/listRefunds')->with('success', 'UTR is updated');
+                $refund = Ccrefund::find($refund_id);
+                $refund->utr_no = 'NA';
+                $refund->done_date = $today;
+                $refund->refund_status = 'done';
+                if($refund->save())
+                    return redirect('/listRefunds')->with('success', 'Cash refund is done');
+                else
+                    return redirect('/listRefunds')->with('error', 'Something went wrong');
+            }
             else
-                return redirect('/listRefunds')->with('error', 'Something went wrong');
+            {
+                $refund_id = $request->input('refund_id');
+                $utr_no = $request->input('utr_no');
+
+                $refund = Ccrefund::find($refund_id);
+                $refund->utr_no = $utr_no;
+                $refund->done_date = $today;
+                $refund->refund_status = 'done';
+                if($refund->save())
+                    return redirect('/listRefunds')->with('success', 'UTR or Cheque No is updated');
+                else
+                    return redirect('/listRefunds')->with('error', 'Something went wrong');
+            }
         }
     }
 
