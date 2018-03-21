@@ -63,7 +63,7 @@
                                 {{csrf_field()}}
                                 <table class="table table-striped table-condensed table-bordered" style="border: 1px solid #ccc;">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Sr. No</th>
                                         <th>Designation</th>
                                         <th>No of vacancy</th>
                                         <th>Reason</th>
@@ -84,7 +84,7 @@
                                     </tr>
                                     @foreach ($manPowerRequests as $manPowerRequest)
                                         <tr>
-                                            <td>{{$manPowerRequest->id}}</td>
+                                            <td>{{$loop->iteration}}</td>
                                             <td>
                                                 {{ucwords($manPowerRequest->vacancy_designation)}}
                                             </td>
@@ -121,7 +121,7 @@
                                                 <a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#action" id="{{$manPowerRequest->id}}" onclick="action(this.id)">Action</a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$manPowerRequest->id}}" onclick="edit(this.id)">Edit</a>
+                                                <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$manPowerRequest->id}}" onclick="getData(this.id)">Edit</a>
                                             </td>
                                             <td>
                                                 <input type="checkbox" name="delete[]" value="{{$manPowerRequest->id}}">
@@ -228,28 +228,28 @@
                     <table class="table table-striped">
                         <tr class="from-group">
                             <td><label>Vacancy Designation: </label></td>
-                            <td><input id="vacancy_designation" type="text" class="form-control" name="vacancy_designation" ></td>
+                            <td><input id="vacancy_designation" type="text" class="form-control" name="vacancy_designation"></td>
                         </tr>
                         <tr class="from-group">
                           <td><label>No. of vacancy: </label></td>
 
-                          <td><input id="vacancy" type="number" class="form-control" name="no_of_vacancy"  pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
+                          <td><input type="number" class="form-control" name="no_of_vacancy" id="no_of_vacancy"></td>
                         </tr>
                         <tr class="from-group">
                            <td><label>Reason: </label></td>
-                           <td><input id="reason" type="text" class="form-control" name="reason" value="" ></td>
+                           <td><input id="reason" type="text" class="form-control" name="reason"></td>
                         </tr>
                         <tr class="from-group">
                            <td><label>Priority: </la  bel></td>
-                           <td><input id="priority" type="text" class="form-control" name="priority"  pattern="([A-Za-z\s]){1,}" title="Only letters are allowed."></td>
+                           <td><input id="priority" type="text" class="form-control" name="priority"></td>
                         </tr>
                         <tr class="from-group">
                            <td><label>Preferences: </label></td>
-                           <td><input id="preferences" type="text" class="form-control" name="preferences"  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed"></td>
+                           <td><input id="preferences" type="text" class="form-control" name="preferences"></td>
                         </tr>
                         <tr class="from-group">
                           <td><label>Qualification: </label></td>
-                          <td><input id="qualification" type="text" class="form-control" name="qualification"  pattern="([A-Za-z\s]){1,}" title="Only letters are allowed."></td>
+                          <td><input id="qualification" type="text" class="form-control" name="qualification"></td>
                         </tr>
                     
                         <tr class="from-group">
@@ -290,10 +290,23 @@
         {
             document.getElementById("requestId").value = id
         }
+      </script>
 
-        function edit(id)
-        {
-            document.getElementById("requestId1").value = id
-        }
+      <script type="text/javascript">
+          function getData(id)
+          {     
+                $.get("{{URL::to('manPowerRequest/readData')}}/"+id, function(data){
+                    //console.log(data)
+                    document.getElementById("requestId1").value = id
+                    document.getElementById("vacancy_designation").value = data['vacancy_designation']
+                    document.getElementById("no_of_vacancy").value = data['no_of_vacancy']
+                    document.getElementById("reason").value = data['reason']
+                    document.getElementById("priority").value = data['priority']
+                    document.getElementById("preferences").value = data['preferences']
+                    document.getElementById("qualification").value = data['qualification']
+                    document.getElementById("article-ckeditor").value = data['job_description']
+                    console.log( data['job_description'])
+                })
+          }
       </script>
 @endsection

@@ -102,6 +102,7 @@ Route::post('/actionOnRequests', 'hr\ManPowerController@actionOnRequests');
 Route::post('/editManPowerRequest', 'hr\ManPowerController@editManPowerRequest');
 Route::post('/deleteManPowerRequest', 'hr\ManPowerController@deleteManPowerRequest');
 Route::get('/exportManPowerRequirments', 'hr\ManPowerController@exportManPowerRequirments');
+Route::get('/manPowerRequest/readData/{id}', 'hr\ManPowerController@readData');
 
 Route::get('/stationery', 'hr\StationeryController@index');
 Route::post('/stationery', 'hr\StationeryController@store');
