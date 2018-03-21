@@ -241,4 +241,15 @@ class ManPowerController extends Controller
                                                       ]);
         }
     }
+
+    public function readData($id)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            $data = HrManpower::find($id);
+            return response($data);
+        }
+    }
 }
