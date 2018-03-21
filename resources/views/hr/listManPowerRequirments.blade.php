@@ -304,8 +304,7 @@
                     document.getElementById("priority").value = data['priority']
                     document.getElementById("preferences").value = data['preferences']
                     document.getElementById("qualification").value = data['qualification']
-                    document.getElementById("article-ckeditor").value = data['job_description']
-                    console.log( data['job_description'])
+                    CKEDITOR.instances['article-ckeditor'].setData(data['job_description'])
                 })
           }
       </script>
