@@ -22,7 +22,7 @@
                             <tr class="from-group">
                               <td><label>No. of vacancy: </label></td>
 
-                              <td><input id="vacancy" type="number" class="form-control" name="no_of_vacancy" required></td>
+                              <td><input id="vacancy" type="number" min="1" class="form-control" name="no_of_vacancy" required></td>
                             </tr>
                             <tr class="from-group">
                                <td><label>Reason: </label></td>
