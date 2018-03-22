@@ -22,7 +22,7 @@
                             <tr class="from-group">
                               <td><label>No. of vacancy: </label></td>
 
-                              <td><input id="vacancy" type="number" class="form-control" name="no_of_vacancy" required pattern="([1-9\s]){1,}" title="Only numbers are allowed!"></td>
+                              <td><input id="vacancy" type="number" class="form-control" name="no_of_vacancy" required></td>
                             </tr>
                             <tr class="from-group">
                                <td><label>Reason: </label></td>
@@ -30,17 +30,38 @@
                             </tr>
                             <tr class="from-group">
                                <td><label>Priority: </la  bel></td>
-                               <td><input id="priority" type="text" class="form-control" name="priority" required pattern="([A-Za-z\s]){1,}" title="Only letters are allowed."></td>
+                               <td>
+                                  <select id="priority" type="text" class="selectpicker form-control" name="priority" title="Select priority">
+                                      <option value="Immediate">Immediate</option>
+                                      <option value="Within 15 days">Within 15 Days</option>
+                                      <option value="Within 1 Month">Within 1 Month</option>
+                                      <option value="Within 2 Months">Within 2 Months</option>
+                                      <option value="Within 3 Months">Within 3 Months</option>
+                                      <option value="3+ Months">3+ Months</option>
+                                  </select>
+                               </td>
                             </tr>
                             <tr class="from-group">
                                <td><label>Preferences: </label></td>
-                               <td><input id="preferences" type="text" class="form-control" name="preferences" required pattern="([A-Za-z\s]){3,}" title="Only letters are allowed"></td>
+                               <td><input id="preferences" type="text" class="form-control" name="preferences" required></td>
                             </tr>
                             <tr class="from-group">
                               <td><label>Qualification: </label></td>
-                              <td><input id="qualification" type="text" class="form-control" name="qualification" required pattern="([A-Za-z\s]){1,}" title="Only letters are allowed."></td>
+                              <td><input id="qualification" type="text" class="form-control" name="qualification" required></td>
                             </tr>
-                        
+                            <tr class="from-group">
+                          <td><label>Experience: </label></td>
+                          <td>
+                                <select id="experience" type="text" class="selectpicker form-control" name="experience" title="Select Experience">
+                                    <option value="0-2 Years">0-2 Years</option>
+                                    <option value="2-4 Years">2-4 Years</option>
+                                    <option value="4-6 Years">4-6 Years</option>
+                                    <option value="6-8 Years">6-8 Years</option>
+                                    <option value="8-10 Years">8-10 Years</option>
+                                    <option value="10+ Years">10+ Years</option>
+                                </select>
+                          </td>
+                        </tr>
                             <tr class="from-group">
                               <td><label>Job Description: </label></td>
                               <td>
@@ -66,3 +87,17 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+  <script type="text/javascript">
+      function toggleSidebar(ref) {
+        ref.classList.toggle('active');
+        document.getElementById('sidebar').classList.toggle('active');
+      }
+  </script>
+
+  <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+  <script>
+      CKEDITOR.replace( 'article-ckeditor' );
+  </script>
+@endpush

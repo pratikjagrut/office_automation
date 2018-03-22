@@ -70,6 +70,7 @@
                                         <th>Priority</th>
                                         <th>Preference</th>
                                         <th>Qualification</th>
+                                        <th>Experience</th>
                                         <th>Status</th>
                                         <th>Comment</th>
                                         <th>JD</th>
@@ -78,7 +79,9 @@
                                         <th>Edited By</th>
                                         <th>Edited At</th>
                                         <th>Acted By</th>
-                                        <th>Action</th>
+                                        @if (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr')
+                                            <th>Action</th>
+                                        @endif
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -96,6 +99,9 @@
                                             <td>{{ucwords($manPowerRequest->preferences)}}</td>
                                             <td>
                                                 {{ucwords($manPowerRequest->qualification)}}
+                                            </td>
+                                            <td>
+                                                {{ucwords($manPowerRequest->experience)}}
                                             </td>
                                             <td>{{ucwords($manPowerRequest->status)}}</td>
                                             <td>{{ucwords($manPowerRequest->comment)}}</td>
@@ -120,9 +126,11 @@
                                             <td>
                                                 <a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#action" id="{{$manPowerRequest->id}}" onclick="action(this.id)">Action</a>
                                             </td>
-                                            <td>
-                                                <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$manPowerRequest->id}}" onclick="getData(this.id)">Edit</a>
-                                            </td>
+                                            @if ($manPowerRequest->generated_by == Auth::user()->name || (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr'))
+                                                <td>
+                                                    <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$manPowerRequest->id}}" onclick="getData(this.id)">Edit</a>
+                                                </td>
+                                            @endif
                                             <td>
                                                 <input type="checkbox" name="delete[]" value="{{$manPowerRequest->id}}">
                                             </td>
@@ -241,7 +249,16 @@
                         </tr>
                         <tr class="from-group">
                            <td><label>Priority: </la  bel></td>
-                           <td><input id="priority" type="text" class="form-control" name="priority"></td>
+                           <td>
+                               <select id="priority" type="text" class="selectpicker form-control" name="priority" title="Select priority">
+                                   <option value="Immediate">Immediate</option>
+                                   <option value="Within 15 days">Within 15 Days</option>
+                                   <option value="Within 1 Month">Within 1 Month</option>
+                                   <option value="Within 2 Months">Within 2 Months</option>
+                                   <option value="Within 3 Months">Within 3 Months</option>
+                                   <option value="3+ Months">3+ Months</option>
+                               </select>
+                           </td>
                         </tr>
                         <tr class="from-group">
                            <td><label>Preferences: </label></td>
@@ -251,7 +268,19 @@
                           <td><label>Qualification: </label></td>
                           <td><input id="qualification" type="text" class="form-control" name="qualification"></td>
                         </tr>
-                    
+                        <tr class="from-group">
+                          <td><label>Experience: </label></td>
+                          <td>
+                                <select id="experience" type="text" class="selectpicker form-control" name="experience">
+                                    <option value="0-2 Years">0-2 Years</option>
+                                    <option value="2-4 Years">2-4 Years</option>
+                                    <option value="4-6 Years">4-6 Years</option>
+                                    <option value="6-8 Years">6-8 Years</option>
+                                    <option value="8-10 Years">8-10 Years</option>
+                                    <option value="10+ Years">10+ Years</option>
+                                </select>
+                          </td>
+                        </tr>
                         <tr class="from-group">
                           <td><label>Job Description: </label></td>
                           <td><textarea name="job_description" id="article-ckeditor"></textarea></td>
@@ -304,8 +333,23 @@
                     document.getElementById("priority").value = data['priority']
                     document.getElementById("preferences").value = data['preferences']
                     document.getElementById("qualification").value = data['qualification']
+                    document.getElementById("experience").value = data['experience']
                     CKEDITOR.instances['article-ckeditor'].setData(data['job_description'])
                 })
           }
       </script>
 @endsection
+
+@push('scripts')
+  <script type="text/javascript">
+      function toggleSidebar(ref) {
+        ref.classList.toggle('active');
+        document.getElementById('sidebar').classList.toggle('active');
+      }
+  </script>
+
+  <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+  <script>
+      CKEDITOR.replace( 'article-ckeditor' );
+  </script>
+@endpush

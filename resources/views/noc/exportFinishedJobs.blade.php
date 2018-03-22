@@ -4,12 +4,40 @@
 
 @section('content')
 	<div class="container-fluid">
+			<div class="col-md-4">
+				<div class="well">
+					<form class="form-inline" action="/exportFinishedJobs" method="get">
+					    <table class="table-condensed">
+					    	<tr class="form-group">
+					    		<td>
+			    			      	<select class="selectpicker form-control" name="consumer_type" title="Select Consumer Type" required="true">
+			    						<option value="">All</option>
+			    						<option value="partner">Partner</option>
+			    						<option value="customer">Customer</option>
+			    						<option value="reseller">Reseller</option>	
+			    					</select>
+					    		</td>
+					    		<td>
+					    			<input type="submit" class="btn btn-success form-control" name="filter" value="Search"> 
+					    		</td>
+					    	</tr>
+					    </table>
+					</form>
+				</div> 
+			</div>
+			<div class="col-md-5"></div>
+			<div class="col-md-3 col-sm-3">
+				<div class="well text-center">
+					<button onclick="printDiv()" class="btn btn-success">Print</button>
+					<button href="" class="btn btn-warning" id="btnExportToExcel">Download To Excel</button>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading text-center">
-						<button onclick="printDiv()" class="btn btn-success">Print</button>
-						<button href="" class="btn btn-warning" id="btnExportToExcel">Download To Excel</button>
+						<b>NOC JOBS</b>
 					</div>
 					<div class="panel-body table-responsive">
 						<table class="table table-striped table-bordered" id="finishedJobsTable" style="border: 1px solid #ccc;">

@@ -146,16 +146,6 @@
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>"></script>
-    <script type="text/javascript">
-        function toggleSidebar(ref) {
-          ref.classList.toggle('active');
-          document.getElementById('sidebar').classList.toggle('active');
-        }
-    </script>
-
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace( 'article-ckeditor' );
-    </script>
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
