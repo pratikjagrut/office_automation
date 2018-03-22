@@ -254,9 +254,9 @@
                            <td><input id="reason" type="text" class="form-control" name="reason"></td>
                         </tr>
                         <tr class="from-group">
-                           <td><label>Priority: </la  bel></td>
+                           <td><label>Priority: </label></td>
                            <td>
-                               <select id="priority" type="text" class="selectpicker form-control" name="priority" title="Select priority">
+                               <select id="priority" class="form-control" name="priority">
                                    <option value="Immediate">Immediate</option>
                                    <option value="Within 15 days">Within 15 Days</option>
                                    <option value="Within 1 Month">Within 1 Month</option>
@@ -277,7 +277,7 @@
                         <tr class="from-group">
                           <td><label>Experience: </label></td>
                           <td>
-                                <select id="experience" type="text" class="selectpicker form-control" name="experience">
+                                <select id="experience" class="form-control" name="experience">
                                     <option value="0-2 Years">0-2 Years</option>
                                     <option value="2-4 Years">2-4 Years</option>
                                     <option value="4-6 Years">4-6 Years</option>
