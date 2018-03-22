@@ -123,16 +123,22 @@
                                             <td>
                                                 {{ucwords($manPowerRequest->acted_by)}}
                                             </td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#action" id="{{$manPowerRequest->id}}" onclick="action(this.id)">Action</a>
-                                            </td>
-                                            @if ($manPowerRequest->generated_by == Auth::user()->name || (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr'))
-                                                <td>
-                                                    <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$manPowerRequest->id}}" onclick="getData(this.id)">Edit</a>
+                                            
+                                            @if (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr')
+                                                <td>     
+                                                
+                                                    <a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#action" id="{{$manPowerRequest->id}}" onclick="action(this.id)">Action</a>
                                                 </td>
                                             @endif
                                             <td>
-                                                <input type="checkbox" name="delete[]" value="{{$manPowerRequest->id}}">
+                                                @if ($manPowerRequest->generated_by == Auth::user()->name || (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr'))
+                                                    <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$manPowerRequest->id}}" onclick="getData(this.id)">Edit</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($manPowerRequest->generated_by == Auth::user()->name || (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr'))
+                                                    <input type="checkbox" name="delete[]" value="{{$manPowerRequest->id}}">
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

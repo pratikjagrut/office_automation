@@ -1,3 +1,31 @@
+@if (Auth::user()->user_type == 'admin')
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+            HR Reports <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ url('/listManPowerRequirments') }}">Manpower Requirement</a>
+            </li>
+            <li>
+                <a href="{{ url('/listStationeryRequests') }}">Miscellaneous/Stationery Requirement</a>
+            </li>
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+            HR Request Forms <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ url('/manPower') }}">Manpower Requirement</a>
+            </li>
+            <li>
+                <a href="{{ url('/stationery') }}">Miscellaneous/Stationery Requirement</a>
+            </li>
+        </ul>
+    </li>
+@endif
 @if (Auth::user()->department == 'cc')
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">

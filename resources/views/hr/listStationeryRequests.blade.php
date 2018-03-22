@@ -65,7 +65,9 @@
                                         <th>Generated At</th>
                                         <th>Status</th>
                                         <th>Comment</th>
-                                        <th>Action</th>
+                                        @if (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr')
+                                            <th>Action</th>
+                                        @endif
                                         <th>Edited By</th>
                                         <th>Edited At</th>
                                         <th>Edit</th>
@@ -87,9 +89,11 @@
                                             </td>
                                             <td>{{ucwords($stationeryRequest->status)}}</td>
                                             <td>{{ucwords($stationeryRequest->comment)}}</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#action" id="{{$stationeryRequest->id}}" onclick="action(this.id)">Action</a>
-                                            </td>
+                                            @if (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr')
+                                                <td>
+                                                    <a class="btn btn-primary btn-sm" style="color: white;" data-toggle="modal" data-target="#action" id="{{$stationeryRequest->id}}" onclick="action(this.id)">Action</a>
+                                                </td>
+                                            @endif
                                             <td>
                                                 {{ucwords($stationeryRequest->edited_by)}}
                                             </td>
@@ -97,10 +101,14 @@
                                                 {{ucwords($stationeryRequest->updated_at)}}
                                             </td>
                                             <td>
-                                                <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$stationeryRequest->id}}" onclick="edit(this.id)">Edit</a>
+                                                @if ($stationeryRequest->generated_by == Auth::user()->name || (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr'))
+                                                  <a class="btn btn-info btn-sm" style="color: white;" data-toggle="modal" data-target="#edit" id="{{$stationeryRequest->id}}" onclick="edit(this.id)">Edit</a>
+                                                  @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="delete[]" value="{{$stationeryRequest->id}}">
+                                                @if ($stationeryRequest->generated_by == Auth::user()->name || (Auth::user()->user_type == 'admin' && Auth::user()->department == 'hr'))
+                                                  <input type="checkbox" name="delete[]" value="{{$stationeryRequest->id}}">
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
