@@ -172,12 +172,24 @@ class JobController extends Controller
     }
 
     //list on-going jobs
-    public function onGoingJobs()
+    public function onGoingJobs(Request $request)
     {
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
         {
+            if(isset($_GET['filter']))
+            {
+                if($request->input('consumer_type') != null)
+                    $jobs = NocOngoingJob::where('consumer_type', $request->input('consumer_type'))
+                                        ->orderBy('created_at', 'dsc')
+                                        ->get();
+                else
+                    $jobs = NocOngoingJob::orderBy('created_at', 'dsc')->get();            
+            }
+            else
+                $jobs = NocOngoingJob::orderBy('created_at', 'dsc')->get();
+
             //$engineers = Engineer::all();
             $engineers = User::all();
             /*$teams = DB::table('engineers')
@@ -189,18 +201,17 @@ class JobController extends Controller
                         ->select('department as department')
                         ->groupBy('department')
                         ->get();
-            $jobs = NocOngoingJob::orderBy('created_at', 'dsc')->get();
-            $fieldJobs = NocOngoingJob::where('transferred_to', 'field team')
+            
+            /*$fieldJobs = NocOngoingJob::where('transferred_to', 'field team')
                                         ->orderBy('created_at', 'dsc')
-                                        ->get();
+                                        ->get();*/
                                         
             return view('noc.listOnGoingJobs',[
                                                 'engineers' => $engineers,
                                                 'teams' => $teams,
                                                 'jobs' => $jobs,
-                                                'fieldJobs' => $fieldJobs
-                                              ]);
-                                            
+                                                //'fieldJobs' => $fieldJobs
+                                              ]);                             
         }
     }
 
@@ -273,30 +284,50 @@ class JobController extends Controller
         }
     }
 
-    public function listFinishedJobs()
+    public function listFinishedJobs(Request $request)
     {
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-        {
-            $jobs = NocJob::orderBy('created_at', 'dsc')->paginate(20);
-            $fieldJobs = NocJob::where('transferred_to', 'field team')
+        {   
+            if(isset($_GET['filter']))
+            {
+                if($request->input('consumer_type') != null)
+                    $jobs = NocJob::where('consumer_type', $request->input('consumer_type'))
                                         ->orderBy('created_at', 'dsc')
                                         ->paginate(20);
+                else
+                    $jobs = NocJob::orderBy('created_at', 'dsc')->paginate(20);            
+            }
+            else
+                $jobs = NocJob::orderBy('created_at', 'dsc')->paginate(20);
+            /*$fieldJobs = NocJob::where('transferred_to', 'field team')
+                                        ->orderBy('created_at', 'dsc')
+                                        ->paginate(20);*/
             return view('noc.listFinishedJobs', [
                                                     'jobs' => $jobs,
-                                                    'fieldJobs' => $fieldJobs
+                                                    //'fieldJobs' => $fieldJobs
                                                 ]);
         }
     }
 
-    public function exportFinishedJobs()
+    public function exportFinishedJobs(Request $request)
     {
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
         else
-        {
-            $jobs = NocJob::orderBy('created_at', 'dsc')->get();
+        {   
+            if(isset($_GET['filter']))
+            {
+                if($request->input('consumer_type') != null)
+                    $jobs = NocJob::where('consumer_type', $request->input('consumer_type'))
+                                        ->orderBy('created_at', 'dsc')
+                                        ->get();
+                else
+                    $jobs = NocJob::orderBy('created_at', 'dsc')->get();            
+            }
+            else
+                $jobs = NocJob::orderBy('created_at', 'dsc')->get();
             return view('noc.exportFinishedJobs')->with('jobs', $jobs);
         }
     }

@@ -30,6 +30,7 @@ class ManPowerController extends Controller
             $priority = $request->input('priority');
             $preferences = $request->input('preferences');
             $qualification = $request->input('qualification');
+            $experience = $request->input('experience');
             $job_description = $request->input('job_description');
             $generated_by = $request->input('generated_by');
 
@@ -41,6 +42,7 @@ class ManPowerController extends Controller
             $new_request->preferences = $preferences;
             $new_request->status = 'pending';
             $new_request->qualification = $qualification;
+            $new_request->experience = $experience;
             $new_request->job_description = $job_description;
             $new_request->generated_by = $generated_by;
 
@@ -138,6 +140,7 @@ class ManPowerController extends Controller
             $priority = $request->input('priority');
             $preferences = $request->input('preferences');
             $qualification = $request->input('qualification');
+            $experience = $request->input('experience');
             $job_description = $request->input('job_description');
             $edited_by = $request->input('edited_by');
 
@@ -154,6 +157,8 @@ class ManPowerController extends Controller
                 $manPowerRequest->preferences = $preferences;
             if($qualification != null)
                 $manPowerRequest->qualification = $qualification;
+            if($experience != null)
+                $manPowerRequest->experience = $experience;
             if($job_description != null)
                 $manPowerRequest->job_description = $job_description;
             if($edited_by != null)
