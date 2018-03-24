@@ -34,7 +34,7 @@
                             <tr class="from-group">
                                 <td><label>Reason: </label></td>
                                 <td>
-                                    <input id="reason" type="text" class="form-control" name="reason" required  pattern="([A-Za-z0-9\s]){3,}" title="Special characters are not allowed.Minimum 3 letters required.">
+                                    <input id="reason" type="text" class="form-control" name="reason" required>
                                 </td>
                             </tr>
                             <tr class="from-group">
@@ -46,7 +46,7 @@
                             <tr class="from-group">
                                 <td><label>Assigned to: </label></td>
                                 <td>
-                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required  pattern="([A-Za-z\s]){3,}" title="Only letters are allowed.Minimum 3 letters required.">
+                                    <input id="assigned_to" type="text" class="form-control" name="assigned_to" required>
                                 </td>
                             </tr>
                             <tr class="from-group">
