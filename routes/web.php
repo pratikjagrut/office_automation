@@ -84,16 +84,6 @@ Route::post('/actOnRefunds', 'cc\RefundController@actOnRefunds');
 Route::post('/updateUtr', 'cc\RefundController@updateUtr');
 Route::post('/rejectRefund', 'cc\RefundController@rejectRefund');
 
-//Route::resource('extension', 'cc\ExtensionController');
-//Route::resource('downArea', 'cc\DownAreaController');
-//Route::resource('feasibleArea', 'cc\FeasibleAreaController');
-//Route::resource('refund', 'cc\RefundController');
-//Route::resource('/extension', 'cc\ExtensionController');
-//Route::resource('/downArea', 'cc\DownAreaController');
-//Route::resource('/feasibleArea', 'cc\FeasibleAreaController');
-//Route::resource('/refund', 'cc\RefundController');
-
-
 //HR Department Routes
 Route::get('/manPower', 'hr\ManPowerController@index');
 Route::post('/manPower', 'hr\ManPowerController@store');
@@ -112,49 +102,44 @@ Route::post('/editStationeryRequest', 'hr\StationeryController@editStationeryReq
 Route::post('/deleteStationeryRequests', 'hr\StationeryController@deleteStationeryRequests');
 Route::get('/exportStationeryRequests', 'hr\StationeryController@exportStationeryRequests');
 
-//Route::resource('/stationery', 'hr\StationeryController');
-//Route::resource('/manPower', 'hr\ManPowerController');
+//VOIP 
+/*Route::get('/uploadRateSheet', 'voip\RatesController@index');
+Route::post('/uploadRateSheet', 'voip\RatesController@updateRateSheet');
+Route::get('/addNewCompany', 'voip\RatesController@addNewCompanyForm');
+Route::post('/addNewCompany', 'voip\RatesController@storeNewCompany');*/
 
-//Sales Department
-Route::get('/ill', function() {
-    return view('sales.internetLeasedLines');
-});
+//Sales
+Route::get('/newConnectionForm', 'sales\SalesController@index');
+Route::post('/internetLeasedLineConnection', 'sales\SalesController@internetLeasedLinesConnection');
+Route::post('/p2pConnection', 'sales\SalesController@p2pConnection');
+Route::get('/internetLeasedLine', 'sales\SalesController@internetLeasedLineRequests');
+Route::get('/internetLeasedLine/readData/{id}', 'sales\SalesController@readData');
+Route::post('/editConnectionRequest', 'sales\SalesController@editConnectionRequest');
+Route::post('/fesibilityCheck', 'sales\SalesController@fesibilityCheck');
+Route::post('/deleteIllRequests', 'sales\SalesController@deleteIllRequests');
 
-Route::get('/p2p', function() {
-    return view('sales.p2p');
-});
+Route::get('/internetLeasedLineFeasibleRequests', 'sales\SalesController@internetLeasedLineFeasibleRequests');
+Route::post('/forwardIllRequest', 'sales\SalesController@forwardIllRequest');
+Route::get('/illForwardedRequests', 'sales\SalesController@illForwardedRequests');
+Route::post('/approveIllRequest', 'sales\SalesController@approveIllRequest');
+Route::get('/illRequests', 'sales\SalesController@illRequests');
 
-Route::get('/approvalnote', function() {
-    return view('sales.approvalNote');
-});
+Route::get('/p2pNewRequests', 'sales\SalesController@p2pNewRequests');
+Route::get('/p2pNewRequests/readData/{id}', 'sales\SalesController@readP2pData');
+Route::post('/editP2pConnectionRequest', 'sales\SalesController@editP2pConnectionRequest');
+Route::post('/p2pFesibilityCheck', 'sales\SalesController@p2pFesibilityCheck');
+Route::get('/p2pFeasibleRequests', 'sales\SalesController@p2pFeasibleRequests');
+Route::post('/forwardP2pRequest', 'sales\SalesController@forwardP2pRequest');
+Route::get('/p2pForwardedRequests', 'sales\SalesController@p2pForwardedRequests');
+Route::post('/approveP2pRequest', 'sales\SalesController@approveP2pRequest');
+Route::get('/p2pRequests', 'sales\SalesController@p2pRequests');
 
-//VOIP Department
-Route::get('/voip', function() {
-    return view('voip.voipForm');
-});
 
-//Inventory Department
-Route::get('/inventory', function() {
-    return view('inventory.purchaseRequest');
-});
-
-//Document Approval 
-Route::get('/documentApproval', function() {
-    return view('document_approval.documentApproval');
-});
-
-Route::resource('/approvalNote', 'sales\ApprovalNoteController');
-Route::resource('/internetLeasedLines', 'sales\InternetLeasedLinesController');
-Route::resource('/p2p', 'sales\P2pController');
-
-//VOIP Department
-Route::resource('/voipForm', 'voip\VoipFormController');
-
-//Inventory Department
+/*//Inventory Department
 Route::resource('/inventory', 'inventory\PurchaseRequestController');
 
 //Document Approval 
-Route::resource('/documentApproval', 'document_approval\DocumentApprovalController');
+Route::resource('/documentApproval', 'document_approval\DocumentApprovalController');*/
 
 
 //Default password generator

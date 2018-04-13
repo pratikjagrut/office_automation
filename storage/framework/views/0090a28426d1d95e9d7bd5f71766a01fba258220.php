@@ -24,6 +24,7 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <?php echo $__env->yieldPushContent('headScript'); ?>
 </head>
 <body>
     <div id="app">
@@ -87,7 +88,12 @@
                                     
                                     <?php case ('voip'): ?>
                                         <?php echo $__env->make('sidebar.voip', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                        <?php break; ?>                
+                                        <?php break; ?> 
+
+                                    <?php case ('networking'): ?>
+                                        <?php echo $__env->make('sidebar.sales', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
                                     <?php default: ?>
                                             Default case...
                                 <?php endswitch; ?>
