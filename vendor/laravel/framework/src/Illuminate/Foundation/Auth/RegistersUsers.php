@@ -48,7 +48,7 @@ trait RegistersUsers
     {
         return Auth::guard();
     }
-
+    
     /**
      * The user has been registered.
      *
