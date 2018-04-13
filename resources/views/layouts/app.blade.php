@@ -90,7 +90,7 @@
                                         @break 
 
                                     @case('networking')
-                                        @include('sidebar.sales')
+                                        @include('sidebar.network')
                                         @break
 
                                     @default
