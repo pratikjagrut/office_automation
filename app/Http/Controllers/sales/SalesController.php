@@ -44,7 +44,7 @@ class SalesController extends Controller
             else
                 $inc = 1;
             date_default_timezone_set('Asia/Kolkata');
-            $job_id = 'SHILL'.date('y').date('m').($count->id+1);
+            $job_id = 'SHILL'.date('y').date('m').$inc;
             $new_request = new SalesInternetLeasedLines;
             $new_request->job_id = $job_id;
             $new_request->generated_by = $generated_by;
