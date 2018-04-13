@@ -24,6 +24,7 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    @stack('headScript')
 </head>
 <body>
     <div id="app">
@@ -86,7 +87,12 @@
                                     
                                     @case('voip')
                                         @include('sidebar.voip')
-                                        @break                
+                                        @break 
+
+                                    @case('networking')
+                                        @include('sidebar.sales')
+                                        @break
+
                                     @default
                                             Default case...
                                 @endswitch

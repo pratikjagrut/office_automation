@@ -57,6 +57,7 @@
                                     <option value="cc">Customer Care</option>
                                     <option value="hr">Human Resource</option>
                                     <option value="inventory">Inventory</option>
+                                    <option value="networking">Networking</option>
                                     <option value="noc">NOC</option>
                                     <option value="Sales">sales</option>
                                     <option value="voip">VOIP</option>
