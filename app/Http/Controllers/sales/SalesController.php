@@ -665,6 +665,85 @@ class SalesController extends Controller
         }
     }
 
+    public function exportIllRequests(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if (isset($_GET['filter'])) 
+            {
+                if($request->input('job_id'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['job_id', $request->input('job_id')],
+                                                                        ['approval', '!=', null]
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                elseif($request->input('customer_name'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['customer_name', $request->input('customer_name')],
+                                                                        ['approval', '!=', null]
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                elseif($request->input('contact_person_name'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['contact_person_name', $request->input('contact_person_name')],
+                                                                        ['approval', '!=', null]
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                elseif($request->input('customer_city'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['customer_city', $request->input('customer_city')],
+                                                                        ['approval', '!=', null]
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                elseif($request->input('approval'))
+                    $ill_requests = SalesInternetLeasedLines::where('approval', $request->input('approval'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                else
+                    $ill_requests = SalesInternetLeasedLines::where('approval', '!=', null)->orderBy('created_at', 'dsc')->get();
+
+            }
+            else
+                $ill_requests = SalesInternetLeasedLines::where('approval', '!=', null)->orderBy('created_at', 'dsc')->get();
+
+            $customers = DB::table('sales_ills')
+                        ->select('customer_name as customer_name')
+                        ->where('approval', '!=', null)
+                        ->groupBy('customer_name')
+                        ->get();
+
+            $contact_person_names = DB::table('sales_ills')
+                        ->select('contact_person_name as contact_person_name')
+                        ->where('approval', '!=', null)
+                        ->groupBy('contact_person_name')
+                        ->get();
+
+            $cities = DB::table('sales_ills')
+                        ->select('customer_city as customer_city')
+                        ->where('approval', '!=', null)
+                        ->groupBy('customer_city')
+                        ->get();            
+
+            
+            return view('sales.exportIllRequests', [
+                                                'ill_requests' => $ill_requests,
+                                                'customers' => $customers,
+                                                'contact_person_names' => $contact_person_names,
+                                                'cities' => $cities
+                                              ]);
+        }   
+    }
 
     public function p2pNewRequests(Request $request)
     {
@@ -1082,5 +1161,70 @@ class SalesController extends Controller
                                                 'contact_person_names' => $contact_person_names,
                                               ]);
         }
+    }
+
+    public function exportP2pRequests(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if (isset($_GET['filter'])) 
+            {
+                if($request->input('job_id'))
+                    $p2p_requests = SalesP2p::where([
+                                                        ['job_id', $request->input('job_id')],
+                                                        ['approval', '!=', null]
+                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                elseif($request->input('customer_name'))
+                    $p2p_requests = SalesP2p::where([
+                                                        ['customer_name', $request->input('customer_name')],
+                                                        ['approval', '!=', null]
+                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                elseif($request->input('contact_person_name'))
+                    $p2p_requests = SalesP2p::where([
+                                                        ['contact_person_name', $request->input('contact_person_name')],
+                                                        ['approval', '!=', null]
+                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                elseif($request->input('approval'))
+                    $p2p_requests = SalesP2p::where('approval', $request->input('approval'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
+
+                else
+                    $p2p_requests = SalesP2p::where('approval', '!=', null)->orderBy('created_at', 'dsc')->get();
+
+            }
+            else
+                $p2p_requests = SalesP2p::where('approval', '!=', null)->orderBy('created_at', 'dsc')->get();
+
+            $customers = DB::table('sales_p2ps')
+                        ->select('customer_name as customer_name')
+                        ->where('approval', '!=', null)
+                        ->groupBy('customer_name')
+                        ->get();
+
+            $contact_person_names = DB::table('sales_p2ps')
+                        ->select('contact_person_name as contact_person_name')
+                        ->where('approval', '!=', null)
+                        ->groupBy('contact_person_name')
+                        ->get();           
+
+            
+            return view('sales.exportP2pRequests', [
+                                                'p2p_requests' => $p2p_requests,
+                                                'customers' => $customers,
+                                                'contact_person_names' => $contact_person_names,
+                                              ]);
+        }   
     }
 }

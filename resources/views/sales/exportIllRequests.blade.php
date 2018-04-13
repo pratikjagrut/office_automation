@@ -5,7 +5,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<div class="well">
 					<form action="/illRequests" method="get">
 						<table class="table-condensed">
@@ -72,9 +72,10 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="well text-center">
-					<a href="/exportIllRequests" class="btn btn-warning">Export</a>
+			<div class="col-5-md">
+				<div class="well pull-right">
+					<button onclick="printDiv()" class="btn btn-success">Print</button>
+					<button href="" class="btn btn-warning" id="btnExportToExcel">Download To Excel</button>
 				</div>
 			</div>
 		</div>
@@ -87,7 +88,7 @@
 							<b>ILL Connection Requests</b>
 						</div>
 						<div class="panel-body table-responsive">
-							<table class="table table-striped table-bordered table-condensed" style="border: 1px solid #ccc;">
+							<table class="table table-striped table-bordered table-condensed" style="border: 1px solid #ccc;" id="output">
 								<tr>
 									<th>Sr. No</th>
 									<th>Job Id</th>
@@ -140,8 +141,59 @@
 				@else
 				    <h2 class="text-center">NO DATA FOUND</h2>	
 				@endif
-				<div class="text-center">{{$ill_requests->links()}}</div>
 			</div>
 		</div>
 	</div>
+
+		<script type="text/javascript">
+		function printDiv() {
+			$('.delete').hide()
+	        var divToPrint = document.getElementById('output');
+	        var htmlToPrint = '' +
+	                '<style type="text/css">' +
+	                'table th, td {' +
+	                'border:1px solid #000;' +
+	                'padding:0.5em;' +
+	                '}' +
+	                'table{' +
+	                'border-collapse: collapse;' +	
+	                '}'+
+	                'h3{'+
+	                'margin-left: 75%;'+
+	                '}'+
+	                '</style>'+
+	                '<h3>Sheng Li Telecom India Pvt Ltd</h3>'+
+	                '<center><h2>ILL Requests</h2><center>';
+	        htmlToPrint += divToPrint.outerHTML;
+	        newWin = window.open("");
+	        newWin.document.write(htmlToPrint);
+	        newWin.print();
+	        newWin.close()
+	    }
+	</script>
+	<!--Download excel-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btnExportToExcel").click(function(e) {
+			    //getting data from our table
+			    var data_type = 'data:application/vnd.ms-excel';
+			    var table_div = document.getElementById('output');
+			    var table_html = table_div.outerHTML.replace(/ /g, '%20');
+
+			    var currentdate = new Date(); 
+		  	    var month = ""+currentdate.getMonth()+1
+		  	    var date = currentdate.getDate()
+		  	    if(currentdate.getDate() < 10)
+		  	    	date = "0"+date
+		  	    
+		  	    var datetime = currentdate.getFullYear()+"-"+(month)+"-"+date
+
+			    var a = document.createElement('a');
+			    a.href = data_type + ', ' + table_html;
+			    a.download = 'illRequests-' + datetime + '.xls';
+			    a.click();
+			});
+		});
+	</script>
 @endsection

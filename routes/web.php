@@ -123,6 +123,7 @@ Route::post('/forwardIllRequest', 'sales\SalesController@forwardIllRequest');
 Route::get('/illForwardedRequests', 'sales\SalesController@illForwardedRequests');
 Route::post('/approveIllRequest', 'sales\SalesController@approveIllRequest');
 Route::get('/illRequests', 'sales\SalesController@illRequests');
+Route::get('/exportIllRequests', 'sales\SalesController@exportIllRequests');
 
 Route::get('/p2pNewRequests', 'sales\SalesController@p2pNewRequests');
 Route::get('/p2pNewRequests/readData/{id}', 'sales\SalesController@readP2pData');
@@ -133,7 +134,7 @@ Route::post('/forwardP2pRequest', 'sales\SalesController@forwardP2pRequest');
 Route::get('/p2pForwardedRequests', 'sales\SalesController@p2pForwardedRequests');
 Route::post('/approveP2pRequest', 'sales\SalesController@approveP2pRequest');
 Route::get('/p2pRequests', 'sales\SalesController@p2pRequests');
-
+Route::get('/exportP2pRequests', 'sales\SalesController@exportP2pRequests');
 
 /*//Inventory Department
 Route::resource('/inventory', 'inventory\PurchaseRequestController');
