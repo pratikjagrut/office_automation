@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function index()
     {
         if(Auth::guest())
-            return view('welcome');
+            return redirect('/login')->with('error', 'Login first');
         else
         {  
             $user = User::find(auth()->user()->id);
@@ -171,7 +171,7 @@ class ProfileController extends Controller
                 if($new_password != null)
                 {
                     $user  = User::find($id);
-                    $user->password = Hash::make(strtolower($new_password));
+                    $user->password = Hash::make($new_password);
                     $user->save();
                     return redirect('profile/'.$id.'/edit')->with('success', 'PASSOWRD UPDATED');
                 }
@@ -180,7 +180,7 @@ class ProfileController extends Controller
             }
         }
         else
-            return redirect('profile/'.$id.'/edit')->with('error', 'password do not match');    
+            return redirect('profile/'.$id.'/edit')->with('error', 'SORRY! WRONG PASSOWRD');    
     }
 
     /**

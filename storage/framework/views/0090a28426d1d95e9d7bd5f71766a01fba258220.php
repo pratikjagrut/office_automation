@@ -16,6 +16,15 @@
 
     <!--jquery-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!--jquery-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <?php echo $__env->yieldPushContent('headScript'); ?>
 </head>
 <body>
     <div id="app">
@@ -50,17 +59,57 @@
                         <?php if(auth()->guard()->guest()): ?>
                             <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
                         <?php else: ?>
-                            <li><a href="<?php echo e(url('listOnGoingJobs')); ?>">On-going Jobs</a></li>
-                            <li><a href="<?php echo e(url('listFinishedJobs')); ?>">Finished Jobs</a></li>
+                        <?php if(auth()->user()->user_type == 'super admin'): ?>
+                                <?php echo $__env->make('sidebar.superAdmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            <?php else: ?>
+                                <?php switch(auth()->user()->department):
+                                    case ('accounts'): ?>
+                                        <?php echo $__env->make('sidebar.accounts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?> 
+                                    <?php case ('cc'): ?>
+                                        <?php echo $__env->make('sidebar.cc', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+                                    
+                                    <?php case ('hr'): ?>
+                                        <?php echo $__env->make('sidebar.hr', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
+                                    <?php case ('inventory'): ?>
+                                        <?php echo $__env->make('sidebar.inventory', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
+                                    <?php case ('noc'): ?>
+                                        <?php echo $__env->make('sidebar.noc', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
+                                    <?php case ('sales'): ?>
+                                        <?php echo $__env->make('sidebar.sales', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+                                    
+                                    <?php case ('voip'): ?>
+                                        <?php echo $__env->make('sidebar.voip', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?> 
+
+                                    <?php case ('networking'): ?>
+                                        <?php echo $__env->make('sidebar.sales', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php break; ?>
+
+                                    <?php default: ?>
+                                            Default case...
+                                <?php endswitch; ?>
+                                
+                            <?php endif; ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     <?php echo e(ucwords(Auth::user()->name)); ?> <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="<?php echo e(url('/newJobEntry')); ?>">Enter New Job</a>
-                                    </li>
+                                    <?php if(Auth::user()->user_type == 'super admin'): ?>
+                                       <li>
+                                           <a href="<?php echo e(url('/dashboard')); ?>">Dashboard</a>
+                                       </li> 
+                                    <?php endif; ?>
                                     <li>
                                         <a href="<?php echo e(url('/profile')); ?>">Profile</a>
                                     </li>
@@ -78,9 +127,6 @@
                                                 Add new user
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="<?php echo e(url('/addNewConsumer')); ?>">Register New Consumer</a>
-                                        </li>
                                     <?php endif; ?>
                                     <li>
                                         <a href="<?php echo e(route('logout')); ?>"
@@ -94,7 +140,7 @@
                                         </form>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>    
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -106,5 +152,6 @@
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>

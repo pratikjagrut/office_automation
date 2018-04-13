@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
 
 <div class="container">
-	<div class="row">
+	<div class="row"> 
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-heading text-center">
@@ -14,15 +14,55 @@
 					    <table class="table table-striped">
 					        <tr class="form-group">
 					            <td>
-					                <select name="consumer_type" class="form-control" required="true">
-					                    <option value="">Select</option>
+					                <select name="consumer_type" class="selectpicker form-control" id="consumer_type" title="Select Consumer Type" required="true">
 					                    <option value="partner">Partner</option>
 					                    <option value="customer">Customer</option>
 					                    <option value="reseller">Reseller</option>
 					                </select>
 					            </td>
-					            <td>
-					                <input type="text" name="consumer_id" class="form-control" required="true">
+					            <td id="partner">
+					                <select class="selectpicker" data-live-search="true" title="Select Partner Name" name="partner_id">
+						            	<?php if(count($partners) > 0): ?>
+                                            <?php $__currentLoopData = $partners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $partner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($partner->name); ?>" data-tokens="<?php echo e($partner->name); ?>">
+                                                	<?php echo e($partner->name); ?>
+
+                                                </option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+					            	</select>
+					            </td>
+					            <td id="reseller">
+					                <select class="selectpicker" data-live-search="true" title="Select Reseller Name" name="reseller_id">
+						            	<?php if(count($resellers) > 0): ?>
+                                            <?php $__currentLoopData = $resellers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reseller): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($reseller->name); ?>" data-tokens="<?php echo e($reseller->name); ?>">
+                                                	<?php echo e($reseller->name); ?>
+
+                                                </option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+					            	</select>
+					            </td>
+					            <td class="customer">
+					                <select class="selectpicker" data-live-search="true" title="Select Circuit id Or Name" name="circuit_id">
+						            	<?php if(count($customers) > 0): ?>
+                                            <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($customer->circuit_id != null): ?>
+                                                	<option value="<?php echo e($customer->circuit_id); ?>" data-tokens="<?php echo e($customer->circuit_id); ?>">
+                                                		<?php echo e($customer->circuit_id); ?>
+
+                                                	</option>
+                                                <?php endif; ?>
+                                                <?php if($customer->name != null): ?>
+                                                	<option value="<?php echo e($customer->name); ?>" data-tokens="<?php echo e($customer->name); ?>">
+                                                		<?php echo e($customer->name); ?>
+
+                                                	</option>
+                                                <?php endif; ?>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+					            	</select>
 					            </td>
 					            <td><input type="submit" class="btn btn-primary form-control" name="submit_name" value="GO"></td>
 					        </tr>
@@ -32,7 +72,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<?php if($consumer != null && count($consumer) > 0): ?>
+					<?php if($consumer != null): ?>
 						<form action="/submitNewJob" method="post">
 							<?php echo e(csrf_field()); ?>
 
@@ -54,7 +94,9 @@
 							    <tr class="form-group">
 							        <td><label>Address</label></td>
 							        <td>
-							            <input type="text" name="address" value=" <?php echo e(ucwords($consumer->address)); ?> " class="form-control" required="true" readonly="true">
+							            <textarea type="text" name="address" class="form-control" required="true" readonly="true"><?php echo e(ucwords($consumer->address)); ?>
+
+							            </textarea>
 							        </td>
 							    </tr>
 							    <tr class="form-group">
@@ -89,14 +131,36 @@
 	                            </tr>
 	                            <tr class="form-group">
 						            <td>
-						                <select name="assign_job" class="form-control">
-						                    <option value="">Assign Job</option>
+						                <select name="assign_job" class="selectpicker form-control" id="assign_job" title="Assign Job To" required>
 						                    <option value="engineer">Engineer</option>
 						                    <option value="team">Team</option>
 						                </select>
 						            </td>
-						            <td>
-						                <input type="text" name="assign_to" class="form-control" required="true">
+						            <td id="engineer">
+						            	<select class="selectpicker" data-live-search="true" title="Select Engineer" name="assign_to_engineer" id="engineer_name">
+							            	<?php if($engineers != null): ?>
+                                                <?php $__currentLoopData = $engineers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $engineer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($engineer->name != 'admin'): ?>
+                                                    	<option value="<?php echo e($engineer->name); ?>" data-tokens="<?php echo e($engineer->name); ?>">
+                                                    		<?php echo e(ucwords($engineer->name)); ?>
+
+                                                    	</option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
+						            	</select>
+						            </td>
+						            <td id="team">
+						            	<select class="selectpicker" data-live-search="true" title="Select Team" name="assign_to_team" id="team_name">
+							            	<?php if($teams != null): ?>
+                                                <?php $__currentLoopData = $teams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $team): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($team->department); ?>" data-tokens="<?php echo e($team->department); ?>">
+                                                    	<?php echo e(ucwords($team->department)); ?>
+
+                                                    </option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
+						            	</select>
 						            </td>
 						        </tr>
 						        <tr class="form-group">
@@ -107,7 +171,9 @@
 						        </tr>
 	                            <input type="text" name="get_consumer_type" hidden="true" value="<?php echo e($consumer->type); ?>">
 
-	                            <input type="string" name="generation_date" id="generation_date" readonly="true" hidden="true">
+	                            <input type="text" name="generation_date" id="generation_date" readonly="true" hidden="true">
+
+	                            <input type="text" name="assigned_to_level" id="asssigned_to_level" value="2" readonly="true" hidden="true">
 	                            
 	                            <script type="text/javascript">
 	                            	$(document).ready(function() {
@@ -129,5 +195,58 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#engineer").hide()
+		$("#team").hide()
+
+
+		$("#assign_job").change(function(){
+			var assign_job = $(this).val()
+			if(assign_job == "engineer")
+			{
+				$("#engineer").show()
+				$("#team").hide()
+				document.getElementById("engineer_name").required = true;
+			}
+			else
+			{
+				$("#engineer").hide()
+				$("#team").show()
+				document.getElementById("team_name").required = true;
+			}
+		})
+	})
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#partner").hide()
+		$(".customer").hide()
+		$("#reseller").hide()
+
+		$("#consumer_type").change(function(){
+			var consumer_type = $(this).val()
+			if(consumer_type == "partner")
+			{
+				$("#partner").show()
+				$(".customer").hide()
+				$("#reseller").hide()
+			}
+			if(consumer_type == "customer")
+			{
+				$("#partner").hide()
+				$(".customer").show()
+				$("#reseller").hide()
+			}
+			if(consumer_type == "reseller")
+			{
+				$("#partner").hide()
+				$(".customer").hide()
+				$("#reseller").show()
+			}
+		})
+	})
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

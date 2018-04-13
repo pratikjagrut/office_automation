@@ -17,7 +17,10 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        if(Auth::user()->user_type == 'admin')
+            return view('auth.register');
+        else
+            return redirect('/home')->with('error', 'Unauthorised access');
     }
 
     /**
@@ -45,7 +48,7 @@ trait RegistersUsers
     {
         return Auth::guard();
     }
-
+    
     /**
      * The user has been registered.
      *
