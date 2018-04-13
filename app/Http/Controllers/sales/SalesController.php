@@ -39,6 +39,10 @@ class SalesController extends Controller
     		$generated_by = $request->input('generated_by');
 
             $count = SalesInternetLeasedLines::select('id')->orderBy('created_at', 'des')->first();
+            if($count)
+                $inc = $count->id+1;
+            else
+                $inc = 1;
             date_default_timezone_set('Asia/Kolkata');
             $job_id = 'SHILL'.date('y').date('m').($count->id+1);
             $new_request = new SalesInternetLeasedLines;
