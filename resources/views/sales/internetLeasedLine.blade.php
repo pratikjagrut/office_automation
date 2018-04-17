@@ -132,7 +132,6 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
 										@if (Auth::user()->user_type == 'admin')
 											<td>
 												<input type="checkbox" id="deleteCkbCheckAll"/>
@@ -175,7 +174,7 @@
 										</tr>
 									@endforeach
 									<tr>
-										<td colspan="17"></td>
+										<td colspan="16"></td>
 										<td>
 											<input type="submit" name="deleteIllRequests" value="delete" class="btn btn-danger">
 										</td>
