@@ -1,61 +1,57 @@
-if(Auth::guest())
-            return redirect('/login')->with('error', 'Login First');
-        else
+public function p2pNewRequests(Request $request)
+    {
+       if (isset($_GET['filter'])) 
         {
-            if (isset($_GET['filter'])) 
-            {
-                if($request->input('job_id'))
-                    $p2p_requests = SalesP2p::where([
-                                                        ['job_id', $request->input('job_id')],
-                                                        ['approval', '!=', null]
-                                                    ])
-                                             ->orderBy('created_at', 'dsc')
-                                             ->get();
+            if($request->input('job_id'))
+                $p2p_requests = SalesP2p::where([
+                                                    ['job_id', $request->input('job_id')],
+                                                    ['feasibility_status', '!=', 'yes']
+                                                ])
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
 
-                elseif($request->input('customer_name'))
-                    $p2p_requests = SalesP2p::where([
-                                                        ['customer_name', $request->input('customer_name')],
-                                                        ['approval', '!=', null]
-                                                    ])
-                                             ->orderBy('created_at', 'dsc')
-                                             ->get();
+            elseif($request->input('customer_name'))
+                $p2p_requests = SalesP2p::where([
+                                                    ['customer_name', $request->input('customer_name')],
+                                                    ['feasibility_status', '!=', 'yes']
+                                                ])
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
 
-                elseif($request->input('contact_person_name'))
-                    $p2p_requests = SalesP2p::where([
-                                                        ['contact_person_name', $request->input('contact_person_name')],
-                                                        ['approval', '!=', null]
-                                                    ])
-                                             ->orderBy('created_at', 'dsc')
-                                             ->get();
+            elseif($request->input('contact_person_name'))
+                $p2p_requests = SalesP2p::where([
+                                                    ['contact_person_name', $request->input('contact_person_name')],
+                                                    ['feasibility_status', '!=', 'yes']
+                                                ])
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
 
-                elseif($request->input('approval'))
-                    $p2p_requests = SalesP2p::where('approval', $request->input('approval'))
-                                             ->orderBy('created_at', 'dsc')
-                                             ->get();
+            elseif($request->input('feasibility_status'))
+                $p2p_requests = SalesP2p::where('feasibility_status', $request->input('feasibility_status'))
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
 
-                else
-                    $p2p_requests = SalesP2p::where('approval', '!=', null)->orderBy('created_at', 'dsc')->get();
-
-            }
             else
-                $p2p_requests = SalesP2p::where('approval', '!=', null)->orderBy('created_at', 'dsc')->get();
+                $p2p_requests = SalesP2p::where('feasibility_status', '!=', 'yes')->orderBy('created_at', 'dsc')->get();
 
-            $customers = DB::table('sales_p2ps')
-                        ->select('customer_name as customer_name')
-                        ->where('approval', '!=', null)
-                        ->groupBy('customer_name')
-                        ->get();
+        }
+        else
+            $p2p_requests = SalesP2p::where('feasibility_status', '!=', 'yes')->orderBy('created_at', 'dsc')->get();
 
-            $contact_person_names = DB::table('sales_p2ps')
-                        ->select('contact_person_name as contact_person_name')
-                        ->where('approval', '!=', null)
-                        ->groupBy('contact_person_name')
-                        ->get();           
+        $customers = DB::table('sales_p2ps')
+                    ->select('customer_name as customer_name')
+                    ->groupBy('customer_name')
+                    ->get();
 
-            
-            return view('sales.p2pRequests', [
+        $contact_person_names = DB::table('sales_p2ps')
+                    ->select('contact_person_name as contact_person_name')
+                    ->groupBy('contact_person_name')
+                    ->get();            
+
+        return view('sales.p2pNewRequests', [
                                                 'p2p_requests' => $p2p_requests,
                                                 'customers' => $customers,
                                                 'contact_person_names' => $contact_person_names,
-                                              ]);
-        }
+                                            ]);
+ 
+    }

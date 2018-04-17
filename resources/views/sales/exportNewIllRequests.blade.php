@@ -4,15 +4,14 @@
 
 @section('content')
 	<div class="container-fluid">
-
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-7">
 				<div class="well">
-					<form action="/internetLeasedLineFeasibleRequests" method="get">
+					<form action="/exportNewIllRequests" method="get">
 						<table class="table-condensed">
 							<tr class="form-group">
 								<td>
-									<select class="form-control selectpicker" name="job_id" id="job_id" data-live-search="true" title="Job Id">
+									<select class="form-control selectpicker" name="job_id" id="job_id1" data-live-search="true" title="Job Id">
 										@if (count($ill_requests) > 0)
 									        @foreach ($ill_requests as $ill_request)
 									            @if ($ill_request->job_id != null)
@@ -24,7 +23,7 @@
 									</select>
 								</td>
 								<td>
-									<select class="form-control selectpicker" name="customer_name" id="customer_name" data-live-search="true" title="Customer Name">
+									<select class="form-control selectpicker" name="customer_name" id="customer_name1" data-live-search="true" title="Customer Name">
 										@if (count($customers) > 0)
 									        @foreach ($customers as $customer)
 									            @if ($customer->customer_name != null)
@@ -60,11 +59,22 @@
 									</select>
 								</td>
 								<td>
+									<select class="form-control selectpicker" name="feasibility_status" id="feasibility_status" title="Feasibility">
+										<option value="no">No</option>
+										<option value="not decided">Not Decided</option>
+									</select>
+								</td>
+								<td>
 									<button type="submit" name="filter" class="btn btn-info">Search</button>
 								</td>
 							</tr>
 						</table>
 					</form>
+				</div>
+			</div>
+			<div class="col-5-md">
+				<div class="well pull-right">
+					<button href="" class="btn btn-warning" id="btnExportToExcel">Download To Excel</button>
 				</div>
 			</div>
 		</div>
@@ -74,10 +84,10 @@
 				@if (count($ill_requests) > 0)
 					<div class="panel panel-default">
 						<div class="panel-heading text-center">
-							<b>ILL Feasible Connection Requests</b>
+							<b>ILL New Connections Request</b>
 						</div>
 						<div class="panel-body table-responsive">
-							<table class="table table-striped table-bordered table-condensed" style="border: 1px solid #ccc;">
+							<table class="table table-striped table-bordered table-condensed" style="border: 1px solid #ccc;" id="output">
 								<tr>
 									<th>Sr. No</th>
 									<th>Job Id</th>
@@ -94,9 +104,6 @@
 									<th>Feasible</th>
 									<th>Fiber</th>
 									<th>Rf</th>
-									<th>Feasiblity Checked By</th>
-									<th>Comment</th>
-									<th>Forward</th>
 								</tr>
 								@foreach ($ill_requests as $request)
 									<tr>
@@ -115,11 +122,6 @@
 										<td>{{ ucwords($request->feasibility_status) }}</td>
 										<td>{{ ucwords($request->fiber) }}</td>
 										<td>{{ ucwords($request->rf) }}</td>
-										<td>{{ ucwords($request->feasibility_checked_by) }}</td>
-										<td>{{ ucwords($request->comment) }}</td>
-										<td>
-											<a class="btn btn-success btn-sm" style="color: white;" data-toggle="modal" data-target="#forwardRequest" id="{{$request->id}}" onclick="response(this.id)">Forward</a>
-										</td>
 									</tr>
 								@endforeach
 							</table>
@@ -128,73 +130,33 @@
 				@else
 				    <h2 class="text-center">NO DATA FOUND</h2>	
 				@endif
-				<div class="text-center">{{$ill_requests->links()}}</div>
 			</div>
 		</div>
 	</div>
-	<!-- Modal -->
-      <div class="modal fade" id="forwardRequest" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title text-center"><b>Forward Request</b></h4>
-            </div>
-            <div class="modal-body">
-            	<form action="/forwardIllRequest" method="post">
-                    {{ csrf_field() }}
-                    <table class="table-striped table">
-                        <tr class="form-group">
-                            <td><label>Forward for approval:</label></td>
-                            <td>
-                                <select class="selectpicker form-control" id="forward_to_ceo" name="forward_to_ceo" title="Yes Or No">
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="form-group">
-                            <td><label>Comment or Note:</label></td>
-                            <td>
-                                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
-                            </td>
-                        </tr>
-                        <tr class="form-group">
-                            <td><label>Forwarded By:</label></td>
-                            <td>
-                                <input type="text" name="generated_by" value="{{ Auth::user()->name }}" readonly="true" class="form-control">
-                            </td>
-                        </tr>
-                        <tr class="form-group">
-                            <td>
-                                <input type="hidden" name="requestId" id="requestId">
-                            </td>
-                            <td>
-                                <button type="clear" name="clear" class="btn btn-danger">
-                                    Clear!
-                                </button>
-                                <button type="submit" name="submit" class="btn btn-primary">
-                                    Submit
-                                </button>
-                            </td>
-                        </tr>
-                    </table>		
-                </form>    
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          
-        </div>
-      </div>
 
-      <script type="text/javascript">
-      	function response(id)
-      	{
-      		document.getElementById("requestId").value = id
-      	}
-      </script>
+	<!--Download excel-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btnExportToExcel").click(function(e) {
+			    //getting data from our table
+			    var data_type = 'data:application/vnd.ms-excel';
+			    var table_div = document.getElementById('output');
+			    var table_html = table_div.outerHTML.replace(/ /g, '%20');
+
+			    var currentdate = new Date(); 
+		  	    var month = ""+currentdate.getMonth()+1
+		  	    var date = currentdate.getDate()
+		  	    if(currentdate.getDate() < 10)
+		  	    	date = "0"+date
+		  	    
+		  	    var datetime = currentdate.getFullYear()+"-"+(month)+"-"+date
+
+			    var a = document.createElement('a');
+			    a.href = data_type + ', ' + table_html;
+			    a.download = 'illRequests-' + datetime + '.xls';
+			    a.click();
+			});
+		});
+	</script>
 @endsection

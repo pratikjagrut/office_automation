@@ -5,7 +5,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8">
                 <div class="well">
                     <form action="/p2pNewRequests" method="get">
                         <table class="table-condensed">
@@ -60,6 +60,11 @@
                     </form>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="well text-center">
+                    <a href="/exportNewP2pRequests" class="btn btn-warning">Export</a>
+                </div>
+            </div>
         </div>
 		<div class="row">
 			<div class="col-md-12">
@@ -109,7 +114,7 @@
 										<th>Delete</th>
 									</tr>
 									<tr>
-										<td colspan="25"></td>
+										<td colspan="26"></td>
 										@if (Auth::user()->user_type == 'admin')
 											<td>
 												<input type="checkbox" id="deleteCkbCheckAll"/>
@@ -167,7 +172,7 @@
 										</tr>
 									@endforeach
 									<tr>
-										<td colspan="25"></td>
+										<td colspan="26"></td>
 										<td>
 											<input type="submit" name="deletep2pRequests" value="delete" class="btn btn-danger">
 										</td>

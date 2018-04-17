@@ -5,7 +5,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-8">
 				<div class="well">
 					<form action="/internetLeasedLine" method="get">
 						<table class="table-condensed">
@@ -70,6 +70,11 @@
 							</tr>
 						</table>
 					</form>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="well text-center">
+					<a href="/exportNewIllRequests" class="btn btn-warning">Export</a>
 				</div>
 			</div>
 		</div>
@@ -182,7 +187,7 @@
 				@else
 				    <h2 class="text-center">NO DATA FOUND</h2>	
 				@endif
-				<div class="text-center">{{$ill_requests->links()}}</div
+				<div class="text-center">{{$ill_requests->links()}}</div>
 			</div>
 		</div>
 	</div>

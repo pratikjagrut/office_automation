@@ -120,21 +120,27 @@ Route::post('/deleteIllRequests', 'sales\SalesController@deleteIllRequests');
 
 Route::get('/internetLeasedLineFeasibleRequests', 'sales\SalesController@internetLeasedLineFeasibleRequests');
 Route::post('/forwardIllRequest', 'sales\SalesController@forwardIllRequest');
+Route::get('/illRequestorApproval', 'sales\SalesController@illRequestorApproval');
+Route::post('/illRequestorApproval', 'sales\SalesController@illRequestorApprovalAction');
 Route::get('/illForwardedRequests', 'sales\SalesController@illForwardedRequests');
 Route::post('/approveIllRequest', 'sales\SalesController@approveIllRequest');
 Route::get('/illRequests', 'sales\SalesController@illRequests');
 Route::get('/exportIllRequests', 'sales\SalesController@exportIllRequests');
+Route::get('/exportNewIllRequests', 'sales\SalesController@exportNewIllRequests');
 
 Route::get('/p2pNewRequests', 'sales\SalesController@p2pNewRequests');
 Route::get('/p2pNewRequests/readData/{id}', 'sales\SalesController@readP2pData');
 Route::post('/editP2pConnectionRequest', 'sales\SalesController@editP2pConnectionRequest');
 Route::post('/p2pFesibilityCheck', 'sales\SalesController@p2pFesibilityCheck');
+Route::get('/p2pRequestorApproval', 'sales\SalesController@p2pRequestorApproval');
+Route::post('/p2pRequestorApproval', 'sales\SalesController@p2pRequestorApprovalAction');
 Route::get('/p2pFeasibleRequests', 'sales\SalesController@p2pFeasibleRequests');
 Route::post('/forwardP2pRequest', 'sales\SalesController@forwardP2pRequest');
 Route::get('/p2pForwardedRequests', 'sales\SalesController@p2pForwardedRequests');
 Route::post('/approveP2pRequest', 'sales\SalesController@approveP2pRequest');
 Route::get('/p2pRequests', 'sales\SalesController@p2pRequests');
 Route::get('/exportP2pRequests', 'sales\SalesController@exportP2pRequests');
+Route::get('/exportNewP2pRequests', 'sales\SalesController@exportNewP2pRequests');
 
 /*//Inventory Department
 Route::resource('/inventory', 'inventory\PurchaseRequestController');
