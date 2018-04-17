@@ -36,6 +36,7 @@ class SalesController extends Controller
             $contact_person_number = $request->input('contact_person_number');
             $contact_person_email = $request->input('contact_person_email');
             $bandwidth_size = $request->input('bandwidth_size');
+            $priority = $request->input('priority');
     		$generated_by = $request->input('generated_by');
 
             $count = SalesInternetLeasedLines::select('id')->orderBy('created_at', 'des')->first();
@@ -57,6 +58,7 @@ class SalesController extends Controller
             $new_request->contact_person_no = $contact_person_number;
             $new_request->contact_person_email = $contact_person_email;
             $new_request->bandwidth_size = $bandwidth_size;
+            $new_request->priority = $priority;
             $new_request->feasibility_status = 'not decided';
             $new_request->forward_to_ceo = 'no';
 
@@ -205,7 +207,7 @@ class SalesController extends Controller
     	}
     }
 
-    public function internetLeasedLineFeasibleRequests(Request $request)
+    public function exportNewIllRequests(Request $request)
     {
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
@@ -216,89 +218,72 @@ class SalesController extends Controller
                 if($request->input('job_id'))
                     $ill_requests = SalesInternetLeasedLines::where([
                                                                         ['job_id', $request->input('job_id')],
-                                                                        ['feasibility_status', 'yes'],
-                                                                        ['forward_to_ceo', 'no']
+                                                                        ['feasibility_status', '!=', 'yes']
                                                                     ])
                                              ->orderBy('created_at', 'dsc')
-                                             ->paginate(15);
+                                             ->get();
 
                 elseif($request->input('customer_name'))
                     $ill_requests = SalesInternetLeasedLines::where([
                                                                         ['customer_name', $request->input('customer_name')],
-                                                                        ['feasibility_status', 'yes'],
-                                                                        ['forward_to_ceo', 'no']
+                                                                        ['feasibility_status', '!=', 'yes']
                                                                     ])
                                              ->orderBy('created_at', 'dsc')
-                                             ->paginate(15);
+                                             ->get();
 
                 elseif($request->input('contact_person_name'))
                     $ill_requests = SalesInternetLeasedLines::where([
                                                                         ['contact_person_name', $request->input('contact_person_name')],
-                                                                        ['feasibility_status', 'yes'],
-                                                                        ['forward_to_ceo', 'no']
+                                                                        ['feasibility_status', '!=', 'yes']
                                                                     ])
                                              ->orderBy('created_at', 'dsc')
-                                             ->paginate(15);
+                                             ->get();
 
                 elseif($request->input('customer_city'))
                     $ill_requests = SalesInternetLeasedLines::where([
                                                                         ['customer_city', $request->input('customer_city')],
-                                                                        ['feasibility_status', 'yes'],
-                                                                        ['forward_to_ceo', 'no']
+                                                                        ['feasibility_status', '!=', 'yes']
                                                                     ])
                                              ->orderBy('created_at', 'dsc')
-                                             ->paginate(15);
+                                             ->get();
+
+                elseif($request->input('feasibility_status'))
+                    $ill_requests = SalesInternetLeasedLines::where('feasibility_status', $request->input('feasibility_status'))
+                                             ->orderBy('created_at', 'dsc')
+                                             ->get();
 
                 else
-                    $ill_requests = SalesInternetLeasedLines::where([
-                                                                ['feasibility_status', 'yes'],
-                                                                ['forward_to_ceo', 'no']
-                                                            ])->orderBy('created_at', 'dsc')->paginate(15);
+                    $ill_requests = SalesInternetLeasedLines::where('feasibility_status', '!=', 'yes')->orderBy('created_at', 'dsc')->get();
 
             }
-            else                
-                $ill_requests = SalesInternetLeasedLines::where([
-                                                                ['feasibility_status', 'yes'],
-                                                                ['forward_to_ceo', 'no']
-                                                            ])->orderBy('created_at', 'dsc')->paginate(15);
+            else
+                $ill_requests = SalesInternetLeasedLines::where('feasibility_status', '!=', 'yes')->orderBy('created_at', 'dsc')->get();
 
             $customers = DB::table('sales_ills')
                         ->select('customer_name as customer_name')
-                        ->where([
-                                    ['feasibility_status', 'yes'],
-                                    ['forward_to_ceo', 'no']
-                                ])
                         ->groupBy('customer_name')
                         ->get();
 
             $contact_person_names = DB::table('sales_ills')
                         ->select('contact_person_name as contact_person_name')
-                        ->where([
-                                    ['feasibility_status', 'yes'],
-                                    ['forward_to_ceo', 'no']
-                                ])
                         ->groupBy('contact_person_name')
                         ->get();
 
             $cities = DB::table('sales_ills')
                         ->select('customer_city as customer_city')
-                        ->where([
-                                    ['feasibility_status', 'yes'],
-                                    ['forward_to_ceo', 'no']
-                                ])
                         ->groupBy('customer_city')
-                        ->get();
+                        ->get();            
 
-            return view('sales.internetLeasedLineFeasibleRequests', [
-                                                                        'ill_requests' => $ill_requests,
-                                                                        'customers' => $customers,
-                                                                        'contact_person_names' => $contact_person_names,
-                                                                        'cities' => $cities
-                                                                    ]);
+            return view('sales.exportNewIllRequests', [
+                                                        'ill_requests' => $ill_requests,
+                                                        'customers' => $customers,
+                                                        'contact_person_names' => $contact_person_names,
+                                                        'cities' => $cities
+                                                    ]);
         }
-    }
+    }    
 
-    public function readData($id)
+    /*public function readData($id)
     {
     	if(Auth::guest())
     		return redirect('/login')->with('error', 'Login First');
@@ -307,7 +292,7 @@ class SalesController extends Controller
     		$data = SalesInternetLeasedLines::find($id);
     		return response($data);
     	}
-    }
+    }*/
 
     public function editConnectionRequest(Request $request)
     {
@@ -375,8 +360,8 @@ class SalesController extends Controller
     		$generated_by = $request->input('generated_by');
     		$requestId  = $request->input('requestId');
 
-    		if($feasibility_status == 'yes' && ($fiber == null || $rf == null))
-                return redirect('/internetLeasedLine')->with('error', 'Please fill fiber and rf fields too!');
+    		if($feasibility_status == 'yes' && ($fiber == null && $rf == null))
+                return redirect('/internetLeasedLine')->with('error', 'Please fill fiber or rf fields too!');
             else
             {
                 $ill_request = SalesInternetLeasedLines::find($requestId);
@@ -384,7 +369,7 @@ class SalesController extends Controller
                 $ill_request->fiber = $fiber;
                 $ill_request->rf = $rf;
                 $ill_request->feasibility_checked_by = $generated_by;
-
+                $ill_request->requestor_approval = 'pending';
                 if($ill_request->save())
                     return redirect('/internetLeasedLine')->with('success', 'Successfuly updated request');
                 else
@@ -420,6 +405,228 @@ class SalesController extends Controller
         }
     }
 
+
+
+    public function illRequestorApproval(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if (isset($_GET['filter'])) 
+            {
+                if($request->input('job_id'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['job_id', $request->input('job_id')],
+                                                                        ['feasibility_status', 'yes'],
+                                                                        ['requestor_approval', 'pending']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('customer_name'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['customer_name', $request->input('customer_name')],
+                                                                        ['feasibility_status', 'yes'],
+                                                                        ['requestor_approval', 'pending']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('contact_person_name'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['contact_person_name', $request->input('contact_person_name')],
+                                                                        ['feasibility_status', 'yes'],
+                                                                        ['requestor_approval', 'pending']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('customer_city'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['customer_city', $request->input('customer_city')],
+                                                                        ['feasibility_status', 'yes'],
+                                                                        ['requestor_approval', 'pending']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                else
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                ['feasibility_status', 'yes'],
+                                                                ['requestor_approval', 'pending']
+                                                            ])->orderBy('created_at', 'dsc')->paginate(15);
+
+            }
+            else                
+                $ill_requests = SalesInternetLeasedLines::where([
+                                                                ['feasibility_status', 'yes'],
+                                                                ['requestor_approval', 'pending']
+                                                            ])->orderBy('created_at', 'dsc')->paginate(15);
+
+            $customers = DB::table('sales_ills')
+                        ->select('customer_name as customer_name')
+                        ->where([
+                                    ['feasibility_status', 'yes'],
+                                    ['requestor_approval', 'pending']
+                                ])
+                        ->groupBy('customer_name')
+                        ->get();
+
+            $contact_person_names = DB::table('sales_ills')
+                        ->select('contact_person_name as contact_person_name')
+                        ->where([
+                                    ['feasibility_status', 'yes'],
+                                    ['requestor_approval', 'pending']
+                                ])
+                        ->groupBy('contact_person_name')
+                        ->get();
+
+            $cities = DB::table('sales_ills')
+                        ->select('customer_city as customer_city')
+                        ->where([
+                                    ['feasibility_status', 'yes'],
+                                    ['requestor_approval', 'pending']
+                                ])
+                        ->groupBy('customer_city')
+                        ->get();
+
+            return view('sales.illRequestorApproval', [
+                                                        'ill_requests' => $ill_requests,
+                                                        'customers' => $customers,
+                                                        'contact_person_names' => $contact_person_names,
+                                                        'cities' => $cities
+                                                      ]);
+        }
+    }
+
+
+    public function illRequestorApprovalAction(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            $requestor_approval = $request->input('requestor_approval');
+            $comment = $request->input('comment');
+            $requestId = $request->input('requestId');
+            $forwardRequest = SalesInternetLeasedLines::find($requestId);
+            
+            if($requestor_approval == 'yes')
+            {
+                $forwardRequest->requestor_approval = $requestor_approval;
+                $forwardRequest->comment = $comment;
+
+                if($forwardRequest->save())
+                        return redirect('/illRequestorApproval')->with('success', 'Successfuly forwarded request');
+                    else
+                        return redirect('/illRequestorApproval')->with('error', 'Request could not be forwarded! Please try again');
+            }
+            else
+            {
+                $forwardRequest->feasibility_status = 'not decided';
+                $forwardRequest->comment = $comment;
+                if($forwardRequest->save())
+                        return redirect('/illRequestorApproval')->with('delete', 'Request is not forwarded, it rolled back');
+                    else
+                        return redirect('/illRequestorApproval')->with('error', 'Request could not be rolled back! Please try again');
+            }
+        }
+    }
+
+    public function internetLeasedLineFeasibleRequests(Request $request)
+    {
+        if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if (isset($_GET['filter'])) 
+            {
+                if($request->input('job_id'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['job_id', $request->input('job_id')],
+                                                                        ['requestor_approval', 'yes'],
+                                                                        ['forward_to_ceo', 'no']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('customer_name'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['customer_name', $request->input('customer_name')],
+                                                                        ['requestor_approval', 'yes'],
+                                                                        ['forward_to_ceo', 'no']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('contact_person_name'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['contact_person_name', $request->input('contact_person_name')],
+                                                                        ['requestor_approval', 'yes'],
+                                                                        ['forward_to_ceo', 'no']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('customer_city'))
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                        ['customer_city', $request->input('customer_city')],
+                                                                        ['requestor_approval', 'yes'],
+                                                                        ['forward_to_ceo', 'no']
+                                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                else
+                    $ill_requests = SalesInternetLeasedLines::where([
+                                                                ['requestor_approval', 'yes'],
+                                                                ['forward_to_ceo', 'no']
+                                                            ])->orderBy('created_at', 'dsc')->paginate(15);
+
+            }
+            else                
+                $ill_requests = SalesInternetLeasedLines::where([
+                                                                ['requestor_approval', 'yes'],
+                                                                ['forward_to_ceo', 'no']
+                                                            ])->orderBy('created_at', 'dsc')->paginate(15);
+
+            $customers = DB::table('sales_ills')
+                        ->select('customer_name as customer_name')
+                        ->where([
+                                    ['requestor_approval', 'yes'],
+                                    ['forward_to_ceo', 'no']
+                                ])
+                        ->groupBy('customer_name')
+                        ->get();
+
+            $contact_person_names = DB::table('sales_ills')
+                        ->select('contact_person_name as contact_person_name')
+                        ->where([
+                                    ['requestor_approval', 'yes'],
+                                    ['forward_to_ceo', 'no']
+                                ])
+                        ->groupBy('contact_person_name')
+                        ->get();
+
+            $cities = DB::table('sales_ills')
+                        ->select('customer_city as customer_city')
+                        ->where([
+                                    ['requestor_approval', 'yes'],
+                                    ['forward_to_ceo', 'no']
+                                ])
+                        ->groupBy('customer_city')
+                        ->get();
+
+            return view('sales.internetLeasedLineFeasibleRequests', [
+                                                                        'ill_requests' => $ill_requests,
+                                                                        'customers' => $customers,
+                                                                        'contact_person_names' => $contact_person_names,
+                                                                        'cities' => $cities
+                                                                    ]);     
+        }
+    }
+
     public function forwardIllRequest(Request $request)
     {
         if(Auth::guest())
@@ -445,9 +652,10 @@ class SalesController extends Controller
             }
             else
             {
-                $forwardRequest->feasibility_status = 'not decided';
+                $forwardRequest->requestor_approval= 'pending';
+                $forwardRequest->comment = $comment;
                 if($forwardRequest->save())
-                        return redirect('/internetLeasedLineFeasibleRequests')->with('delete', 'Request is not forwarded, it rolled back to feasibilty stage');
+                        return redirect('/internetLeasedLineFeasibleRequests')->with('delete', 'Request is not forwarded, it rolled back');
                     else
                         return redirect('/internetLeasedLineFeasibleRequests')->with('error', 'Request could not be rolled back! Please try again');
             }
@@ -803,7 +1011,65 @@ class SalesController extends Controller
  
     }
 
-    public function readP2pData($id)
+    public function exportNewP2pRequests(Request $request)
+    {
+       if (isset($_GET['filter'])) 
+        {
+            if($request->input('job_id'))
+                $p2p_requests = SalesP2p::where([
+                                                    ['job_id', $request->input('job_id')],
+                                                    ['feasibility_status', '!=', 'yes']
+                                                ])
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
+
+            elseif($request->input('customer_name'))
+                $p2p_requests = SalesP2p::where([
+                                                    ['customer_name', $request->input('customer_name')],
+                                                    ['feasibility_status', '!=', 'yes']
+                                                ])
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
+
+            elseif($request->input('contact_person_name'))
+                $p2p_requests = SalesP2p::where([
+                                                    ['contact_person_name', $request->input('contact_person_name')],
+                                                    ['feasibility_status', '!=', 'yes']
+                                                ])
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
+
+            elseif($request->input('feasibility_status'))
+                $p2p_requests = SalesP2p::where('feasibility_status', $request->input('feasibility_status'))
+                                         ->orderBy('created_at', 'dsc')
+                                         ->get();
+
+            else
+                $p2p_requests = SalesP2p::where('feasibility_status', '!=', 'yes')->orderBy('created_at', 'dsc')->get();
+
+        }
+        else
+            $p2p_requests = SalesP2p::where('feasibility_status', '!=', 'yes')->orderBy('created_at', 'dsc')->get();
+
+        $customers = DB::table('sales_p2ps')
+                    ->select('customer_name as customer_name')
+                    ->groupBy('customer_name')
+                    ->get();
+
+        $contact_person_names = DB::table('sales_p2ps')
+                    ->select('contact_person_name as contact_person_name')
+                    ->groupBy('contact_person_name')
+                    ->get();            
+
+        return view('sales.exportNewP2pRequests', [
+                                                'p2p_requests' => $p2p_requests,
+                                                'customers' => $customers,
+                                                'contact_person_names' => $contact_person_names,
+                                            ]);
+ 
+    }
+
+    /*public function readP2pData($id)
     {
         if(Auth::guest())
             return redirect('/login')->with('error', 'Login First');
@@ -812,7 +1078,7 @@ class SalesController extends Controller
             $data = SalesP2p::find($id);
             return response($data);
         }
-    }
+    }*/
 
 
     public function editP2pConnectionRequest(Request $request)
@@ -883,6 +1149,7 @@ class SalesController extends Controller
             $p2p_request->b_end_feasibility = $b_end_feasibility;
             $p2p_request->feasibility_checked_by = $generated_by;
             $p2p_request->comment = $comment;
+            $p2p_request->requestor_approval = 'pending';
             $p2p_request->bts_address = $bts_address;
             if($p2p_request->save())
                 return redirect('/p2pNewRequests')->with('success', 'Successfuly updated request');
@@ -890,6 +1157,108 @@ class SalesController extends Controller
                 return redirect('/p2pNewRequests')->with('error', 'Request could not be update! Please try again');
         }
     }
+
+
+    public function p2pRequestorApproval(Request $request)
+    {
+       if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            if (isset($_GET['filter'])) 
+            {
+                if($request->input('job_id'))
+                    $p2p_requests = SalesP2p::where([
+                                                        ['job_id', $request->input('job_id')],
+                                                        ['feasibility_status', 'yes'],
+                                                        ['requestor_approval', 'pending']
+                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('customer_name'))
+                    $p2p_requests = SalesP2p::where([
+                                                        ['customer_name', $request->input('customer_name')],
+                                                        ['feasibility_status', 'yes'],
+                                                        ['requestor_approval', 'pending']
+                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+                elseif($request->input('contact_person_name'))
+                    $p2p_requests = SalesP2p::where([
+                                                        ['contact_person_name', $request->input('contact_person_name')],
+                                                        ['feasibility_status', 'yes'],
+                                                        ['requestor_approval', 'pending']
+                                                    ])
+                                             ->orderBy('created_at', 'dsc')
+                                             ->paginate(15);
+
+            }
+            else                
+                $p2p_requests = SalesP2p::where([
+                                                    ['feasibility_status', 'yes'],
+                                                    ['requestor_approval', 'pending']
+                                                ])->orderBy('created_at', 'dsc')->paginate(15);
+
+            $customers = DB::table('sales_p2ps')
+                        ->select('customer_name as customer_name')
+                        ->where([
+                                    ['feasibility_status', 'yes'],
+                                    ['requestor_approval', 'pending']
+                                ])
+                        ->groupBy('customer_name')
+                        ->get();
+
+            $contact_person_names = DB::table('sales_p2ps')
+                        ->select('contact_person_name as contact_person_name')
+                        ->where([
+                                    ['feasibility_status', 'yes'],
+                                    ['requestor_approval', 'pending']
+                                ])
+                        ->groupBy('contact_person_name')
+                        ->get();
+            return view('sales.p2pRequestorApproval', [
+                                                        'p2p_requests' => $p2p_requests,
+                                                        'customers' => $customers,
+                                                        'contact_person_names' => $contact_person_names,
+                                                    ]);
+        } 
+    }
+
+
+    public function p2pRequestorApprovalAction(Request $request)
+    {
+       if(Auth::guest())
+            return redirect('/login')->with('error', 'Login First');
+        else
+        {
+            $requestor_approval = $request->input('requestor_approval');
+            $comment = $request->input('comment');
+            $requestId = $request->input('requestId');
+            $forwardRequest = SalesP2p::find($requestId);
+            
+            if($requestor_approval == 'yes')
+            {
+                $forwardRequest->requestor_approval = $requestor_approval;
+                $forwardRequest->comment = $comment;
+
+                if($forwardRequest->save())
+                        return redirect('/p2pRequestorApproval')->with('success', 'Successfuly forwarded request');
+                    else
+                        return redirect('/p2pRequestorApproval')->with('error', 'Request could not be forwarded! Please try again');
+            }
+            else
+            {
+                $forwardRequest->feasibility_status = 'not decided';
+                if($forwardRequest->save())
+                        return redirect('/p2pRequestorApproval')->with('delete', 'Request is not forwarded, it rolled back to feasibilty stage');
+                    else
+                        return redirect('/p2pRequestorApproval')->with('error', 'Request could not be rolled back! Please try again');
+            }
+        } 
+    }
+
 
     public function p2pFeasibleRequests(Request $request)
     {
@@ -902,7 +1271,7 @@ class SalesController extends Controller
                 if($request->input('job_id'))
                     $p2p_requests = SalesP2p::where([
                                                         ['job_id', $request->input('job_id')],
-                                                        ['feasibility_status', 'yes'],
+                                                        ['requestor_approval', 'yes'],
                                                         ['forward_to_ceo', 'no']
                                                     ])
                                              ->orderBy('created_at', 'dsc')
@@ -911,7 +1280,7 @@ class SalesController extends Controller
                 elseif($request->input('customer_name'))
                     $p2p_requests = SalesP2p::where([
                                                         ['customer_name', $request->input('customer_name')],
-                                                        ['feasibility_status', 'yes'],
+                                                        ['requestor_approval', 'yes'],
                                                         ['forward_to_ceo', 'no']
                                                     ])
                                              ->orderBy('created_at', 'dsc')
@@ -920,7 +1289,7 @@ class SalesController extends Controller
                 elseif($request->input('contact_person_name'))
                     $p2p_requests = SalesP2p::where([
                                                         ['contact_person_name', $request->input('contact_person_name')],
-                                                        ['feasibility_status', 'yes'],
+                                                        ['requestor_approval', 'yes'],
                                                         ['forward_to_ceo', 'no']
                                                     ])
                                              ->orderBy('created_at', 'dsc')
@@ -929,14 +1298,14 @@ class SalesController extends Controller
             }
             else                
                 $p2p_requests = SalesP2p::where([
-                                                    ['feasibility_status', 'yes'],
+                                                    ['requestor_approval', 'yes'],
                                                     ['forward_to_ceo', 'no']
                                                 ])->orderBy('created_at', 'dsc')->paginate(15);
 
             $customers = DB::table('sales_p2ps')
                         ->select('customer_name as customer_name')
                         ->where([
-                                    ['feasibility_status', 'yes'],
+                                    ['requestor_approval', 'yes'],
                                     ['forward_to_ceo', 'no']
                                 ])
                         ->groupBy('customer_name')
@@ -945,7 +1314,7 @@ class SalesController extends Controller
             $contact_person_names = DB::table('sales_p2ps')
                         ->select('contact_person_name as contact_person_name')
                         ->where([
-                                    ['feasibility_status', 'yes'],
+                                    ['requestor_approval', 'yes'],
                                     ['forward_to_ceo', 'no']
                                 ])
                         ->groupBy('contact_person_name')
@@ -983,7 +1352,8 @@ class SalesController extends Controller
             }
             else
             {
-                $forwardRequest->feasibility_status = 'not decided';
+                $forwardRequest->requestor_approval = 'pending';
+                $forwardRequest->comment = $comment;
                 if($forwardRequest->save())
                         return redirect('/p2pFeasibleRequests')->with('delete', 'Request is not forwarded, it rolled back to feasibilty stage');
                     else

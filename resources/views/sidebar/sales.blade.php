@@ -10,7 +10,10 @@
             <a href="{{ url('/internetLeasedLine') }}">New Requests</a>
         </li>
         <li>
-            <a href="{{ url('/internetLeasedLineFeasibleRequests') }}">Feasible Requests</a>
+            <a href="{{ url('/illRequestorApproval') }}">Requestor's Approval</a>
+        </li>
+        <li>
+            <a href="{{ url('/internetLeasedLineFeasibleRequests') }}">Senior's Approval</a>
         </li>
         <li>
             <a href="{{ url('/illForwardedRequests') }}">Final Approval ILL Requests</a>
@@ -29,7 +32,10 @@
             <a href="{{ url('/p2pNewRequests') }}">New Requests</a>
         </li>
         <li>
-            <a href="{{ url('/p2pFeasibleRequests') }}">Feasible Requests</a>
+            <a href="{{ url('/p2pRequestorApproval') }}">Requestor's Approval</a>
+        </li>
+        <li>
+            <a href="{{ url('/p2pFeasibleRequests') }}">Senior's Approval</a>
         </li>
         <li>
             <a href="{{ url('/p2pForwardedRequests') }}">Final Approval P2P Requests</a>

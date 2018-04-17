@@ -117,9 +117,11 @@
 										<td>{{ ucwords($request->rf) }}</td>
 										<td>{{ ucwords($request->feasibility_checked_by) }}</td>
 										<td>{{ ucwords($request->comment) }}</td>
-										<td>
-											<a class="btn btn-success btn-sm" style="color: white;" data-toggle="modal" data-target="#forwardRequest" id="{{$request->id}}" onclick="response(this.id)">Forward</a>
-										</td>
+										@if ($request->generated_by == Auth::user()->name)
+											<td>
+												<a class="btn btn-success btn-sm" style="color: white;" data-toggle="modal" data-target="#forwardRequest" id="{{$request->id}}" onclick="response(this.id)">Forward</a>
+											</td>
+										@endif
 									</tr>
 								@endforeach
 							</table>
@@ -143,13 +145,13 @@
               <h4 class="modal-title text-center"><b>Forward Request</b></h4>
             </div>
             <div class="modal-body">
-            	<form action="/forwardIllRequest" method="post">
+            	<form action="/illRequestorApproval" method="post">
                     {{ csrf_field() }}
                     <table class="table-striped table">
                         <tr class="form-group">
-                            <td><label>Forward for approval:</label></td>
+                            <td><label>Forward:</label></td>
                             <td>
-                                <select class="selectpicker form-control" id="forward_to_ceo" name="forward_to_ceo" title="Yes Or No">
+                                <select class="selectpicker form-control" id="requestor_approval" name="requestor_approval" title="Yes Or No">
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
@@ -159,12 +161,6 @@
                             <td><label>Comment or Note:</label></td>
                             <td>
                                 <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
-                            </td>
-                        </tr>
-                        <tr class="form-group">
-                            <td><label>Forwarded By:</label></td>
-                            <td>
-                                <input type="text" name="generated_by" value="{{ Auth::user()->name }}" readonly="true" class="form-control">
                             </td>
                         </tr>
                         <tr class="form-group">
