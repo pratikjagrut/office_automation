@@ -71,7 +71,7 @@
 				@if (count($p2p_requests) > 0)
 					<div class="panel panel-default">
 						<div class="panel-heading text-center">
-							<b>Manage services</b>
+							<b>Manage services New Requests</b>
 						</div>
 						<div class="panel-body table-responsive">
 							<form action="/deletep2pRequests" method="post">
@@ -352,7 +352,7 @@
                 		<tr class="form-group">
                 			<td><label>A End Feasibility:</label></td>
                 			<td>
-                				<select class="selectpicker form-control" name="a_end_feasibility" title="Select Feasibility">
+                				<select class="selectpicker form-control" name="a_end_feasibility" title="Select Feasibility"  required="true">
                 					<option value="yes">Yes</option>
                 					<option value="no">No</option>
                 					<option value="not decided">Not Decided</option>
@@ -362,7 +362,7 @@
                 		<tr class="form-group">
                 			<td><label>B End Feasibility:</label></td>
                 			<td>
-                				<select class="selectpicker form-control" name="b_end_feasibility" title="Select Feasibility">
+                				<select class="selectpicker form-control" name="b_end_feasibility" title="Select Feasibility" required="true">
                 					<option value="yes">Yes</option>
                 					<option value="no">No</option>
                 					<option value="not decided">Not Decided</option>
@@ -372,7 +372,7 @@
                 		<tr class="form-group">
                 			<td><label>Overall Feasibility:</label></td>
                 			<td>
-                				<select class="selectpicker form-control" name="feasibility_status" title="Select Feasibility">
+                				<select class="selectpicker form-control" name="feasibility_status" title="Select Feasibility" required="true">
                 					<option value="yes">Yes</option>
                 					<option value="no">No</option>
                 					<option value="not decided">Not Decided</option>
@@ -382,13 +382,13 @@
                 		<tr class="form-group">
                 			<td><label>Bts Address:</label></td>
                 			<td>
-                                <textarea id="bts_address" class="form-control" name="bts_address" cols="30" rows="3"></textarea>
+                                <textarea id="bts_address" class="form-control" name="bts_address" cols="30" rows="3" required="true"></textarea>
                             </td>
                 		</tr>
                 		<tr class="form-group">
                 			<td><label>Comment:</label></td>
                 			<td>
-                                <textarea id="comment" class="form-control" name="comment" cols="30" rows="3"></textarea>
+                                <textarea id="comment" class="form-control" name="comment" cols="30" rows="3" required="true"></textarea>
                             </td>
                 		</tr>
                 		<tr class="form-group">
@@ -402,7 +402,7 @@
 								<input type="hidden" name="requestId" id="requestId1">
 							</td>
 							<td>
-								<button type="clear" name="clear" class="btn btn-danger">
+								<button type="reset" name="clear" class="btn btn-danger">
 									Clear!
 								</button>
                                 <button type="submit" name="submit" class="btn btn-primary">

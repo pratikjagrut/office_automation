@@ -74,7 +74,7 @@
 				@if (count($ill_requests) > 0)
 					<div class="panel panel-default">
 						<div class="panel-heading text-center">
-							<b>ILL Feasible Connection Requests for Approval</b>
+							<b>ILL Final Approval</b>
 						</div>
 						<div class="panel-body table-responsive">
 							<table class="table table-striped table-bordered table-condensed" style="border: 1px solid #ccc;">
@@ -151,7 +151,7 @@
                         <tr class="form-group">
                             <td><label>Approval for request:</label></td>
                             <td>
-                                <select class="selectpicker form-control" id="approval" name="approval" title="Select">
+                                <select class="selectpicker form-control" id="approval" name="approval" title="Select" required="true">
                                     <option value="approved">Approve</option>
                                     <option value="denied">Deny</option>
                                     <option value="yes">Back to sales team</option>
@@ -161,7 +161,7 @@
                         <tr class="form-group">
                             <td><label>Comment or Note:</label></td>
                             <td>
-                                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
+                                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control" required="true"></textarea>
                             </td>
                         </tr>
                         <tr class="form-group">
@@ -175,7 +175,7 @@
                                 <input type="hidden" name="requestId" id="requestId">
                             </td>
                             <td>
-                                <button type="clear" name="clear" class="btn btn-danger">
+                                <button type="reset" name="clear" class="btn btn-danger">
                                     Clear!
                                 </button>
                                 <button type="submit" name="submit" class="btn btn-primary">

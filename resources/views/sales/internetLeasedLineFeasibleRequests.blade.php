@@ -74,7 +74,7 @@
 				@if (count($ill_requests) > 0)
 					<div class="panel panel-default">
 						<div class="panel-heading text-center">
-							<b>ILL Feasible Connection Requests</b>
+							<b>ILL Senior's Approval</b>
 						</div>
 						<div class="panel-body table-responsive">
 							<table class="table table-striped table-bordered table-condensed" style="border: 1px solid #ccc;">
@@ -149,7 +149,7 @@
                         <tr class="form-group">
                             <td><label>Forward for approval:</label></td>
                             <td>
-                                <select class="selectpicker form-control" id="forward_to_ceo" name="forward_to_ceo" title="Yes Or No">
+                                <select class="selectpicker form-control" id="forward_to_ceo" name="forward_to_ceo" title="Yes Or No" required="true">
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
@@ -158,7 +158,7 @@
                         <tr class="form-group">
                             <td><label>Comment or Note:</label></td>
                             <td>
-                                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
+                                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control" required="true"></textarea>
                             </td>
                         </tr>
                         <tr class="form-group">
@@ -172,7 +172,7 @@
                                 <input type="hidden" name="requestId" id="requestId">
                             </td>
                             <td>
-                                <button type="clear" name="clear" class="btn btn-danger">
+                                <button type="reset" name="clear" class="btn btn-danger">
                                     Clear!
                                 </button>
                                 <button type="submit" name="submit" class="btn btn-primary">

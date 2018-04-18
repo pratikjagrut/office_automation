@@ -116,22 +116,7 @@
 										<th>Delete</th>
 									</tr>
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td colspan="17"></td>
 										@if (Auth::user()->user_type == 'admin')
 											<td>
 												<input type="checkbox" id="deleteCkbCheckAll"/>
@@ -174,7 +159,7 @@
 										</tr>
 									@endforeach
 									<tr>
-										<td colspan="16"></td>
+										<td colspan="17"></td>
 										<td>
 											<input type="submit" name="deleteIllRequests" value="delete" class="btn btn-danger">
 										</td>
@@ -307,7 +292,7 @@
                 		<tr class="form-group">
                 			<td><label>Feasible:</label></td>
                 			<td>
-                				<select class="selectpicker form-control" id="feasibility_status" name="feasibility_status" title="Select Feasibility Status">
+                				<select class="selectpicker form-control" id="feasibility_status" name="feasibility_status" title="Select Feasibility Status" required="true">
                 					<option value="yes">Yes</option>
                 					<option value="no">No</option>
                 					<option value="not decided">Not Decided</option>
@@ -317,13 +302,13 @@
                 		<tr class="form-group">
                 			<td><label>Fiber:</label></td>
                 			<td>
-                				<input type="text" name="fiber" id="fiber" class="form-control">
+                				<textarea name="fiber" id="fiber" cols="30" rows="3" class="form-control" required="true"></textarea>
                 			</td>
                 		</tr>
                 		<tr class="form-group">
                 			<td><label>Rf:</label></td>
                 			<td>
-                				<input type="text" name="rf" id="rf" class="form-control">
+                				<textarea  name="rf" id="rf" cols="30" rows="3" class="form-control" required="true"></textarea>
                 			</td>
                 		</tr>
                 		<tr class="form-group">
@@ -337,7 +322,7 @@
 								<input type="hidden" name="requestId" id="requestId1">
 							</td>
 							<td>
-								<button type="clear" name="clear" class="btn btn-danger">
+								<button type="reset" name="clear" class="btn btn-danger">
 									Clear!
 								</button>
                                 <button type="submit" name="submit" class="btn btn-primary">

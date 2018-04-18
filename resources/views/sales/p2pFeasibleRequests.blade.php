@@ -61,7 +61,7 @@
 				@if (count($p2p_requests) > 0)
 					<div class="panel panel-default">
 						<div class="panel-heading text-center">
-							<b>Manage services</b>
+							<b>Manage services Senior's Approval</b>
 						</div>
 						<div class="panel-body table-responsive">
 							<table class="table table-striped table-bordered table-condensed" style="border: 1px solid #ccc;">
