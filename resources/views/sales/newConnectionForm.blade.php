@@ -113,7 +113,7 @@
 									<tr class="form-group">
 										<td></td>
 										<td>
-											<button type="clear" name="clear" class="btn btn-danger">
+											<button type="reset" name="clear" class="btn btn-danger">
 												Clear!
 											</button>
 		                                    <button type="submit" name="submit" class="btn btn-primary">
@@ -241,7 +241,7 @@
 									<tr class="form-group">
 										<td></td>
 										<td>
-											<button type="clear" name="clear" class="btn btn-danger">
+											<button type="reset" name="clear" class="btn btn-danger">
 												Clear!
 											</button>
 		                                    <button type="submit" name="submit" class="btn btn-primary">
